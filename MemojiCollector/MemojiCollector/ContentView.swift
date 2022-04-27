@@ -15,6 +15,16 @@ struct ContentView: View {
     
     @State private var isShowMyPage = false
     
+    @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+    
+    @ViewBuilder
+    func goToMyMemojiView() -> some View{
+        if self.firstUser {
+            RegisterUserView()
+        } else {
+            MyMemojiView()
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -27,6 +37,7 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal)
+                    
                     ScrollView {
                         LazyVGrid(columns: self.gridItems){
                             ForEach(0..<100, id: \.self) { number in
@@ -58,7 +69,7 @@ struct ContentView: View {
                         }
                         .padding([.bottom, .trailing], 50)
                         .sheet(isPresented: self.$isShowMyPage) {
-                            MyMemojiView()
+                            self.goToMyMemojiView()
                         }
                     }
                 }

@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct MyMemojiView: View {
+    @AppStorage(AppStorageKey.userName.string) private var userName = ""
+    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
+    
     var body: some View {
         NavigationView {
-            NavigationLink("미모지 만들기", destination: MakeMemojiCardView())
+//            NavigationLink("미모지 만들기", destination: MakeMemojiCardView())
+            Text("")
+            Text("")
         }
     }
 }

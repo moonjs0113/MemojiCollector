@@ -20,6 +20,8 @@
 		C73C45682819241100E41406 /* MyMemojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45672819241100E41406 /* MyMemojiView.swift */; };
 		C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45692819245D00E41406 /* MakeMemojiCardView.swift */; };
 		C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456B281924A400E41406 /* MemojiDetailView.swift */; };
+		C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456D28192EA100E41406 /* RegisterUserView.swift */; };
+		C73C45702819300D00E41406 /* EnumValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* EnumValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		C73C45672819241100E41406 /* MyMemojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiView.swift; sourceTree = "<group>"; };
 		C73C45692819245D00E41406 /* MakeMemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiCardView.swift; sourceTree = "<group>"; };
 		C73C456B281924A400E41406 /* MemojiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiDetailView.swift; sourceTree = "<group>"; };
+		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
+		C73C456F2819300D00E41406 /* EnumValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +75,11 @@
 			children = (
 				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
+				C73C456F2819300D00E41406 /* EnumValue.swift */,
 				C73C45672819241100E41406 /* MyMemojiView.swift */,
 				C73C45652819155600E41406 /* MemojiCardView.swift */,
 				C73C45692819245D00E41406 /* MakeMemojiCardView.swift */,
+				C73C456D28192EA100E41406 /* RegisterUserView.swift */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
 				C701990D2818C5C500AAEF0A /* Assets.xcassets */,
 				C73C455A2819129C00E41406 /* GoogleService-Info.plist */,
@@ -171,8 +177,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
+				C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */,
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
+				C73C45702819300D00E41406 /* EnumValue.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
