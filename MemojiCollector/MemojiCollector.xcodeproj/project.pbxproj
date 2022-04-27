@@ -11,6 +11,12 @@
 		C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C701990B2818C5C400AAEF0A /* ContentView.swift */; };
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
+		C73C455B2819129C00E41406 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73C455A2819129C00E41406 /* GoogleService-Info.plist */; };
+		C73C455E2819131F00E41406 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C73C455D2819131F00E41406 /* FirebaseAnalytics */; };
+		C73C45602819131F00E41406 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C73C455F2819131F00E41406 /* FirebaseStorage */; };
+		C73C45622819131F00E41406 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */; };
+		C73C45642819131F00E41406 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */; };
+		C73C45662819155600E41406 /* MemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45652819155600E41406 /* MemojiCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,8 @@
 		C701990B2818C5C400AAEF0A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C701990D2818C5C500AAEF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C73C455A2819129C00E41406 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C73C45652819155600E41406 /* MemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +34,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C73C455E2819131F00E41406 /* FirebaseAnalytics in Frameworks */,
+				C73C45642819131F00E41406 /* FirebaseStorageSwift-Beta in Frameworks */,
+				C73C45622819131F00E41406 /* FirebaseStorageCombine-Community in Frameworks */,
+				C73C45602819131F00E41406 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +65,9 @@
 			children = (
 				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
+				C73C45652819155600E41406 /* MemojiCardView.swift */,
 				C701990D2818C5C500AAEF0A /* Assets.xcassets */,
+				C73C455A2819129C00E41406 /* GoogleService-Info.plist */,
 				C701990F2818C5C500AAEF0A /* Preview Content */,
 			);
 			path = MemojiCollector;
@@ -83,6 +97,12 @@
 			dependencies = (
 			);
 			name = MemojiCollector;
+			packageProductDependencies = (
+				C73C455D2819131F00E41406 /* FirebaseAnalytics */,
+				C73C455F2819131F00E41406 /* FirebaseStorage */,
+				C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */,
+				C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */,
+			);
 			productName = MemojiCollector;
 			productReference = C70199062818C5C400AAEF0A /* MemojiCollector.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +131,9 @@
 				Base,
 			);
 			mainGroup = C70198FD2818C5C400AAEF0A;
+			packageReferences = (
+				C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = C70199072818C5C400AAEF0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +150,7 @@
 			files = (
 				C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */,
 				C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */,
+				C73C455B2819129C00E41406 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +163,7 @@
 			files = (
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
+				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +220,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +274,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -270,6 +295,7 @@
 				DEVELOPMENT_TEAM = Z629PZ4XVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "미모지를 사진을 등록하기 위해 사진첩 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +325,7 @@
 				DEVELOPMENT_TEAM = Z629PZ4XVL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "미모지를 사진을 등록하기 위해 사진첩 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -339,6 +366,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 8.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C73C455D2819131F00E41406 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C73C455F2819131F00E41406 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageCombine-Community";
+		};
+		C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C70198FE2818C5C400AAEF0A /* Project object */;
 }
