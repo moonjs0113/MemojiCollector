@@ -13,25 +13,55 @@ struct ContentView: View {
     @State private var session = "All"
     @State private var searchText = ""
     
+    @State private var isShowMyPage = false
+    
     
     var body: some View {
         NavigationView {
-            VStack {
-                Picker("",selection: self.$session) {
-                    ForEach(self.sessionArray, id: \.self) { session in
-                        Text(session)
+            ZStack {
+                VStack {
+                    Picker("",selection: self.$session) {
+                        ForEach(self.sessionArray, id: \.self) { session in
+                            Text(session)
+                        }
                     }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                    ScrollView {
+                        LazyVGrid(columns: self.gridItems){
+                            ForEach(0..<100, id: \.self) { number in
+                                NavigationLink("Grid \(number)", destination: MemojiDetailView())
+                            }
+                        }
+                    }
+                    Spacer()
                 }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                ScrollView {
-                    LazyVGrid(columns: self.gridItems){
-                        ForEach(0..<100, id: \.self) { number in
-                            Text("Grid \(number)")
+                
+                VStack{
+                    Spacer()
+                    HStack{
+                        Spacer()
+                        Button{
+                            self.isShowMyPage.toggle()
+                            print("button")
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.black)
+                                .background {
+                                    Circle()
+                                        .fill(Color(red: 66/255, green: 234/255, blue: 221/255))
+                                        .frame(width: 60, height: 60)
+                                }
+                        }
+                        .padding([.bottom, .trailing], 50)
+                        .sheet(isPresented: self.$isShowMyPage) {
+                            MyMemojiView()
                         }
                     }
                 }
-                Spacer()
             }
             .navigationTitle("Memoji Collector")
         }
