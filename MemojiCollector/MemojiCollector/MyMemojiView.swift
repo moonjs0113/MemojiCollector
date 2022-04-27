@@ -13,9 +13,7 @@ struct MyMemojiView: View {
     
     var body: some View {
         NavigationView {
-//            NavigationLink("미모지 만들기", destination: MakeMemojiCardView())
-            Text("")
-            Text("")
+            NavigationLink("미모지 만들기", destination: MakeMemojiCardView())
         }
     }
 }

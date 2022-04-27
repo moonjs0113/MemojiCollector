@@ -20,7 +20,7 @@ struct ContentView: View {
     @ViewBuilder
     func goToMyMemojiView() -> some View{
         if self.firstUser {
-            RegisterUserView()
+            RegisterUserView(isShowMyPage: self.$isShowMyPage)
         } else {
             MyMemojiView()
         }

@@ -16,6 +16,8 @@ struct RegisterUserView: View {
     
     @State private var showAlert = false
     
+    @Binding var isShowMyPage: Bool
+    
     var body: some View {
         VStack {
             VStack(spacing:40) {
@@ -71,11 +73,16 @@ struct RegisterUserView: View {
             }
         }
         .padding()
+        .onDisappear {
+            if self.firstUser == false {
+                self.isShowMyPage = true
+            }
+        }
     }
 }
 
-struct RegisterUserView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterUserView()
-    }
-}
+//struct RegisterUserView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RegisterUserView()
+//    }
+//}
