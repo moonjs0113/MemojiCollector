@@ -71,6 +71,7 @@ struct RegisterUserView: View {
             } message: {
                 Text("닉네임: \(self.userName)\n세션: \(self.userSession)")
             }
+            .disabled(self.userName == "")
         }
         .padding()
         .onDisappear {
