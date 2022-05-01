@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  MemojiCollector
@@ -8,13 +9,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var sessionArray = ["All", "Morning", "Afternoon"]
-    private var gridItems = [GridItem(.flexible()), GridItem(.flexible())]
+    var gridItems = [GridItem(.flexible()), GridItem(.flexible()),]
+    
+    var sessionArray = ["All", "Morning", "Afternoon"]
     @State private var session = "All"
     @State private var searchText = ""
-    
     @State private var isShowMyPage = false
     
+    @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @ViewBuilder
@@ -40,10 +42,26 @@ struct ContentView: View {
                     
                     ScrollView {
                         LazyVGrid(columns: self.gridItems){
-                            ForEach(0..<100, id: \.self) { number in
-                                NavigationLink("Grid \(number)", destination: MemojiDetailView())
+                            let memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).filter {
+                                !$0.isMyCard
+                            }.filter{ memoji in
+                                if self.session == "All" { return true }
+                                else {
+                                    return memoji.session == self.session
+                                }
+                            }.filter { memoji in
+                                print(memoji.imageData)
+                                if self.searchText == "" { return true }
+                                else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
+                            }
+                            ForEach(memojiList, id: \.self) { memoji in
+                                NavigationLink(destination: MemojiDetailView(memojiCard: memoji)) {
+                                    MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
+                                }
+                                .disabled(memoji.imageData.count == 0)
                             }
                         }
+                        .padding(.horizontal, 20)
                     }
                     Spacer()
                 }
@@ -52,9 +70,8 @@ struct ContentView: View {
                     Spacer()
                     HStack{
                         Spacer()
-                        Button{
+                        Button {
                             self.isShowMyPage.toggle()
-                            print("button")
                         } label: {
                             Image(systemName: "person.fill")
                                 .resizable()
@@ -63,7 +80,7 @@ struct ContentView: View {
                                 .foregroundColor(.black)
                                 .background {
                                     Circle()
-                                        .fill(Color(red: 66/255, green: 234/255, blue: 221/255))
+                                        .fill(Color("MainColor"))
                                         .frame(width: 60, height: 60)
                                 }
                         }
@@ -75,14 +92,14 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Memoji Collector")
+            .navigationBarTitleDisplayMode(.large)
         }
         .searchable(text: self.$searchText)
-        .navigationBarTitleDisplayMode(.large)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

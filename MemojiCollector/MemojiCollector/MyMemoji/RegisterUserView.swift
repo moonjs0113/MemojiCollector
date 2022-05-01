@@ -10,6 +10,7 @@ import SwiftUI
 struct RegisterUserView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
     @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
+    
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @Environment(\.dismiss) var dismiss
@@ -21,7 +22,7 @@ struct RegisterUserView: View {
     var body: some View {
         VStack {
             VStack(spacing:40) {
-                Text("본인의 닉네임과 세션을 선택해주세요.")
+                Text("기본 정보 등록")
 
                 VStack(spacing: 8) {
                     HStack(spacing: 5) {
@@ -55,7 +56,7 @@ struct RegisterUserView: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15, style: .circular)
-                        .fill(Color(red: 66/255, green: 234/255, blue: 221/255))
+                        .fill(Color("MainColor"))
                     Text("등록하기")
                         .font(.title)
                         .foregroundColor(.white)

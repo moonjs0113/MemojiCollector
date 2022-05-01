@@ -12,16 +12,23 @@
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
 		C73C455B2819129C00E41406 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73C455A2819129C00E41406 /* GoogleService-Info.plist */; };
-		C73C455E2819131F00E41406 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C73C455D2819131F00E41406 /* FirebaseAnalytics */; };
-		C73C45602819131F00E41406 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C73C455F2819131F00E41406 /* FirebaseStorage */; };
-		C73C45622819131F00E41406 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */; };
-		C73C45642819131F00E41406 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */; };
 		C73C45662819155600E41406 /* MemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45652819155600E41406 /* MemojiCardView.swift */; };
 		C73C45682819241100E41406 /* MyMemojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45672819241100E41406 /* MyMemojiView.swift */; };
 		C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45692819245D00E41406 /* MakeMemojiCardView.swift */; };
 		C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456B281924A400E41406 /* MemojiDetailView.swift */; };
 		C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456D28192EA100E41406 /* RegisterUserView.swift */; };
 		C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey.swift */; };
+		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
+		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
+		C79F8531281A2402001D013F /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F8530281A2402001D013F /* View+Extension.swift */; };
+		C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* App+Extension.swift */; };
+		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
+		C7F03073281D21590072CC11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03072281D21590072CC11 /* FirebaseAuth */; };
+		C7F03075281D21590072CC11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03074281D21590072CC11 /* FirebaseMessaging */; };
+		C7F03077281D21590072CC11 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03076281D21590072CC11 /* FirebaseStorage */; };
+		C7F03079281D21590072CC11 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03078281D21590072CC11 /* FirebaseStorageCombine-Community */; };
+		C7F0307B281D21590072CC11 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C7F0307A281D21590072CC11 /* FirebaseStorageSwift-Beta */; };
+		C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0307C281D27B90072CC11 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +45,12 @@
 		C73C456B281924A400E41406 /* MemojiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiDetailView.swift; sourceTree = "<group>"; };
 		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
 		C73C456F2819300D00E41406 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
+		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
+		C79F8530281A2402001D013F /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		C7D499B6281E47E700440C07 /* App+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+Extension.swift"; sourceTree = "<group>"; };
+		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
+		C7F0307C281D27B90072CC11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,10 +58,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C73C455E2819131F00E41406 /* FirebaseAnalytics in Frameworks */,
-				C73C45642819131F00E41406 /* FirebaseStorageSwift-Beta in Frameworks */,
-				C73C45622819131F00E41406 /* FirebaseStorageCombine-Community in Frameworks */,
-				C73C45602819131F00E41406 /* FirebaseStorage in Frameworks */,
+				C7F0307B281D21590072CC11 /* FirebaseStorageSwift-Beta in Frameworks */,
+				C7F03075281D21590072CC11 /* FirebaseMessaging in Frameworks */,
+				C7F03073281D21590072CC11 /* FirebaseAuth in Frameworks */,
+				C7F03079281D21590072CC11 /* FirebaseStorageCombine-Community in Frameworks */,
+				C7F03077281D21590072CC11 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,13 +89,13 @@
 			isa = PBXGroup;
 			children = (
 				C709F46B2819948A00C3F74C /* Info.plist */,
-				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
+				C77FF5AA281AFE1200518079 /* App */,
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
-				C73C456F2819300D00E41406 /* AppStorageKey.swift */,
-				C73C45672819241100E41406 /* MyMemojiView.swift */,
+				C7D499B9281E48A000440C07 /* Manager */,
+				C7D499B8281E489800440C07 /* Model */,
+				C7D499B5281E47C300440C07 /* Extension */,
 				C73C45652819155600E41406 /* MemojiCardView.swift */,
-				C73C45692819245D00E41406 /* MakeMemojiCardView.swift */,
-				C73C456D28192EA100E41406 /* RegisterUserView.swift */,
+				C77FF5A9281AFDF800518079 /* MyMemoji */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
 				C701990D2818C5C500AAEF0A /* Assets.xcassets */,
 				C73C455A2819129C00E41406 /* GoogleService-Info.plist */,
@@ -96,6 +110,52 @@
 				C70199102818C5C500AAEF0A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C77FF5A9281AFDF800518079 /* MyMemoji */ = {
+			isa = PBXGroup;
+			children = (
+				C73C45672819241100E41406 /* MyMemojiView.swift */,
+				C73C45692819245D00E41406 /* MakeMemojiCardView.swift */,
+				C73C456D28192EA100E41406 /* RegisterUserView.swift */,
+				C77FF5AB281B020200518079 /* ActivityViewController.swift */,
+			);
+			path = MyMemoji;
+			sourceTree = "<group>";
+		};
+		C77FF5AA281AFE1200518079 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
+				C7F0307C281D27B90072CC11 /* AppDelegate.swift */,
+				C73C456F2819300D00E41406 /* AppStorageKey.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C7D499B5281E47C300440C07 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C79F8530281A2402001D013F /* View+Extension.swift */,
+				C7D499B6281E47E700440C07 /* App+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		C7D499B8281E489800440C07 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C79F852E281A1175001D013F /* MemojiCardModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C7D499B9281E48A000440C07 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C7D499BA281E48BB00440C07 /* JsonManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,10 +175,11 @@
 			);
 			name = MemojiCollector;
 			packageProductDependencies = (
-				C73C455D2819131F00E41406 /* FirebaseAnalytics */,
-				C73C455F2819131F00E41406 /* FirebaseStorage */,
-				C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */,
-				C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */,
+				C7F03072281D21590072CC11 /* FirebaseAuth */,
+				C7F03074281D21590072CC11 /* FirebaseMessaging */,
+				C7F03076281D21590072CC11 /* FirebaseStorage */,
+				C7F03078281D21590072CC11 /* FirebaseStorageCombine-Community */,
+				C7F0307A281D21590072CC11 /* FirebaseStorageSwift-Beta */,
 			);
 			productName = MemojiCollector;
 			productReference = C70199062818C5C400AAEF0A /* MemojiCollector.app */;
@@ -149,7 +210,7 @@
 			);
 			mainGroup = C70198FD2818C5C400AAEF0A;
 			packageReferences = (
-				C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C70199072818C5C400AAEF0A /* Products */;
 			projectDirPath = "";
@@ -178,14 +239,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
 				C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */,
+				C79F8531281A2402001D013F /* View+Extension.swift in Sources */,
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
+				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
 				C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
+				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
+				C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */,
+				C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,9 +386,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemojiCollector/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "미모지를 사진을 등록하기 위해 사진첩 권한이 필요합니다.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -333,7 +400,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -350,9 +417,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MemojiCollector/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "미모지를 사진을 등록하기 위해 사진첩 권한이 필요합니다.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -364,7 +431,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -392,7 +459,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -403,24 +470,29 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C73C455D2819131F00E41406 /* FirebaseAnalytics */ = {
+		C7F03072281D21590072CC11 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
+			package = C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
-		C73C455F2819131F00E41406 /* FirebaseStorage */ = {
+		C7F03074281D21590072CC11 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		C7F03076281D21590072CC11 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
-		C73C45612819131F00E41406 /* FirebaseStorageCombine-Community */ = {
+		C7F03078281D21590072CC11 /* FirebaseStorageCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
 		};
-		C73C45632819131F00E41406 /* FirebaseStorageSwift-Beta */ = {
+		C7F0307A281D21590072CC11 /* FirebaseStorageSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C73C455C2819131F00E41406 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = C7F03071281D21590072CC11 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */

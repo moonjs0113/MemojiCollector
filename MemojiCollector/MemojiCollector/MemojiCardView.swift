@@ -6,49 +6,78 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MemojiCardView: View {
-    var isFirst: Bool
+    var memojiCard: MemojiCard
+    var preImageData: Data = Data()
+    @State private var imageData: Data = Data()
     
-    @AppStorage(AppStorageKey.userName.string) private var userName = ""
     
-    @AppStorage(AppStorageKey.firstCard.string) private var firstCardInfo = ""
-    @AppStorage(AppStorageKey.secondCard.string) private var secondCardInfo = ""
+    init(memojiCard: MemojiCard, preImageData: Data = Data()) {
+        self.memojiCard = memojiCard
+        self.preImageData = preImageData
+        print("\(memojiCard.kor) init")
+    }
     
-    @AppStorage(AppStorageKey.firstCardImage.string) private var firstCardImage = Data()
-    @AppStorage(AppStorageKey.secondCardImage.string) private var secondCardImage = Data()
-    
-    @State private var dataString = ""
-    @State private var kor = ""
-    @State private var eng = ""
-    
+    func addImageData(memoji: MemojiCard) {
+        let storage = Storage.storage()
+        let pathReference = storage.reference(withPath: "\(memoji.imageName)")
+        pathReference.getData(maxSize: 1 * 1024 * 1024) { optionalData, _ in
+            if let data = optionalData {
+                self.imageData = data
+                self.updateImageData(memojiCard: memojiCard, imageData: data)
+            }
+        }
+    }
     
     var body: some View {
-        VStack{
-            Text(self.kor)
-            Text(self.eng)
-            Image(uiImage: UIImage(data: self.isFirst ? self.firstCardImage : self.secondCardImage) ?? UIImage())
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-            Text(self.userName)
-        }
-        .padding()
-        .onAppear {
-            self.dataString = self.isFirst ? self.firstCardInfo : self.secondCardInfo
-            if let url = URL(string: self.dataString) {
-                let urlStr = url.absoluteString // [스키마 주소값 가지고 온다]
-                let components = URLComponents(string: urlStr) // 전체 주소
-                if let queryItems = components?.queryItems {
-                    for item in queryItems {
-                        if let kor = item.value, item.name == "kor" {
-                            self.kor = kor
-                        } else if let eng = item.value, item.name == "eng" {
-                            self.eng = eng
-                        }
-                        
+        VStack {
+            VStack(alignment: .leading) {
+                Text("\(self.memojiCard.kor)\n\(self.memojiCard.eng) ")
+                    .lineLimit(2)
+                    .font(.system(.caption, design: .rounded))
+                    .minimumScaleFactor(0.01)
+                    .multilineTextAlignment(.leading)
+                    .frame(alignment: .leading)
+                    .foregroundColor(Color("MainColor"))
+                    .padding(.horizontal, 10)
+                Spacer()
+                
+                VStack(alignment: .center) {
+                    if self.imageData.count == 0  {
+                        ProgressView(.init())
+                            .progressViewStyle(.circular)
+                            .scaledToFit()
+                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
+                    } else {
+                        Image(uiImage: (UIImage(data: imageData) ?? UIImage()))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
                     }
+                    
+                    Text(self.memojiCard.name)
+                        .font(.system(.title, design: .rounded))
+                        .fontWeight(.bold)
+                        .lineLimit(1)
+                        .foregroundColor(Color("MainColor"))
                 }
+            }
+            .padding()
+            .padding(.top, 10)
+        }
+        .frame(minWidth: 10, maxWidth: .infinity, minHeight: 10, maxHeight: .infinity)
+        .aspectRatio(11/17, contentMode: .fit)
+        .overlay {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 1)
+                .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
+        }
+        .onAppear{
+            self.imageData = self.preImageData
+            if self.imageData.count == 0 {
+                self.addImageData(memoji: self.memojiCard)
             }
         }
     }
@@ -56,6 +85,6 @@ struct MemojiCardView: View {
 
 struct MemojiCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MemojiCardView(isFirst: true)
+        MemojiCardView(memojiCard: MemojiCard(token: ""))
     }
 }
