@@ -63,7 +63,7 @@ struct RegisterUserView: View {
                 }
             }
             .frame(height: 60)
-            .alert("등록하시겠습니까?", isPresented: self.$showAlert) {
+            .alert("등록하시겠습니까? 이후 수정이 불가합니다!", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
                     self.firstUser = false

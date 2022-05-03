@@ -18,9 +18,13 @@
 		C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456B281924A400E41406 /* MemojiDetailView.swift */; };
 		C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456D28192EA100E41406 /* RegisterUserView.swift */; };
 		C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey.swift */; };
+		C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74EA4D728214FA1001CDE03 /* GridCardView.swift */; };
 		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
 		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
 		C79F8531281A2402001D013F /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F8530281A2402001D013F /* View+Extension.swift */; };
+		C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F62820347800B05DED /* DeletedCardView.swift */; };
+		C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F8282034BC00B05DED /* EmptyCardView.swift */; };
+		C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369FA2820350200B05DED /* MakeCardView.swift */; };
 		C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* App+Extension.swift */; };
 		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
 		C7F03073281D21590072CC11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03072281D21590072CC11 /* FirebaseAuth */; };
@@ -45,9 +49,13 @@
 		C73C456B281924A400E41406 /* MemojiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiDetailView.swift; sourceTree = "<group>"; };
 		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
 		C73C456F2819300D00E41406 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
+		C74EA4D728214FA1001CDE03 /* GridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCardView.swift; sourceTree = "<group>"; };
 		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
 		C79F8530281A2402001D013F /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		C7B369F62820347800B05DED /* DeletedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedCardView.swift; sourceTree = "<group>"; };
+		C7B369F8282034BC00B05DED /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
+		C7B369FA2820350200B05DED /* MakeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCardView.swift; sourceTree = "<group>"; };
 		C7D499B6281E47E700440C07 /* App+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+Extension.swift"; sourceTree = "<group>"; };
 		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
 		C7F0307C281D27B90072CC11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,10 +99,11 @@
 				C709F46B2819948A00C3F74C /* Info.plist */,
 				C77FF5AA281AFE1200518079 /* App */,
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
+				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
 				C7D499B9281E48A000440C07 /* Manager */,
 				C7D499B8281E489800440C07 /* Model */,
 				C7D499B5281E47C300440C07 /* Extension */,
-				C73C45652819155600E41406 /* MemojiCardView.swift */,
+				C7B369F52820346300B05DED /* CardView */,
 				C77FF5A9281AFDF800518079 /* MyMemoji */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
 				C701990D2818C5C500AAEF0A /* Assets.xcassets */,
@@ -131,6 +140,17 @@
 				C73C456F2819300D00E41406 /* AppStorageKey.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		C7B369F52820346300B05DED /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				C73C45652819155600E41406 /* MemojiCardView.swift */,
+				C7B369F62820347800B05DED /* DeletedCardView.swift */,
+				C7B369FA2820350200B05DED /* MakeCardView.swift */,
+				C7B369F8282034BC00B05DED /* EmptyCardView.swift */,
+			);
+			path = CardView;
 			sourceTree = "<group>";
 		};
 		C7D499B5281E47C300440C07 /* Extension */ = {
@@ -241,15 +261,19 @@
 			files = (
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
+				C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */,
 				C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */,
 				C79F8531281A2402001D013F /* View+Extension.swift in Sources */,
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
+				C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */,
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
 				C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
+				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
+				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
 				C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */,
 				C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */,

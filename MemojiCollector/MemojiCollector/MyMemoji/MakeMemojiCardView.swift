@@ -12,9 +12,10 @@ import PhotosUI
 struct MakeMemojiCardView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
     @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
-    
+    @AppStorage(AppStorageKey.saveCount.string) private var saveCount: Int = 0
     @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.token.string) private var token: String = ""
+    
     // @SceneStorage -> ipad 에서 나옴
     
     var isFirst: Bool
@@ -42,24 +43,19 @@ struct MakeMemojiCardView: View {
                                     imageData: (self.uploadMethod == "사진" ? self.selectedImage : self.selectedMemoji).pngData() ?? Data(),
                                     kor: self.korean.replacingOccurrences(of: " ", with: "_"),
                                     eng: self.english.replacingOccurrences(of: " ", with: "_"),
+                                    saveCount: self.saveCount,
                                     token: self.token)
-        print(self.token)
         return memojiCard
     }
     
     func saveData(memojiCard: MemojiCard) {
-//        if let myCardListData = UserDefaults.standard.data(forKey: AppStorageKey.myCardInfo.string) {
-//            var list = self.jsonDecoder(decodingData: myCardListData)
-//            list.append(memojiCard)
-//            let newMyCardListData = self.jsonEncoder(ecodingData: list)
-//            UserDefaults.standard.set(newMyCardListData, forKey: AppStorageKey.myCardInfo.string)
-//        }
         var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
         memojiList.append(memojiCard)
         self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
         self.saveImageToStorage(memojiModel: memojiCard) { snapshot in
             let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
             if percentComplete == 1.0 {
+                self.saveCount += 1
                 self.dismiss()
             }
         }
@@ -85,6 +81,8 @@ struct MakeMemojiCardView: View {
                 
                 VStack {
                     if self.uploadMethod == "사진" {
+                        Text("모두가 서비스를 정상적으로 이용할 수 있도록\n미모지만 업로드 해주세요.")
+                            .font(.caption)
                         Button {
                             self.picker.toggle()
                         } label: {
@@ -193,7 +191,7 @@ struct MakeMemojiCardView: View {
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15, style: .circular)
-                                .fill(Color("MainColor"))
+                                .fill(.tint)//Color("MainColor"))
                             if self.isUploading {
                                 ProgressView(value: self.progressValue)
                                     .progressViewStyle(.circular)
@@ -260,7 +258,9 @@ struct ImagePicker : UIViewControllerRepresentable {
                 if img.itemProvider.canLoadObject(ofClass: UIImage.self){
                     img.itemProvider.loadObject(ofClass: UIImage.self) { (image, err) in
                         guard let selectedImage = image else {
-                            print("err ")
+                            if let error = err {
+                                debugPrint(error)
+                            }
                             return
                         }
                         if let uiImage = selectedImage as? UIImage {
@@ -268,8 +268,6 @@ struct ImagePicker : UIViewControllerRepresentable {
                             self.parent.isSelecteImage = true
                         }
                     }
-                } else {
-                    print("cannot be loaded ")
                 }
             }
         }

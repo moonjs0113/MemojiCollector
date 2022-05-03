@@ -8,11 +8,9 @@
 import Foundation
 
 enum AppStorageKey: String {
-    case token, firstUser
+    case token, firstUser, saveCount
     case userName, userSession
     case cardList
-//    case myCardInfo, otherCardInfo
-    
     
     var string: String {
         switch self {
@@ -24,12 +22,10 @@ enum AppStorageKey: String {
             return "USER_SESSION"
         case .firstUser:
             return "FIRST_USER"
+        case .saveCount:
+            return "SAVE_COUNT"
         case .cardList:
             return "CARD_LIST"
-//        case .myCardInfo:
-//            return "MY_CARD_INFO"
-//        case .otherCardInfo:
-//            return "OTHER_CARD_INFO"
         }
     }
 }

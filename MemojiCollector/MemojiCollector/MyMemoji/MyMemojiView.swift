@@ -19,13 +19,10 @@ struct MyMemojiView: View {
     @ViewBuilder
     func goToMemojiView(memojiCard: MemojiCard?, isFirst: Bool) -> some View {
         if let memojiCard = memojiCard {
-            
-            NavigationLink(destination: MemojiDetailView(memojiCard: memojiCard)) {
-                MemojiCardView(memojiCard: memojiCard)
-            }
+            MemojiCardView(memojiCard: memojiCard, preImageData: memojiCard.imageData)
         } else {
             NavigationLink(destination: MakeMemojiCardView(isFirst: isFirst)) {
-                EmptyCardView()
+                MakeCardView()
             }
         }
     }
@@ -47,53 +44,23 @@ struct MyMemojiView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 20){
-                Text("\(self.userName)")
-                    .font(.title)
+            VStack(alignment: .leading, spacing: 100) {
+                Text("내 미모지")
+                    .font(.largeTitle)
                     .fontWeight(.bold)
                     .frame(alignment: .leading)
                     .padding(.leading, 20)
-                
                 HStack {
                     self.goToMemojiView(memojiCard: self.firstMemojiCard, isFirst: true)
                     self.goToMemojiView(memojiCard: self.SecondMemojiCard, isFirst: false)
                 }
                 .padding(.horizontal, 20)
-//                VStack{
-//
-//                    Text("세션: \(self.userSession)")
-//                }
+                Spacer()
             }
             .onAppear {
                 self.findMemojiCard()
             }
         }
-    }
-}
-
-struct EmptyCardView: View {
-    let buttonSize: CGFloat = 60
-    
-    var body: some View {
-        ZStack {
-            Color("MainColor").opacity(0.1)
-                .cornerRadius(20)
-            Circle()
-                .fill(Color("MainColor"))
-                .frame(width: self.buttonSize, height: self.buttonSize)
-            Image(systemName: "plus")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .tint(.white)
-                .frame(width: self.buttonSize - 15, height: self.buttonSize - 15)
-        }
-        .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
-        .aspectRatio(11/17, contentMode: .fit)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(lineWidth: 1)
-                .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255)))
-        
     }
 }
 

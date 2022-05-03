@@ -31,9 +31,8 @@ extension View {
         @AppStorage(AppStorageKey.cardList.string) var cardListData: Data = Data()
         var cardList = JsonManager.shared.jsonDecoder(decodingData: cardListData)
         cardList.indices.filter{
-            (cardList[$0].token == memojiCard.token) && (cardList[$0].isFirst == memojiCard.isFirst)
+            cardList[$0].urlString == memojiCard.urlString
         }.forEach { changeIndex in
-            print("save \(cardList[changeIndex].kor) image")
             cardList[changeIndex].imageData = imageData
             cardListData = JsonManager.shared.jsonEncoder(ecodingData: cardList)
         }

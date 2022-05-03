@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 extension  MemojiCollectorApp {
     func convertURLtoMemojiCard(url: URL) -> MemojiCard? {
@@ -28,7 +29,7 @@ extension  MemojiCollectorApp {
                             if index == 0 {
                                 memojiCard.name = string
                             } else if index == 1 {
-                                memojiCard.isFirst = (string == "0")
+                                memojiCard.saveCount = Int(string) ?? 0
                             } else if index == 2 {
                                 memojiCard.token = string
                             }
@@ -40,9 +41,22 @@ extension  MemojiCollectorApp {
         } else { return nil }
     }
     
-    func saveData(memojiCard: MemojiCard) {
+    func saveData(receiveMemojiCard: MemojiCard) {
+//        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
         var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.append(memojiCard)
+        let memojiCard = receiveMemojiCard
+        if memojiList.filter({ $0.urlString == memojiCard.urlString }).isEmpty {
+//            let storage = Storage.storage()
+//            let pathReference = storage.reference(withPath: "\(memojiCard.imageName)")
+//            pathReference.getData(maxSize: 1 * 1024 * 1024) { optionalData, _ in
+//                if let data = optionalData {
+//                    memojiCard.imageData = data
+//                    self.updateImageData(memojiCard: self.memojiCard, imageData: data)
+//                }
+//            }
+
+            memojiList.append(memojiCard)
+        }
         self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
     }
 }
