@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Firebase
+
 
 @main
 struct MemojiCollectorApp: App {
@@ -16,12 +16,8 @@ struct MemojiCollectorApp: App {
     @AppStorage(AppStorageKey.token.string) var fcmToken: String = ""
     
     @State private var showAlert: Bool = false
-    @State private var receiveMemojiCard: MemojiCard?
+    @State var receiveMemojiCard: MemojiCard?
 
-    init() {
-        FirebaseApp.configure()
-    }
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -30,14 +26,10 @@ struct MemojiCollectorApp: App {
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
                     self.showAlert = true
                 }
-                .onAppear {
-                    print("ContentView On Appear FCM Token")
-                    print(self.fcmToken)
-                }
                 .alert("\(self.receiveMemojiCard?.name ?? "")의 미모지 카드가 왔습니다!", isPresented: self.$showAlert) {
                     Button("받기", role: .none) {
                         if let memoji = self.receiveMemojiCard {
-                            self.saveData(memojiCard: memoji)
+                            self.saveData(receiveMemojiCard: memoji)
 //                            self.addImageData(memoji: memoji)
                         }
                         self.receiveMemojiCard = nil
@@ -46,9 +38,6 @@ struct MemojiCollectorApp: App {
                         self.receiveMemojiCard = nil
                     }
                 }
-//        message:  {
-//                    Text("")
-//                }
         }
     }
 }

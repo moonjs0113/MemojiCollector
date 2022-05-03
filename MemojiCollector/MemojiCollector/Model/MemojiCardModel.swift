@@ -16,10 +16,11 @@ struct MemojiCard: Codable, Hashable {
     var kor: String = ""
     var eng: String = ""
     
+    var saveCount: Int = 0
     var token: String
     
     var imageName: String {
-        return "\(self.name)___\(self.isFirst ? 0 : 1)___\(self.token).png"
+        return "\(self.name)___\(self.saveCount)___\(self.token).png"
     }
     
     var urlString: String {

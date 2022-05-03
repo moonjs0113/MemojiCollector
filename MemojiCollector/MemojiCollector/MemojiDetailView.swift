@@ -19,12 +19,16 @@ struct MemojiDetailView: View {
     func deleteMemojiCard() {
         var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
         memojiList.removeAll{
-            $0.isFirst == self.memojiCard.isFirst && $0.token == self.memojiCard.token
+            $0.urlString == self.memojiCard.urlString
         }
         self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        
         if self.memojiCard.isMyCard {
             self.removeImageToStorage(memojiModel: self.memojiCard)
         }
+        
+        self.dismiss()
+        
     }
     
     var body: some View {
@@ -37,7 +41,7 @@ struct MemojiDetailView: View {
                         .minimumScaleFactor(0.01)
                         .multilineTextAlignment(.leading)
                         .frame(alignment: .leading)
-                        .foregroundColor(Color("MainColor"))
+                        .foregroundColor(.black)
                         .padding(.top, 35)
                         .padding(.horizontal, 30)
                     
@@ -48,11 +52,12 @@ struct MemojiDetailView: View {
                             .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
                             .cornerRadius(20)
                             .clipped()
+                            .onAppear()
                         Text(self.memojiCard.name)
                             .font(.system(.largeTitle, design: .rounded))
                             .fontWeight(.bold)
                             .lineLimit(1)
-                            .foregroundColor(Color("MainColor"))
+                            .foregroundColor(.black)
                     }
                     Spacer()
                 }
@@ -61,10 +66,15 @@ struct MemojiDetailView: View {
             }
             .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
             .aspectRatio(11/17, contentMode: .fit)
-            .overlay {
+            .background {
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
+                    .fill(.white)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .stroke(lineWidth: 2)
+//                            .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
+//                    )
+                    .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 2)
             }
             .padding(50)
         }
@@ -92,7 +102,6 @@ struct MemojiDetailView: View {
             Button("No", role: .cancel) { }
             Button("Yes", role: .none){
                 self.deleteMemojiCard()
-                self.dismiss()
             }
         } message: {
             Text("삭제 후엔 되돌릴 수 없습니다.")
@@ -100,8 +109,8 @@ struct MemojiDetailView: View {
     }
 }
 
-//struct MemojiDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MemojiDetailView(memojiCard: MemojiCard())
-//    }
-//}
+struct MemojiDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        MemojiDetailView(memojiCard: MemojiCard(token: ""))
+    }
+}
