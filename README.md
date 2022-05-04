@@ -56,26 +56,23 @@ MemojiCollector
 │   ├── AppDelegate.swift
 │   ├── AppStorageKey.swift
 │   └── MemojiCollectorApp.swift
-├── CardView
-│   ├── DeletedCardView.swift
-│   ├── EmptyCardView.swift
-│   ├── MakeCardView.swift
-│   └── MemojiCardView.swift
 ├── Extension
-│   ├── App+Extension.swift
-│   └── View+Extension.swift
+│   └── App+Extension.swift
 ├── Manager
 │   └── JsonManager.swift
 ├── Model
 │   └── MemojiCardModel.swift
-├── MyMemoji
-│   ├── ActivityViewController.swift
-│   ├── MakeMemojiCardView.swift
-│   ├── MyMemojiView.swift
-│   └── RegisterUserView.swift
-├── ContentView.swift
-├── GridCardView.swift
-└── MemojiDetailView.swift
+├── View
+│   ├── CardView
+│   ├── ContentView.swift
+│   ├── GridCardView.swift
+│   ├── MemojiDetailView.swift
+│   └── MyMemoji
+└── ViewModel
+    ├── MakeMemojiViewModel.swift
+    ├── MemojiCardViewModel.swift
+    ├── MemojiDetaillViewModel.swift
+    └── MyMemojiViewModel.swift
 ```
 
 # API
