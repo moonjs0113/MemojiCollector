@@ -28,13 +28,10 @@ struct GridCardView: View {
                         return memoji.session == self.session
                     }
                 }.filter { memoji in
-//                    print(memoji)
                     if self.searchText == "" { return true }
                     else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
                 }
-//                ForEach(memojiList, id: \.self) { memoji in
                 ForEach(Array(memojiList.enumerated()), id: \.1) { index, memoji in
-//                    Text(memojiList.description)
                     MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
                     if index == 0 {
                         if memojiList.count == 1 {
@@ -54,6 +51,7 @@ struct GridCardView: View {
                         }
                     }
                 }
+                Spacer(minLength: 110)
             }
             .padding(.horizontal, 20)
             Spacer()

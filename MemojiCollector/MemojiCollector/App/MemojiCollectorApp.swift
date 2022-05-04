@@ -21,7 +21,7 @@ struct MemojiCollectorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(.light)
+//                .preferredColorScheme(.light)
                 .onOpenURL { URL in
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
                     self.showAlert = true
@@ -30,7 +30,6 @@ struct MemojiCollectorApp: App {
                     Button("받기", role: .none) {
                         if let memoji = self.receiveMemojiCard {
                             self.saveData(receiveMemojiCard: memoji)
-//                            self.addImageData(memoji: memoji)
                         }
                         self.receiveMemojiCard = nil
                     }

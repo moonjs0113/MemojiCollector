@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var isShowMyPage = false
     
-//    @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @ViewBuilder
@@ -50,15 +49,13 @@ struct ContentView: View {
                             self.isShowMyPage.toggle()
                         } label: {
                             Image(systemName: "person.fill")
-//                            Image(systemName: "person")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 30, height: 30)
-//                                .foregroundColor(.black)
                                 .foregroundColor(.white)
                                 .background {
                                     Circle()
-                                        .fill(.tint)//Color("MainColor"))
+                                        .fill(.tint)
                                         .shadow(color: .gray.opacity(0.5), radius: 3, x: 1, y: 2)
                                         .frame(width: 60, height: 60)
                                 }

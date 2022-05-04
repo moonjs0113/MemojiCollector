@@ -69,11 +69,6 @@ struct MemojiDetailView: View {
             .background {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.white)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .stroke(lineWidth: 2)
-//                            .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
-//                    )
                     .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 2)
             }
             .padding(50)
