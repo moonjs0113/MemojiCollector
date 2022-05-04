@@ -18,7 +18,6 @@ struct MemojiDetailView: View {
     
     init(memojiCard: MemojiCard) {
         self.memojiCard = memojiCard
-        self.viewModel.memojiCard = memojiCard
     }
     
     var body: some View {
@@ -62,6 +61,9 @@ struct MemojiDetailView: View {
                     .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 2)
             }
             .padding(50)
+        }
+        .onAppear{
+            self.viewModel.memojiCard = memojiCard
         }
         .navigationBarItems(trailing:
                                 HStack {
