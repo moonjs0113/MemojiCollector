@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct DeletedCardView: View {
-    var memojiCard: MemojiCard
+    var memojiCard: MemojiCard?
     @State private var isShowAlert: Bool = false
     
+    func deleteMemojiCard() {
+        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
+        var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: cardInfoList)
+        memojiList.removeAll{
+            $0.urlString == (self.memojiCard?.urlString ?? "")
+        }
+        cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+    }
     
     var body: some View {
         Button {
-            print(self.memojiCard)
             self.isShowAlert.toggle()
         } label: {
             VStack {
@@ -24,12 +31,7 @@ struct DeletedCardView: View {
         }
         .alert("삭제하시겠습니까?", isPresented: self.$isShowAlert) {
             Button("네", role: .none) {
-                @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-                var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: cardInfoList)
-                memojiList.removeAll{
-                    $0.urlString == self.memojiCard.urlString
-                }
-                cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+                self.deleteMemojiCard()
             }
             Button("아니요", role: .cancel) { }
         }

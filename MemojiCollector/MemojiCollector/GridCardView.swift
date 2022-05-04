@@ -14,23 +14,27 @@ struct GridCardView: View {
     @Binding var session: String
     @Binding var searchText: String
     
+    func filterList() -> [MemojiCard] {
+        return JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
+            $0.name < $1.name
+        }.filter {
+            !$0.isMyCard
+        }.filter { memoji in
+            if self.session == "All" { return true }
+            else {
+                return memoji.session == self.session
+            }
+        }.filter { memoji in
+            if self.searchText == "" { return true }
+            else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
+        }
+    }
+    
     var body: some View {
         ScrollView {
             Spacer()
             LazyVGrid(columns: self.gridItems) {
-                let memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
-                    $0.name < $1.name
-                }.filter {
-                    !$0.isMyCard
-                }.filter { memoji in
-                    if self.session == "All" { return true }
-                    else {
-                        return memoji.session == self.session
-                    }
-                }.filter { memoji in
-                    if self.searchText == "" { return true }
-                    else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
-                }
+                let memojiList = self.filterList()
                 ForEach(Array(memojiList.enumerated()), id: \.1) { index, memoji in
                     MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
                     if index == 0 {

@@ -10,56 +10,20 @@ import PhotosUI
 //import CloudKit
 
 struct MakeMemojiCardView: View {
-    @AppStorage(AppStorageKey.userName.string) private var userName = ""
-    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
-    @AppStorage(AppStorageKey.saveCount.string) private var saveCount: Int = 0
-    @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
-    @AppStorage(AppStorageKey.token.string) private var token: String = ""
+    @StateObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
     
-    // @SceneStorage -> ipad 에서 나옴
-    
-    var isFirst: Bool
     var uploadMethodArray = ["사진", "미모지 스티커"]
+    var isFirst: Bool
     
     @State private var uploadMethod: String = "사진"
-    @State private var picker: Bool = false
-    @State private var selectedImage: UIImage = UIImage()
-    @State private var selectedMemoji: UIImage = UIImage()
-    @State private var isSelecteImage: Bool = false
+    @State private var isShowImagePicker: Bool = false
     @State private var isUploading: Bool = false
-    @State private var korean: String = "#"
-    @State private var english: String = "#"
     @State private var showAlert = false
     @State private var progressValue = 0.0
     
     @FocusState private var focusedField: Bool
+    
     @Environment(\.dismiss) var dismiss
-    
-    func createMemojiModel() -> MemojiCard{
-        let memojiCard = MemojiCard(name: self.userName,
-                                    session: self.userSession,
-                                    isFirst: self.isFirst,
-                                    isMyCard: true,
-                                    imageData: (self.uploadMethod == "사진" ? self.selectedImage : self.selectedMemoji).pngData() ?? Data(),
-                                    kor: self.korean.replacingOccurrences(of: " ", with: "_"),
-                                    eng: self.english.replacingOccurrences(of: " ", with: "_"),
-                                    saveCount: self.saveCount,
-                                    token: self.token)
-        return memojiCard
-    }
-    
-    func saveData(memojiCard: MemojiCard) {
-        var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.append(memojiCard)
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
-        self.saveImageToStorage(memojiModel: memojiCard) { snapshot in
-            let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            if percentComplete == 1.0 {
-                self.saveCount += 1
-                self.dismiss()
-            }
-        }
-    }
     
     init(isFirst: Bool) {
         self.isFirst = isFirst
@@ -84,10 +48,10 @@ struct MakeMemojiCardView: View {
                         Text("모두가 서비스를 정상적으로 이용할 수 있도록\n미모지만 업로드 해주세요.")
                             .font(.caption)
                         Button {
-                            self.picker.toggle()
+                            self.isShowImagePicker.toggle()
                         } label: {
-                            if self.isSelecteImage {
-                                Image(uiImage: self.selectedImage)
+                            if self.viewModel.isSelecteImage {
+                                Image(uiImage: self.viewModel.selectedImage)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
@@ -107,18 +71,19 @@ struct MakeMemojiCardView: View {
                                 .stroke(lineWidth: 1)
                                 .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
                         }
-                        .sheet(isPresented: self.$picker) {
-                            ImagePicker(images: self.$selectedImage, picker: self.$picker, isSelecteImage: self.$isSelecteImage)
+                        .sheet(isPresented: self.$isShowImagePicker) {
+                            ImagePicker(images: self.$viewModel.selectedImage, picker: self.$isShowImagePicker, isSelecteImage: self.$viewModel.isSelecteImage)
                         }
                         .onAppear {
-                            self.selectedMemoji = UIImage()
+                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
+                            
                         }
                         .padding(.horizontal, 40)
                     } else {
                         VStack {
                             Text("미모지 스티커를 1개만 입력해주세요.\n2개 이상 입력시 등록이 불가합니다.")
                                 .font(.caption)
-                            MemojiTextView(selectedMemoji: self.$selectedMemoji, isSelecteImage: self.$isSelecteImage)
+                            MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
                                 .aspectRatio(1, contentMode: .fit)
                                 .cornerRadius(20)
@@ -132,8 +97,7 @@ struct MakeMemojiCardView: View {
                                 .padding(.horizontal, 50)
                         }
                         .onAppear {
-                            self.isSelecteImage = false
-                            self.selectedImage = UIImage()
+                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
                         }
                     }
                 }
@@ -143,7 +107,7 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("닉네임        ")
-                            TextField("NickName", text: self.$userName)
+                            TextField("NickName", text: self.$viewModel.userName)
                                 .disabled(true)
                         }
                         .padding(.leading, 15)
@@ -153,7 +117,10 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("한글문구    ")
-                            TextField("#으로 시작해주세요", text: self.$korean)
+                            TextField("#으로 시작해주세요", text: self.$viewModel.korean)
+                                .onChange(of: self.viewModel.korean) { newValue in
+                                    self.viewModel.hangulTextCheck(newValue: newValue)
+                                }
                                 .focused(self.$focusedField)
                                 .onChange(of: self.korean) { newValue in
                                     let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ0-9_#]{2,20}$"
@@ -174,7 +141,10 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("영어문구    ")
-                            TextField("#으로 시작해주세요", text: self.$english)
+                            TextField("#으로 시작해주세요", text: self.$viewModel.english)
+                                .onChange(of: self.viewModel.korean) { newValue in
+                                    self.viewModel.englishTextCheck(newValue: newValue)
+                                }
                                 .focused(self.$focusedField)
                                 .onChange(of: self.english) { newValue in
                                     let pattern = "^[a-zA-Z0-9_#]{2,20}$"
@@ -195,7 +165,7 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("Session     ")
-                            TextField("NickName", text: self.$userSession)
+                            TextField("NickName", text: self.$viewModel.userSession)
                                 .disabled(true)
                         }
                         .padding(.leading, 15)
@@ -206,14 +176,14 @@ struct MakeMemojiCardView: View {
                     
                     Spacer()
                     Button {
-                        if self.korean.count > 1 && self.english.count > 1 && self.isSelecteImage {
+                        if self.viewModel.isEnableRegister() {
                             self.focusedField = false
                             self.showAlert.toggle()
                         }
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15, style: .circular)
-                                .fill(.tint)//Color("MainColor"))
+                                .fill(.tint)
                             if self.isUploading {
                                 ProgressView(value: self.progressValue)
                                     .progressViewStyle(.circular)
@@ -230,8 +200,10 @@ struct MakeMemojiCardView: View {
                         Button("No", role: .cancel) { }
                         Button("Yes", role: .none){
                             self.isUploading = true
-                            let memojiModel = createMemojiModel()
-                            self.saveData(memojiCard: memojiModel)
+                            let memojiModel = self.viewModel.createMemojiModel(uploadMethod: self.uploadMethod)
+                            self.viewModel.saveData(memojiCard: memojiModel) {
+                                self.dismiss()
+                            }
                         }
                     } message: {
                         Text("저장 후 삭제가 가능합니다.")
@@ -239,8 +211,12 @@ struct MakeMemojiCardView: View {
                 }
                 .padding()
             }
+            .onAppear {
+                self.viewModel.isFirst = isFirst
+            }
             .navigationBarBackButtonHidden(self.isUploading)
         }
+        
     }
 }
 
@@ -286,8 +262,10 @@ struct ImagePicker : UIViewControllerRepresentable {
                             return
                         }
                         if let uiImage = selectedImage as? UIImage {
-                            self.parent.images = uiImage
-                            self.parent.isSelecteImage = true
+                            DispatchQueue.main.async { [weak self] in
+                                self?.parent.images = uiImage
+                                self?.parent.isSelecteImage = true
+                            }
                         }
                     }
                 }
