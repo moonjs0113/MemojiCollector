@@ -122,17 +122,6 @@ struct MakeMemojiCardView: View {
                                     self.viewModel.hangulTextCheck(newValue: newValue)
                                 }
                                 .focused(self.$focusedField)
-                                .onChange(of: self.korean) { newValue in
-                                    let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ0-9_#]{2,20}$"
-                                    let regex = try? NSRegularExpression(pattern: pattern)
-                                    if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-                                        if self.korean.count == 0 {
-                                            self.korean = "#"
-                                        } else if self.korean.count > 1 {
-                                            _ = self.korean.removeLast()
-                                        }
-                                    }
-                                }
                         }
                         .padding(.leading, 15)
                         Divider()
@@ -146,17 +135,6 @@ struct MakeMemojiCardView: View {
                                     self.viewModel.englishTextCheck(newValue: newValue)
                                 }
                                 .focused(self.$focusedField)
-                                .onChange(of: self.english) { newValue in
-                                    let pattern = "^[a-zA-Z0-9_#]{2,20}$"
-                                    let regex = try? NSRegularExpression(pattern: pattern)
-                                    if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-                                        if self.english.count == 0 {
-                                            self.english = "#"
-                                        } else if self.english.count > 1 {
-                                            _ = self.english.removeLast()
-                                        }
-                                    }
-                                }
                         }
                         .padding(.leading, 15)
                         Divider()

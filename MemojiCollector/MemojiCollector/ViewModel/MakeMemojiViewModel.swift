@@ -45,7 +45,6 @@ class MakeMemojiViewModel: ObservableObject {
             if percentComplete == 1.0 {
                 self.saveCount += 1
                 completeHandler()
-                //                self.dismiss()
             }
         }
     }

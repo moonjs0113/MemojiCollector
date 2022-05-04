@@ -8,27 +8,17 @@
 import SwiftUI
 
 struct MemojiDetailView: View {
+    @StateObject var viewModel: MemojiDetaillViewModel = MemojiDetaillViewModel()
     var memojiCard: MemojiCard
-    @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
     
     @State private var showAlert = false
     @State private var isActivityViewPresented: Bool = false
     
     @Environment(\.dismiss) var dismiss
     
-    func deleteMemojiCard() {
-        var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.removeAll{
-            $0.urlString == self.memojiCard.urlString
-        }
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
-        
-        if self.memojiCard.isMyCard {
-            self.removeImageToStorage(memojiModel: self.memojiCard)
-        }
-        
-        self.dismiss()
-        
+    init(memojiCard: MemojiCard) {
+        self.memojiCard = memojiCard
+        self.viewModel.memojiCard = memojiCard
     }
     
     var body: some View {
@@ -96,7 +86,9 @@ struct MemojiDetailView: View {
         .alert("삭제하시겠습니까?", isPresented: self.$showAlert) {
             Button("No", role: .cancel) { }
             Button("Yes", role: .none){
-                self.deleteMemojiCard()
+                self.viewModel.deleteMemojiCard() {
+                    self.dismiss()
+                }
             }
         } message: {
             Text("삭제 후엔 되돌릴 수 없습니다.")

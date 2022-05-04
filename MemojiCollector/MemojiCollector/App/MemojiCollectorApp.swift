@@ -13,15 +13,12 @@ struct MemojiCollectorApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    @AppStorage(AppStorageKey.token.string) var fcmToken: String = ""
-    
     @State private var showAlert: Bool = false
     @State var receiveMemojiCard: MemojiCard?
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-//                .preferredColorScheme(.light)
                 .onOpenURL { URL in
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
                     self.showAlert = true

@@ -12,11 +12,7 @@ class MemojiCardViewModel: ObservableObject {
     @Published var imageData: Data = Data()
     @Published var isEmptyImage: Bool = false
     var preImageData: Data = Data()
-    var memojiCard: MemojiCard?// = MemojiCard(token: "")
-    
-//        init(memojiCard: MemojiCard) {
-//            self.memojiCard = memojiCard
-//        }
+    var memojiCard: MemojiCard?
     
     func addImageData() {
         let storage = Storage.storage()
