@@ -10,7 +10,6 @@ import SwiftUI
 struct RegisterUserView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
     @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
-    
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @Environment(\.dismiss) var dismiss

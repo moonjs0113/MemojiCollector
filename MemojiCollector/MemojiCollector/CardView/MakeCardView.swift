@@ -12,8 +12,6 @@ struct MakeCardView: View {
     
     var body: some View {
         ZStack {
-//            Color("MainColor").opacity(0.1)
-//                .cornerRadius(20)
             Circle()
                 .fill(.tint)
                 .frame(width: self.buttonSize, height: self.buttonSize)
@@ -25,11 +23,6 @@ struct MakeCardView: View {
         }
         .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
         .aspectRatio(11/17, contentMode: .fit)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 20)
-//                .stroke(lineWidth: 1)
-//                .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
-//        )
         .background {
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white)

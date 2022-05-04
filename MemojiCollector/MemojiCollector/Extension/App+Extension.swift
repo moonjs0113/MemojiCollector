@@ -42,19 +42,9 @@ extension  MemojiCollectorApp {
     }
     
     func saveData(receiveMemojiCard: MemojiCard) {
-//        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
         var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
         let memojiCard = receiveMemojiCard
         if memojiList.filter({ $0.urlString == memojiCard.urlString }).isEmpty {
-//            let storage = Storage.storage()
-//            let pathReference = storage.reference(withPath: "\(memojiCard.imageName)")
-//            pathReference.getData(maxSize: 1 * 1024 * 1024) { optionalData, _ in
-//                if let data = optionalData {
-//                    memojiCard.imageData = data
-//                    self.updateImageData(memojiCard: self.memojiCard, imageData: data)
-//                }
-//            }
-
             memojiList.append(memojiCard)
         }
         self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
