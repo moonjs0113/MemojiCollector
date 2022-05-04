@@ -11,6 +11,9 @@
 		C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C701990B2818C5C400AAEF0A /* ContentView.swift */; };
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
+		C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54B2822594A00526965 /* MyMemojiViewModel.swift */; };
+		C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */; };
+		C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A5502822622A00526965 /* MemojiCardViewModel.swift */; };
 		C73C455B2819129C00E41406 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73C455A2819129C00E41406 /* GoogleService-Info.plist */; };
 		C73C45662819155600E41406 /* MemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45652819155600E41406 /* MemojiCardView.swift */; };
 		C73C45682819241100E41406 /* MyMemojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C45672819241100E41406 /* MyMemojiView.swift */; };
@@ -42,6 +45,9 @@
 		C701990D2818C5C500AAEF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C709F46B2819948A00C3F74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C730A54B2822594A00526965 /* MyMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiViewModel.swift; sourceTree = "<group>"; };
+		C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiViewModel.swift; sourceTree = "<group>"; };
+		C730A5502822622A00526965 /* MemojiCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardViewModel.swift; sourceTree = "<group>"; };
 		C73C455A2819129C00E41406 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C73C45652819155600E41406 /* MemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardView.swift; sourceTree = "<group>"; };
 		C73C45672819241100E41406 /* MyMemojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiView.swift; sourceTree = "<group>"; };
@@ -101,8 +107,9 @@
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
 				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
 				C7D499B9281E48A000440C07 /* Manager */,
-				C7D499B8281E489800440C07 /* Model */,
 				C7D499B5281E47C300440C07 /* Extension */,
+				C7D499B8281E489800440C07 /* Model */,
+				C730A54A2822593800526965 /* ViewModel */,
 				C7B369F52820346300B05DED /* CardView */,
 				C77FF5A9281AFDF800518079 /* MyMemoji */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
@@ -119,6 +126,16 @@
 				C70199102818C5C500AAEF0A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C730A54A2822593800526965 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C730A54B2822594A00526965 /* MyMemojiViewModel.swift */,
+				C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */,
+				C730A5502822622A00526965 /* MemojiCardViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C77FF5A9281AFDF800518079 /* MyMemoji */ = {
@@ -267,11 +284,14 @@
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
 				C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */,
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
+				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
 				C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
+				C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */,
 				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
+				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,

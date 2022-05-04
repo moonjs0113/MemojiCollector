@@ -28,7 +28,6 @@ struct GridCardView: View {
                         return memoji.session == self.session
                     }
                 }.filter { memoji in
-//                    print(memoji)
                     if self.searchText == "" { return true }
                     else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
                 }
