@@ -7,10 +7,9 @@
 
 import SwiftUI
 import PhotosUI
-//import CloudKit
 
 struct MakeMemojiCardView: View {
-    @StateObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
+    @ObservedObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
     
     var uploadMethodArray = ["사진", "미모지 스티커"]
     var isFirst: Bool
@@ -131,7 +130,7 @@ struct MakeMemojiCardView: View {
                         HStack(spacing: 5) {
                             Text("영어문구    ")
                             TextField("#으로 시작해주세요", text: self.$viewModel.english)
-                                .onChange(of: self.viewModel.korean) { newValue in
+                                .onChange(of: self.viewModel.english) { newValue in
                                     self.viewModel.englishTextCheck(newValue: newValue)
                                 }
                                 .focused(self.$focusedField)
@@ -149,7 +148,7 @@ struct MakeMemojiCardView: View {
                         .padding(.leading, 15)
                         Divider()
                     }
-                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.")
+                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.\n_ 외엔 다른 기호는 사용할 수 없습니다.")
                         .font(.caption)
                     
                     Spacer()
@@ -190,7 +189,7 @@ struct MakeMemojiCardView: View {
                 .padding()
             }
             .onAppear {
-                self.viewModel.isFirst = isFirst
+                self.viewModel.isFirst = self.isFirst
             }
             .navigationBarBackButtonHidden(self.isUploading)
         }
@@ -206,12 +205,11 @@ struct ImagePicker : UIViewControllerRepresentable {
     @Binding var images : UIImage
     @Binding var picker : Bool
     @Binding var isSelecteImage : Bool
-    
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
-        config.filter = .images
         config.selectionLimit = 1
         let picker = PHPickerViewController(configuration: config)
+        config.filter = .images
         picker.delegate = context.coordinator
         return picker
     }

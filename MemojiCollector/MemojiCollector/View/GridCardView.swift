@@ -14,6 +14,8 @@ struct GridCardView: View {
     @Binding var session: String
     @Binding var searchText: String
     
+    @Environment(\.refresh) private var action
+    
     func filterList() -> [MemojiCard] {
         return JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
             $0.name < $1.name
@@ -55,10 +57,16 @@ struct GridCardView: View {
                         }
                     }
                 }
+                .onAppear {
+                    print("For Each On Appear")
+                }
                 Spacer(minLength: 110)
             }
             .padding(.horizontal, 20)
             Spacer()
+        }
+        .refreshable {
+            await print("refreshable scroll")
         }
     }
 }

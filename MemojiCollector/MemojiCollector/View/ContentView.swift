@@ -43,7 +43,7 @@ struct ContentView: View {
                 
                 VStack{
                     Spacer()
-                    HStack{
+                    HStack {
                         Spacer()
                         Button {
                             self.isShowMyPage.toggle()

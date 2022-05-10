@@ -48,6 +48,8 @@ struct MemojiCardView: View {
                                 Image(uiImage: (UIImage(data: self.viewModel.imageData) ?? UIImage()))
                                     .resizable()
                                     .scaledToFit()
+                                    .cornerRadius(10)
+                                    .clipped()
                                     .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
                             }
                             

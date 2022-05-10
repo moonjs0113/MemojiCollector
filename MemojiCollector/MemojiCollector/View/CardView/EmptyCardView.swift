@@ -11,7 +11,7 @@ struct EmptyCardView: View {
     var memojiCard: MemojiCard
     
     var body: some View {
-        Text("\(self.memojiCard.name)에게\n나머지 카드를 요청해보세요!")
+        Text("\(self.memojiCard.name)에게\n나머지 카드를\n요청해보세요!")
             .foregroundColor(.black)
             .frame(minWidth: 10, maxWidth: .infinity, minHeight: 10, maxHeight: .infinity)
             .aspectRatio(11/17, contentMode: .fit)
@@ -28,3 +28,4 @@ struct EmptyCardView_Previews: PreviewProvider {
         EmptyCardView(memojiCard: MemojiCard(token: ""))
     }
 }
+
