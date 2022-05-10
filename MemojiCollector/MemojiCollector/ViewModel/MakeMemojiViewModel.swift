@@ -89,6 +89,10 @@ class MakeMemojiViewModel: ObservableObject {
             } else if self.english.count > 1 {
                 _ = self.english.removeLast()
             }
+        } else {
+            if self.english.last == "#" {
+                _ = self.english.removeLast()
+            }
         }
     }
     

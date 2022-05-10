@@ -25,6 +25,9 @@
 		C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74EA4D728214FA1001CDE03 /* GridCardView.swift */; };
 		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
 		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
+		C7A816BF282AB8820075D136 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816BE282AB8820075D136 /* SettingView.swift */; };
+		C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816C1282AB99A0075D136 /* ChangeNameView.swift */; };
+		C7A816C4282ABE860075D136 /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816C3282ABE860075D136 /* ResetView.swift */; };
 		C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F62820347800B05DED /* DeletedCardView.swift */; };
 		C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F8282034BC00B05DED /* EmptyCardView.swift */; };
 		C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369FA2820350200B05DED /* MakeCardView.swift */; };
@@ -59,6 +62,9 @@
 		C74EA4D728214FA1001CDE03 /* GridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCardView.swift; sourceTree = "<group>"; };
 		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
+		C7A816BE282AB8820075D136 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		C7A816C1282AB99A0075D136 /* ChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameView.swift; sourceTree = "<group>"; };
+		C7A816C3282ABE860075D136 /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		C7B369F62820347800B05DED /* DeletedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedCardView.swift; sourceTree = "<group>"; };
 		C7B369F8282034BC00B05DED /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
 		C7B369FA2820350200B05DED /* MakeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCardView.swift; sourceTree = "<group>"; };
@@ -140,7 +146,9 @@
 			children = (
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
 				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
+				C7A816BE282AB8820075D136 /* SettingView.swift */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
+				C7A816C0282AB9830075D136 /* Setting */,
 				C77FF5A9281AFDF800518079 /* MyMemoji */,
 				C7B369F52820346300B05DED /* CardView */,
 			);
@@ -166,6 +174,15 @@
 				C73C456F2819300D00E41406 /* AppStorageKey.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		C7A816C0282AB9830075D136 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
+				C7A816C3282ABE860075D136 /* ResetView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		C7B369F52820346300B05DED /* CardView */ = {
@@ -284,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A816C4282ABE860075D136 /* ResetView.swift in Sources */,
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
 				C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */,
@@ -301,10 +319,12 @@
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
 				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
+				C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
 				C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */,
 				C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */,
+				C7A816BF282AB8820075D136 /* SettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +463,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -474,6 +495,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

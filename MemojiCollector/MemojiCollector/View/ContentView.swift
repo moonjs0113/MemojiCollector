@@ -67,6 +67,20 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationBarItems(trailing:
+                                    NavigationLink {
+                SettingView()
+            }
+                                label: {
+                Image(systemName: "gear")
+            }
+//                                    Button {
+////                                        self.showAlert.toggle()
+//                                    } label: {
+//                                        Image(systemName: "gear")
+//                                    }
+                                
+            )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
         }

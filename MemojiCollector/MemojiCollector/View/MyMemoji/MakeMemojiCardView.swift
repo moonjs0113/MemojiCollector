@@ -80,7 +80,7 @@ struct MakeMemojiCardView: View {
                         .padding(.horizontal, 40)
                     } else {
                         VStack {
-                            Text("미모지 스티커를 1개만 입력해주세요.\n2개 이상 입력시 등록이 불가합니다.")
+                            Text("미모지 스티커를 1개만 입력해주세요.")
                                 .font(.caption)
                             MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
@@ -296,14 +296,18 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
                 if let attachment = (value as? NSTextAttachment) {
                     nsTextAttachmentCount.append(attachment)
                 }
+            } else {
+                textView.attributedText = NSAttributedString(string: "")
             }
         }
-        if nsTextAttachmentCount.count == 1 {
+        if nsTextAttachmentCount.count > 0 {
             if let attachment = nsTextAttachmentCount.first {
                 if let image = attachment.image {
                     self.textView.selectedMemoji = image
                     self.textView.isSelecteImage = true
                 }
+                textView.attributedText = NSAttributedString(attachment: attachment)
+                textView.endEditing(true)
             }
         } else {
             self.textView.isSelecteImage = false
