@@ -37,7 +37,7 @@ struct GridCardView: View {
             Spacer()
             LazyVGrid(columns: self.gridItems) {
                 let memojiList = self.filterList()
-                ForEach(Array(memojiList.enumerated()), id: \.1) { index, memoji in
+                ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
                     MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
                     if index == 0 {
                         if memojiList.count == 1 {
@@ -57,16 +57,10 @@ struct GridCardView: View {
                         }
                     }
                 }
-                .onAppear {
-                    print("For Each On Appear")
-                }
                 Spacer(minLength: 110)
             }
             .padding(.horizontal, 20)
             Spacer()
-        }
-        .refreshable {
-            await print("refreshable scroll")
         }
     }
 }

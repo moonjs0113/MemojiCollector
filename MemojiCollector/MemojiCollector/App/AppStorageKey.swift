@@ -10,7 +10,7 @@ import Foundation
 enum AppStorageKey: String {
     case token, firstUser, saveCount
     case userName, userSession
-    case cardList
+    case cardList, groupList
     
     var string: String {
         switch self {
@@ -26,6 +26,8 @@ enum AppStorageKey: String {
             return "SAVE_COUNT"
         case .cardList:
             return "CARD_LIST"
+        case .groupList:
+            return "GROUP_LIST"
         }
     }
 }

@@ -74,12 +74,6 @@ struct ContentView: View {
                                 label: {
                 Image(systemName: "gear")
             }
-//                                    Button {
-////                                        self.showAlert.toggle()
-//                                    } label: {
-//                                        Image(systemName: "gear")
-//                                    }
-                                
             )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)

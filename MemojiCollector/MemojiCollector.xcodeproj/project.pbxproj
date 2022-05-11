@@ -11,6 +11,8 @@
 		C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C701990B2818C5C400AAEF0A /* ContentView.swift */; };
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
+		C71F9676282B985400E06650 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F9675282B985400E06650 /* GroupView.swift */; };
+		C71F9678282C094500E06650 /* SelectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F9677282C094500E06650 /* SelectGroupView.swift */; };
 		C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54B2822594A00526965 /* MyMemojiViewModel.swift */; };
 		C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */; };
 		C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A5502822622A00526965 /* MemojiCardViewModel.swift */; };
@@ -48,6 +50,8 @@
 		C701990D2818C5C500AAEF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C709F46B2819948A00C3F74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C71F9675282B985400E06650 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
+		C71F9677282C094500E06650 /* SelectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupView.swift; sourceTree = "<group>"; };
 		C730A54B2822594A00526965 /* MyMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A5502822622A00526965 /* MemojiCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardViewModel.swift; sourceTree = "<group>"; };
@@ -146,7 +150,6 @@
 			children = (
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
 				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
-				C7A816BE282AB8820075D136 /* SettingView.swift */,
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
 				C7A816C0282AB9830075D136 /* Setting */,
 				C77FF5A9281AFDF800518079 /* MyMemoji */,
@@ -179,8 +182,11 @@
 		C7A816C0282AB9830075D136 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				C7A816BE282AB8820075D136 /* SettingView.swift */,
 				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
 				C7A816C3282ABE860075D136 /* ResetView.swift */,
+				C71F9675282B985400E06650 /* GroupView.swift */,
+				C71F9677282C094500E06650 /* SelectGroupView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C71F9678282C094500E06650 /* SelectGroupView.swift in Sources */,
 				C7A816C4282ABE860075D136 /* ResetView.swift in Sources */,
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
@@ -318,6 +325,7 @@
 				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
 				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
+				C71F9676282B985400E06650 /* GroupView.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,

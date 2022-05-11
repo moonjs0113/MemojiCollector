@@ -18,6 +18,8 @@ struct MemojiCard: Codable, Hashable {
     
     var saveCount: Int = 0
     var token: String
+    var group: [String] = []
+    var description: String = ""
     
     var imageName: String {
         return "\(self.name)___\(self.saveCount)___\(self.token).png"

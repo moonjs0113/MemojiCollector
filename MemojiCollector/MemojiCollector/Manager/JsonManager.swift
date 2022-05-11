@@ -27,4 +27,22 @@ class JsonManager {
             return Data()
         }
     }
+    
+    func jsonToStringDecoder(decodingData: Data) -> [String] {
+        let decoder = JSONDecoder()
+        if let myMemojiCardList = try? decoder.decode([String].self, from: decodingData) {
+            return myMemojiCardList
+        } else {
+            return []
+        }
+    }
+    
+    func stringToJsonEncoder(ecodingData: [String]) -> Data {
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(ecodingData) {
+            return data
+        } else {
+            return Data()
+        }
+    }
 }
