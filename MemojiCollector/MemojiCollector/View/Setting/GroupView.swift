@@ -7,66 +7,26 @@
 
 import SwiftUI
 
-struct GroupView: View, AlertDelegate {
-    @AppStorage(AppStorageKey.groupList.string) private var groupList: Data = Data()
-    @State private var showAlert = false
-    @State private var groupName = ""
-    
-    func deleteGroup(groupName: String) {
-        var groupList = JsonManager.shared.jsonToStringDecoder(decodingData: self.groupList)
-        groupList.removeAll { $0 == groupName }
-        self.groupList = JsonManager.shared.stringToJsonEncoder(ecodingData: groupList)
-    }
-    
-    func addGroupName(groupName: String, bufferName: String) {
-        var groupList = JsonManager.shared.jsonToStringDecoder(decodingData: self.groupList)
-        if !groupList.contains(groupName) {
-            if bufferName == "" {
-                groupList.append(groupName)
-            } else {
-                if let bufferIndex = groupList.firstIndex(of: bufferName) {
-                    // 미모지 카드에 등록된 그룹 변경해줘야함
-                    groupList.remove(at: bufferIndex)
-                    groupList.insert(groupName, at: bufferIndex)
-                }
-            }
-        }
-
-        self.groupList = JsonManager.shared.stringToJsonEncoder(ecodingData: groupList)
-        self.showAlert = false
-        self.groupName = ""
-    }
-
-    func hideAlertView() {
-        self.showAlert = false
-    }
-    
-    func getGroupName() -> String {
-        return self.groupName
-    }
-    
-    func editGroupName(groupName: String) {
-        self.groupName = groupName
-        self.showAlert.toggle()
-    }
+struct GroupView: View{
+    @StateObject var viewModel: GroupViewModel = GroupViewModel()
     
     var body: some View {
         ZStack {
             List {
-                let groupList = JsonManager.shared.jsonToStringDecoder(decodingData: self.groupList)
-                ForEach(groupList, id: \.self) { groupName in
-                    Text(groupName)
+                let groupList = JsonManager.shared.jsonToGroupDecoder(decodingData: self.viewModel.groupList)
+                ForEach(groupList, id: \.self) { group in
+                    Text(group.name)
                         .swipeActions {
                             Button(role: .destructive) {
                                 withAnimation {
-                                    self.deleteGroup(groupName: groupName)
+                                    self.viewModel.deleteGroup(groupName: group.name)
                                 }
                             } label: {
                                 Text("삭제")
                             }
                             Button() {
                                 withAnimation {
-                                    self.editGroupName(groupName: groupName)
+                                    self.viewModel.editGroupName(groupName: group.name)
                                 }
                             } label: {
                                 Text("편집")
@@ -74,13 +34,12 @@ struct GroupView: View, AlertDelegate {
                         }
                 }
             }
-            if self.showAlert {
-                AlertView(alertDelegate: self)
+            if self.viewModel.showAlert {
+                AlertView(alertDelegate: self.viewModel)
             }
         }
-        .navigationBarItems(trailing:
-                                Button{
-            self.showAlert.toggle()
+        .navigationBarItems(trailing: Button{
+            self.viewModel.showAlert.toggle()
         } label: {
             Image(systemName: "plus")
         }
@@ -136,7 +95,7 @@ class AlertViewController: UIViewController {
                 self.alertDelegate.hideAlertView()
             }
         }
-        let saveAction = UIAlertAction(title: "Add", style: .default) { _ in
+        let saveAction = UIAlertAction(title: (self.bufferName == "") ? "Add" : "Edit", style: .default) { _ in
             if let groupName = alertController.textFields![0].text {
                 self.alertDelegate.addGroupName(groupName: groupName, bufferName: self.bufferName)
             }

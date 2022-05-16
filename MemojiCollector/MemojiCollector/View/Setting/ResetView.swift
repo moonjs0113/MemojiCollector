@@ -14,6 +14,7 @@ struct ResetView: View {
     
     func removeMyMemojiCard() {
         @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
+        @AppStorage(AppStorageKey.groupList.string) var groupList: Data = Data()
         @AppStorage(AppStorageKey.userName.string) var userName = ""
         @AppStorage(AppStorageKey.userSession.string) var userSession = "Morning"
         @AppStorage(AppStorageKey.firstUser.string) var firstUser: Bool = true
@@ -27,6 +28,7 @@ struct ResetView: View {
                 return true
             }
         }
+        groupList = Data()
         cardInfoList = Data()
         userName = ""
         userSession = ""

@@ -110,7 +110,7 @@ struct MemojiDetailView: View {
             self.memojiMemo = self.memojiCard.description
             self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
             self.memojiCard = self.viewModel.memojiCard
-            print(self.memojiCard.group)
+//            print(self.memojiCard.group)
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -143,7 +143,7 @@ struct MemojiDetailView: View {
                     Image(systemName: "square.and.pencil")
                 }
                 NavigationLink {
-                    SelectGroupView(memojiCard: self.viewModel.memojiCard, selections: self.viewModel.memojiCard.group)
+                    SelectGroupView(memojiCard: self.viewModel.memojiCard)
                 } label: {
                     Image(systemName: "tray")
                 }

@@ -9,11 +9,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    var sessionArray = ["All", "Morning", "Afternoon"]
-    @State private var session = "All"
+//    @EnvironmentObject var groupFilter: GroupFilter
+//    @State private var selectedGroupList: [Group] = []
     @State private var searchText = ""
     @State private var isShowMyPage = false
-    
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @ViewBuilder
@@ -29,15 +28,8 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 VStack {
-                    Picker("",selection: self.$session) {
-                        ForEach(self.sessionArray, id: \.self) { session in
-                            Text(session)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    
-                    GridCardView(session: self.$session, searchText: self.$searchText)
+                    Spacer(minLength: 10)
+                    GridCardView(searchText: self.$searchText)
                     Spacer()
                 }
                 
@@ -68,17 +60,30 @@ struct ContentView: View {
                 }
             }
             .navigationBarItems(trailing:
-                                    NavigationLink {
-                SettingView()
-            }
-                                label: {
+                                    HStack{
+                NavigationLink {
+                    SettingView()
+                }
+            label: {
                 Image(systemName: "gear")
+            }
+                NavigationLink {
+                    FilterGroupView()
+                }
+            label: {
+                Image(systemName: "tray")
+            }
             }
             )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
         }
         .searchable(text: self.$searchText)
+        .onAppear {
+            print("On Appear?")
+            print("On Appear?")
+            print("On Appear?")
+        }
     }
 }
 

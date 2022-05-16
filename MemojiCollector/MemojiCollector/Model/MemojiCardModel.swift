@@ -18,7 +18,7 @@ struct MemojiCard: Codable, Hashable {
     
     var saveCount: Int = 0
     var token: String
-    var group: [String] = []
+//    var group: [String] = []
     var description: String = ""
     
     var imageName: String {

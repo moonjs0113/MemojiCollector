@@ -10,25 +10,35 @@ import SwiftUI
 struct GridCardView: View {    
     let gridItems: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()),]
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    
-    @Binding var session: String
+    @EnvironmentObject var groupFilter: GroupFilter
+//    @Binding var groupList: [Group]
     @Binding var searchText: String
     
-    @Environment(\.refresh) private var action
-    
     func filterList() -> [MemojiCard] {
-        return JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
+        let filteredList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
             $0.name < $1.name
         }.filter {
             !$0.isMyCard
         }.filter { memoji in
-            if self.session == "All" { return true }
-            else {
-                return memoji.session == self.session
-            }
-        }.filter { memoji in
             if self.searchText == "" { return true }
             else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
+        }
+        
+        if self.groupFilter.groupList.isEmpty {
+            return filteredList
+        } else {
+            var groupedList: [MemojiCard] = []
+            filteredList.forEach{ memoji in
+                if !groupedList.contains(memoji) {
+                    for group in self.groupFilter.groupList {
+                        if group.memojiCardList.map({$0.urlString}).contains(memoji.urlString) {
+                            groupedList.append(memoji)
+                        }
+                    }
+                }
+            }
+            
+            return groupedList
         }
     }
     
