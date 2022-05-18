@@ -11,8 +11,6 @@
 		C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C701990B2818C5C400AAEF0A /* ContentView.swift */; };
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
-		C71F9676282B985400E06650 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F9675282B985400E06650 /* GroupView.swift */; };
-		C71F9678282C094500E06650 /* SelectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F9677282C094500E06650 /* SelectGroupView.swift */; };
 		C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54B2822594A00526965 /* MyMemojiViewModel.swift */; };
 		C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */; };
 		C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A5502822622A00526965 /* MemojiCardViewModel.swift */; };
@@ -25,8 +23,6 @@
 		C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456D28192EA100E41406 /* RegisterUserView.swift */; };
 		C73C45702819300D00E41406 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey.swift */; };
 		C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74EA4D728214FA1001CDE03 /* GridCardView.swift */; };
-		C77DA2E92831515700455C74 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77DA2E82831515700455C74 /* GroupModel.swift */; };
-		C77DA2EE28315C1C00455C74 /* FilterGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77DA2ED28315C1C00455C74 /* FilterGroupView.swift */; };
 		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
 		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
 		C7A816BF282AB8820075D136 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816BE282AB8820075D136 /* SettingView.swift */; };
@@ -35,7 +31,6 @@
 		C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F62820347800B05DED /* DeletedCardView.swift */; };
 		C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F8282034BC00B05DED /* EmptyCardView.swift */; };
 		C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369FA2820350200B05DED /* MakeCardView.swift */; };
-		C7CA62572832745900E0514B /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CA62562832745900E0514B /* GroupViewModel.swift */; };
 		C7D499B7281E47E700440C07 /* App+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* App+Extension.swift */; };
 		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
 		C7F03073281D21590072CC11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03072281D21590072CC11 /* FirebaseAuth */; };
@@ -53,8 +48,6 @@
 		C701990D2818C5C500AAEF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C709F46B2819948A00C3F74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		C71F9675282B985400E06650 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
-		C71F9677282C094500E06650 /* SelectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupView.swift; sourceTree = "<group>"; };
 		C730A54B2822594A00526965 /* MyMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A5502822622A00526965 /* MemojiCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardViewModel.swift; sourceTree = "<group>"; };
@@ -67,8 +60,6 @@
 		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
 		C73C456F2819300D00E41406 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
 		C74EA4D728214FA1001CDE03 /* GridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCardView.swift; sourceTree = "<group>"; };
-		C77DA2E82831515700455C74 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
-		C77DA2ED28315C1C00455C74 /* FilterGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGroupView.swift; sourceTree = "<group>"; };
 		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
 		C7A816BE282AB8820075D136 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -77,7 +68,6 @@
 		C7B369F62820347800B05DED /* DeletedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedCardView.swift; sourceTree = "<group>"; };
 		C7B369F8282034BC00B05DED /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
 		C7B369FA2820350200B05DED /* MakeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCardView.swift; sourceTree = "<group>"; };
-		C7CA62562832745900E0514B /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		C7D499B6281E47E700440C07 /* App+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App+Extension.swift"; sourceTree = "<group>"; };
 		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
 		C7F0307C281D27B90072CC11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,7 +135,6 @@
 			children = (
 				C7CA62582832758300E0514B /* MyMemojiViewModel */,
 				C730A5502822622A00526965 /* MemojiCardViewModel.swift */,
-				C7CA625A283275DF00E0514B /* SettingViewModel */,
 				C7CA6259283275D000E0514B /* CardDetailViewModel */,
 			);
 			path = ViewModel;
@@ -168,7 +157,6 @@
 			children = (
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
 				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
-				C77DA2ED28315C1C00455C74 /* FilterGroupView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -177,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				C73C456B281924A400E41406 /* MemojiDetailView.swift */,
-				C71F9677282C094500E06650 /* SelectGroupView.swift */,
 			);
 			path = CardDetail;
 			sourceTree = "<group>";
@@ -209,7 +196,6 @@
 				C7A816BE282AB8820075D136 /* SettingView.swift */,
 				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
 				C7A816C3282ABE860075D136 /* ResetView.swift */,
-				C71F9675282B985400E06650 /* GroupView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -242,14 +228,6 @@
 			path = CardDetailViewModel;
 			sourceTree = "<group>";
 		};
-		C7CA625A283275DF00E0514B /* SettingViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C7CA62562832745900E0514B /* GroupViewModel.swift */,
-			);
-			path = SettingViewModel;
-			sourceTree = "<group>";
-		};
 		C7D499B5281E47C300440C07 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				C79F852E281A1175001D013F /* MemojiCardModel.swift */,
-				C77DA2E82831515700455C74 /* GroupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -356,7 +333,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C71F9678282C094500E06650 /* SelectGroupView.swift in Sources */,
 				C7A816C4282ABE860075D136 /* ResetView.swift in Sources */,
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
@@ -365,7 +341,6 @@
 				C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */,
 				C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */,
 				C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */,
-				C77DA2E92831515700455C74 /* GroupModel.swift in Sources */,
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
@@ -374,10 +349,7 @@
 				C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */,
 				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
-				C7CA62572832745900E0514B /* GroupViewModel.swift in Sources */,
-				C77DA2EE28315C1C00455C74 /* FilterGroupView.swift in Sources */,
 				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
-				C71F9676282B985400E06650 /* GroupView.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,

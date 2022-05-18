@@ -9,7 +9,7 @@ import Foundation
 
 struct MemojiCard: Codable, Hashable {
     var name: String = ""
-    var session: String = ""
+    var subTitle: String = ""
     var isFirst: Bool = true
     var isMyCard: Bool = false
     var imageData: Data = Data()
@@ -18,7 +18,7 @@ struct MemojiCard: Codable, Hashable {
     
     var saveCount: Int = 0
     var token: String
-    var group: [String] = []
+//    var group: [String] = []
     var description: String = ""
     
     var imageName: String {
@@ -26,7 +26,7 @@ struct MemojiCard: Codable, Hashable {
     }
     
     var urlString: String {
-        return "MemojiCollector://?imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)&session=\(self.session)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return "MemojiCollector://?imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
     
     var urlScheme: URL? {

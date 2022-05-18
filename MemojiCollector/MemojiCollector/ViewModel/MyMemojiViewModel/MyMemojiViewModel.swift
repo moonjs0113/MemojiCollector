@@ -8,8 +8,8 @@
 import SwiftUI
 
 class MyMemojiViewModel: ObservableObject {
-    @AppStorage(AppStorageKey.userName.string) private var userName = ""
-    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
+//    @AppStorage(AppStorageKey.userName.string) private var userName = ""
+//    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
     @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
     
     @Published private var firstMemojiCard: MemojiCard?

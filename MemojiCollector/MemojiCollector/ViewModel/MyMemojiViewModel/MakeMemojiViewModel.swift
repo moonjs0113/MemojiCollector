@@ -11,7 +11,6 @@ import FirebaseStorage
 class MakeMemojiViewModel: ObservableObject {
     // MARK: - AppStorage
     @AppStorage(AppStorageKey.userName.string) var userName = ""
-    @AppStorage(AppStorageKey.userSession.string) var userSession = "Morning"
     @AppStorage(AppStorageKey.saveCount.string) var saveCount: Int = 0
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.token.string) var token: String = ""
@@ -27,7 +26,6 @@ class MakeMemojiViewModel: ObservableObject {
     
     func createMemojiModel(uploadMethod: String) -> MemojiCard{
         let memojiCard = MemojiCard(name: self.userName,
-                                    session: self.userSession,
                                     isFirst: self.isFirst,
                                     isMyCard: true,
                                     imageData: (uploadMethod == "사진" ? self.selectedImage : self.selectedMemoji).pngData() ?? Data(),

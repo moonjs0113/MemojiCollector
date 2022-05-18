@@ -14,8 +14,8 @@ struct SettingView: View {
     var body: some View {
         List {
             Section {
-                NavigationLink("비밀번호 설정", destination: Text("비밀번호 설정"))
-                NavigationLink("그룹 설정", destination: GroupView())
+//                NavigationLink("비밀번호 설정", destination: Text("비밀번호 설정"))
+//                NavigationLink("그룹 설정", destination: GroupView())
                 if !firstUser {
                     NavigationLink("닉네임 변경", destination: ChangeNameView())
                 }

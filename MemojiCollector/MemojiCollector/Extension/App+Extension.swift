@@ -21,8 +21,6 @@ extension  MemojiCollectorApp {
                     memojiCard.kor = kor
                 } else if let eng = item.value, item.name == "eng" {
                     memojiCard.eng = eng
-                } else if let session = item.value, item.name == "session" {
-                    memojiCard.session = session
                 } else if let imageName = item.value, item.name == "imageName" {
                     if let fileName = imageName.components(separatedBy: ".").first {
                         for (index, string) in fileName.components(separatedBy: "___").enumerated() {

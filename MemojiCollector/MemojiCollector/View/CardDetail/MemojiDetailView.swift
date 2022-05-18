@@ -10,19 +10,14 @@ import SwiftUI
 struct MemojiDetailView: View {
     @StateObject var viewModel: MemojiDetaillViewModel = MemojiDetaillViewModel()
     @State var memojiCard: MemojiCard
-
+    
     @State private var showAlert = false
     @State private var isActivityViewPresented: Bool = false
-    @State private var isTextEditorPresented: Bool = false
-    @State private var saveDisabled: Bool = true
+    @State private var isEditing: Bool = false
     @State private var memojiMemo: String = ""
     
     @FocusState var isFocus: Bool
     @Environment(\.dismiss) var dismiss
-    
-//    init(memojiCard: MemojiCard) {
-//        self.memojiCard = memojiCard
-//    }
     
     var body: some View {
         VStack {
@@ -52,6 +47,11 @@ struct MemojiDetailView: View {
                             .lineLimit(1)
                             .foregroundColor(.black)
                             .minimumScaleFactor(0.05)
+                        Text(self.memojiCard.subTitle)
+                            .font(.system(.body, design: .rounded))
+                            .lineLimit(1)
+                            .foregroundColor(.gray)
+                            .minimumScaleFactor(0.05)
                     }
                     Spacer()
                 }
@@ -74,31 +74,33 @@ struct MemojiDetailView: View {
             
             Spacer()
             
-            if self.isTextEditorPresented {
-                VStack{
-                    HStack {
-                        Text("메모")
+            if self.isEditing {
+                VStack {
+                    VStack(alignment: .leading) {
+                        Text("부제")
                             .frame(alignment: .leading)
-                            .multilineTextAlignment(.leading)
-                        Spacer()
-                        Button("저장") {
-                            self.viewModel.memojiCard.description = self.memojiMemo
-                            self.viewModel.editMemojiDescription()
-                            self.saveDisabled = true
-                        }
-                        .disabled(self.saveDisabled)
                     }
-                    TextEditor(text: self.$memojiMemo)
-                        .onChange(of: self.memojiMemo) { _ in
-                            if self.memojiMemo.count > 50 || self.memojiMemo == self.memojiCard.description {
-                                self.saveDisabled = true
-                            } else {
-                                self.saveDisabled = false
-                            }
-                        }
+                    
+                    TextField("최대 20자까지 저장 가능합니다.", text: self.$memojiCard.subTitle)
+                        .frame(height: 25)
+                        .padding(5)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10, style: .circular)
                                 .stroke(lineWidth: 1)
+                                .fill(.gray)
+                        )
+                        
+                    VStack(alignment: .leading) {
+                        Text("메모")
+                            .frame(alignment: .leading)
+                    }
+                    .frame(alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                    TextEditor(text: self.$memojiMemo)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10, style: .circular)
+                                .stroke(lineWidth: 1)
+                                .fill(.gray)
                         )
                         .frame(minWidth: 50, maxWidth: .infinity, minHeight: 70, maxHeight: 100)
                         .focused(self.$isFocus)
@@ -110,7 +112,7 @@ struct MemojiDetailView: View {
             self.memojiMemo = self.memojiCard.description
             self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
             self.memojiCard = self.viewModel.memojiCard
-//            print(self.memojiCard.group)
+            //            print(self.memojiCard.group)
         }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -123,29 +125,44 @@ struct MemojiDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing:
                                 HStack {
-            Button {
-                self.showAlert.toggle()
-            } label: {
-                Image(systemName: "trash")
-            }
+            
             if self.memojiCard.isMyCard {
+                Button {
+                    self.showAlert.toggle()
+                } label: {
+                    Image(systemName: "trash")
+                }
                 Button {
                     self.isActivityViewPresented.toggle()
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }
             } else {
+                if self.isEditing {
+                    Button {
+                        self.showAlert.toggle()
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                }
                 Button {
                     withAnimation {
-                        self.isTextEditorPresented.toggle()
+                        if self.isEditing {
+                            var subTitle = ""
+                            if self.memojiCard.subTitle.count > 20 {
+                                subTitle = String(self.memojiCard.subTitle[..<self.memojiCard.subTitle.endIndex])
+                            } else {
+                                subTitle = self.memojiCard.subTitle
+                            }
+                            self.viewModel.memojiCard.description = self.memojiMemo
+                            self.viewModel.memojiCard.subTitle = subTitle
+                                
+                            self.viewModel.editMemojiDescription()
+                        }
+                        self.isEditing.toggle()
                     }
                 } label: {
-                    Image(systemName: "square.and.pencil")
-                }
-                NavigationLink {
-                    SelectGroupView(memojiCard: self.viewModel.memojiCard)
-                } label: {
-                    Image(systemName: "tray")
+                    Text(self.isEditing ? "완료" : "편집")
                 }
             }
         }

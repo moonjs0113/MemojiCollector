@@ -80,7 +80,7 @@ struct MakeMemojiCardView: View {
                         .padding(.horizontal, 40)
                     } else {
                         VStack {
-                            Text("미모지 스티커를 1개만 입력해주세요.")
+                            Text("미모지 스티커를 1개만 입력해주세요.\n미모지 스티커만 입력가능합니다.")
                                 .font(.caption)
                             MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
@@ -134,16 +134,6 @@ struct MakeMemojiCardView: View {
                                     self.viewModel.englishTextCheck(newValue: newValue)
                                 }
                                 .focused(self.$focusedField)
-                        }
-                        .padding(.leading, 15)
-                        Divider()
-                    }
-                    
-                    VStack(spacing: 8) {
-                        HStack(spacing: 5) {
-                            Text("Session     ")
-                            TextField("NickName", text: self.$viewModel.userSession)
-                                .disabled(true)
                         }
                         .padding(.leading, 15)
                         Divider()
