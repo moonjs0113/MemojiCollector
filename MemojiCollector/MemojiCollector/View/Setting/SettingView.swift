@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+//    @Binding var selectedGroupList: [Group]
     
     var body: some View {
         List {
@@ -28,8 +29,8 @@ struct SettingView: View {
     }
 }
 
-struct SettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingView()
-    }
-}
+//struct SettingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingView()
+//    }
+//}

@@ -8,6 +8,7 @@
 import Foundation
 
 struct Group: Codable, Hashable {
+//    let id: UUID = UUID()
     var name: String = ""
     var memojiCardList: [MemojiCard] = []
 }

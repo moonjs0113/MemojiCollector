@@ -11,7 +11,6 @@ struct SelectGroupView: View {
     @AppStorage(AppStorageKey.groupList.string) private var groupList: Data = Data()
     var memojiCard: MemojiCard
     
-    @EnvironmentObject var groupFilter: GroupFilter
     @Environment(\.dismiss) var dismiss
     
     init(memojiCard: MemojiCard) {
@@ -33,12 +32,6 @@ struct SelectGroupView: View {
                     self.groupList = JsonManager.shared.groupToJsonEncoder(ecodingData: groupList)
                 }
             }
-        }
-        .onDisappear {
-            let groupList = JsonManager.shared.jsonToGroupDecoder(decodingData: self.groupList).filter { group in
-                self.groupFilter.groupList.map({$0.name}).contains(group.name)
-            }
-            self.groupFilter.groupList = groupList
         }
         .navigationBarTitleDisplayMode(.inline)
     }

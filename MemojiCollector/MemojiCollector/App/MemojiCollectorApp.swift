@@ -7,16 +7,13 @@
 
 import SwiftUI
 
-class GroupFilter: ObservableObject {
-    @Published var groupList: [Group] = []
-}
-
 @main
 struct MemojiCollectorApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    @StateObject var groupFilter: GroupFilter = GroupFilter()
+    
+    
     @State private var showAlert: Bool = false
     @State var receiveMemojiCard: MemojiCard?
 
@@ -38,7 +35,6 @@ struct MemojiCollectorApp: App {
                         self.receiveMemojiCard = nil
                     }
                 }
-                .environmentObject(self.groupFilter)
         }
     }
 }

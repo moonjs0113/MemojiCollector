@@ -10,9 +10,29 @@ import SwiftUI
 struct GridCardView: View {    
     let gridItems: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()),]
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    @EnvironmentObject var groupFilter: GroupFilter
-//    @Binding var groupList: [Group]
+        @AppStorage(AppStorageKey.groupList.string) private var groupListData: Data = Data()
+    
+    @StateObject var groupFilter: GroupFilter
+    @Binding var selectedGroupList: [Group]
     @Binding var searchText: String
+    
+    func updateSelectedGroupList() {
+        let groupList = JsonManager.shared.jsonToGroupDecoder(decodingData: self.groupListData)
+        //        for (index,selectedgroup) in self.groupFilter.selectedGroupList.enumerated() {
+        for (index,selectedgroup) in self.selectedGroupList.enumerated() {
+            if !groupList.map({$0.name}).contains(selectedgroup.name) {
+                //                self.groupFilter.selectedGroupList.remove(at: index)
+                self.selectedGroupList.removeAll{ $0.name == selectedgroup.name}
+            } else {
+//                for group in groupList {
+//                    if group.id == selectedgroup.id && group.name != selectedgroup.name {
+//                        //                        self.groupFilter.selectedGroupList[index].name = group.name
+//                        self.selectedGroupList[index].name = group.name
+//                    }
+//                }
+            }
+        }
+    }
     
     func filterList() -> [MemojiCard] {
         let filteredList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
@@ -24,13 +44,16 @@ struct GridCardView: View {
             else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
         }
         
-        if self.groupFilter.groupList.isEmpty {
+        self.updateSelectedGroupList()
+//        if self.groupFilter.selectedGroupList.isEmpty {
+        if self.selectedGroupList.isEmpty {
             return filteredList
         } else {
             var groupedList: [MemojiCard] = []
             filteredList.forEach{ memoji in
                 if !groupedList.contains(memoji) {
-                    for group in self.groupFilter.groupList {
+//                    for group in self.groupFilter.selectedGroupList {
+                    for group in self.selectedGroupList {
                         if group.memojiCardList.map({$0.urlString}).contains(memoji.urlString) {
                             groupedList.append(memoji)
                         }

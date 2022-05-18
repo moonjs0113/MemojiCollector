@@ -8,21 +8,29 @@
 import SwiftUI
 
 struct FilterGroupView: View {
-    @AppStorage(AppStorageKey.groupList.string) private var groupList: Data = Data()
-    @EnvironmentObject var groupFilter: GroupFilter
-//    @Binding var selectedGroupList: [Group]
+    @StateObject var groupFilter: GroupFilter
+//    @AppStorage(AppStorageKey.groupList.string) private var groupList: Data = Data()
+    @Binding var selectedGroupList: [Group]
     
     var body: some View {
         List {
-            let groupList = JsonManager.shared.jsonToGroupDecoder(decodingData: self.groupList)
+            let groupList = JsonManager.shared.jsonToGroupDecoder(decodingData: self.groupFilter.groupListData)
             ForEach(groupList, id: \.self.name) { group in
-                MultipleSelectionRow(title: group.name, isSelected: self.groupFilter.groupList.map({$0.name}).contains(group.name)) {
-                    if self.groupFilter.groupList.map({$0.name}).contains(group.name) {
-                        self.groupFilter.groupList.removeAll(where: {$0.name == group.name})
+                MultipleSelectionRow(title: group.name, isSelected: self.selectedGroupList.map({$0.name}).contains(group.name)) {
+                    if self.selectedGroupList.map({$0.name}).contains(group.name) {
+                        self.selectedGroupList.removeAll{$0.name == group.name}
                     } else {
-                        self.groupFilter.groupList.append(group)
+                        self.selectedGroupList.append(group)
                     }
                 }
+                
+//                MultipleSelectionRow(title: group.name, isSelected: self.groupFilter.selectedGroupList.map({$0.id}).contains(group.id)) {
+//                    if self.groupFilter.selectedGroupList.map({$0.id}).contains(group.id) {
+//                        self.groupFilter.selectedGroupList.removeAll{$0.id == group.id}
+//                    } else {
+//                        self.groupFilter.selectedGroupList.append(group)
+//                    }
+//                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)

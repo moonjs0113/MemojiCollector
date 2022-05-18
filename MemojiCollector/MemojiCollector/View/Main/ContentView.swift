@@ -8,12 +8,29 @@
 
 import SwiftUI
 
+class GroupFilter: ObservableObject {
+    var groupListData: Data {
+        get{
+            @AppStorage(AppStorageKey.groupList.string) var groupListData: Data = Data()
+            return groupListData
+        }
+        set {
+            @AppStorage(AppStorageKey.groupList.string) var groupListData: Data = Data()
+            groupListData = newValue
+        }
+    }
+    
+//    @Published var selectedGroupList: [Group] = []
+}
+
 struct ContentView: View {
 //    @EnvironmentObject var groupFilter: GroupFilter
-//    @State private var selectedGroupList: [Group] = []
+    @StateObject private var groupFilter: GroupFilter = GroupFilter()
+    @State private var selectedGroupList: [Group] = []
     @State private var searchText = ""
     @State private var isShowMyPage = false
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+//    @StateObject var groupFilter: GroupFilter = GroupFilter()
     
     @ViewBuilder
     func goToMyMemojiView() -> some View{
@@ -29,7 +46,9 @@ struct ContentView: View {
             ZStack {
                 VStack {
                     Spacer(minLength: 10)
-                    GridCardView(searchText: self.$searchText)
+                    GridCardView(groupFilter: self.groupFilter, selectedGroupList: self.$selectedGroupList, searchText: self.$searchText)
+//                    GridCardView(groupFilter: self.groupFilter, searchText: self.$searchText)
+                    //, selectedGroupList: self.$groupFilter.selectedGroupList, searchText: self.$searchText)
                     Spacer()
                 }
                 
@@ -68,7 +87,9 @@ struct ContentView: View {
                 Image(systemName: "gear")
             }
                 NavigationLink {
-                    FilterGroupView()
+                    FilterGroupView(groupFilter: self.groupFilter, selectedGroupList: self.$selectedGroupList)
+//                    FilterGroupView(groupFilter: self.groupFilter)
+                    //selectedGroupList: self.$groupFilter.selectedGroupList)
                 }
             label: {
                 Image(systemName: "tray")
@@ -79,11 +100,6 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.large)
         }
         .searchable(text: self.$searchText)
-        .onAppear {
-            print("On Appear?")
-            print("On Appear?")
-            print("On Appear?")
-        }
     }
 }
 
