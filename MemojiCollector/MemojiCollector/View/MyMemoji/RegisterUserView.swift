@@ -54,10 +54,10 @@ struct RegisterUserView: View {
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 15, style: .circular)
-                        .fill(Color("MainColor"))
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .fill(.tint)
                     Text("등록하기")
-                        .font(.title)
+                        .font(.body)
                         .foregroundColor(.white)
                 }
             }

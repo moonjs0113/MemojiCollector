@@ -10,6 +10,7 @@ import FirebaseStorage
 
 struct ChangeNameView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
+    @State private var newUserName = ""
     @State private var showAlert = false
     @Environment(\.dismiss) var dismiss
     
@@ -18,7 +19,6 @@ struct ChangeNameView: View {
         let memojiCardList = JsonManager.shared.jsonDecoder(decodingData: cardInfoList).filter {
             if $0.isMyCard {
                 self.removeImageToStorage(memojiModel: $0)
-                print("dr")
                 return false
             } else {
                 return true
@@ -42,7 +42,7 @@ struct ChangeNameView: View {
             VStack(spacing: 8) {
                 HStack(spacing: 5) {
                     Text("닉네임    ")
-                    TextField("NickName", text: self.$userName)
+                    TextField("NickName", text: self.$newUserName)
                 }
                 .padding(.leading, 15)
                 Divider()
@@ -50,15 +50,15 @@ struct ChangeNameView: View {
             Spacer()
             
             Button {
-                if self.userName != "" {
+                if self.newUserName != "" {
                     self.showAlert.toggle()
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 15, style: .circular)
-                        .fill(Color("MainColor"))
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .fill(.tint)
                     Text("변경하기")
-                        .font(.title)
+                        .font(.body)
                         .foregroundColor(.white)
                 }
             }
@@ -69,10 +69,11 @@ struct ChangeNameView: View {
                 }
                 Button("Yes", role: .none){
                     self.removeMyMemojiCard()
+                    self.userName = self.newUserName
                     self.dismiss()
                 }
             }
-            .disabled(self.userName == "")
+            .disabled(self.newUserName == "")
         }
         .padding()
         

@@ -38,21 +38,30 @@ struct ResetView: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Text("""
-나의 정보와 미모지 카드, 내가 받은 미모지 카드가 모두 삭제되며
-삭제 후 복구가 불가능 합니다.
-""")
-                .padding(.top, 25)
+            VStack(spacing: 10){
+                Text("""
+    ===== 주의 사항 =====
+    """)
+                .frame(alignment: .center)
+                .minimumScaleFactor(0.5)
+                Text("""
+    나의 정보와 미모지 카드,
+    내가 받은 미모지 카드가 모두 삭제되며
+    삭제 후 복구가 불가능 합니다.
+    """)
+                    .padding(.top, 25)
+            }
+
             Spacer()
             
             Button {
                 self.showAlert.toggle()
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 15, style: .circular)
-                        .fill(Color("MainColor"))
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .fill(.tint)
                     Text("초기화 하기")
-                        .font(.title)
+                        .font(.body)
                         .foregroundColor(.white)
                 }
             }
@@ -61,7 +70,7 @@ struct ResetView: View {
                 Button("No", role: .cancel) {
                     self.dismiss()
                 }
-                Button("Yes", role: .none){
+                Button("Yes", role: .destructive){
                     self.removeMyMemojiCard()
                     
                     self.dismiss()

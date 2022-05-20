@@ -116,11 +116,20 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("한글문구    ")
-                            TextField("#으로 시작해주세요", text: self.$viewModel.korean)
-                                .onChange(of: self.viewModel.korean) { newValue in
-                                    self.viewModel.hangulTextCheck(newValue: newValue)
+                            ZStack {
+                                if self.viewModel.korean.count == 1 {
+                                    Text("한글, 띄어쓰기, _ 만 입력 가능")
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.center)
+                                        .minimumScaleFactor(0.1)
                                 }
-                                .focused(self.$focusedField)
+                                TextField("#으로 시작해주세요", text: self.$viewModel.korean)
+                                    .onChange(of: self.viewModel.korean) { newValue in
+                                        self.viewModel.hangulTextCheck(newValue: newValue)
+                                    }
+                                    .focused(self.$focusedField)
+                            }
+                            
                         }
                         .padding(.leading, 15)
                         Divider()
@@ -129,11 +138,19 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("영어문구    ")
-                            TextField("#으로 시작해주세요", text: self.$viewModel.english)
-                                .onChange(of: self.viewModel.english) { newValue in
-                                    self.viewModel.englishTextCheck(newValue: newValue)
+                            ZStack {
+                                if self.viewModel.english.count == 1 {
+                                    Text("영어, 띄어쓰기, _ 만 입력 가능")
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.center)
+                                        .minimumScaleFactor(0.1)
                                 }
-                                .focused(self.$focusedField)
+                                TextField("#으로 시작해주세요", text: self.$viewModel.english)
+                                    .onChange(of: self.viewModel.english) { newValue in
+                                        self.viewModel.englishTextCheck(newValue: newValue)
+                                    }
+                                    .focused(self.$focusedField)
+                            }
                         }
                         .padding(.leading, 15)
                         Divider()
@@ -149,14 +166,14 @@ struct MakeMemojiCardView: View {
                         }
                     } label: {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 15, style: .circular)
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
                                 .fill(.tint)
                             if self.isUploading {
                                 ProgressView(value: self.progressValue)
                                     .progressViewStyle(.circular)
                             } else {
                                 Text("등록하기")
-                                    .font(.title)
+                                    .font(.body)
                                     .foregroundColor(.white)
                             }
                         }

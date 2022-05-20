@@ -75,9 +75,9 @@ struct MemojiDetailView: View {
             Spacer()
             
             if self.isEditing {
-                VStack {
+                VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        Text("부제")
+                        Text("부제(최대20자)")
                             .frame(alignment: .leading)
                     }
                     
@@ -89,6 +89,7 @@ struct MemojiDetailView: View {
                                 .stroke(lineWidth: 1)
                                 .fill(.gray)
                         )
+                        .focused(self.$isFocus)
                         
                     VStack(alignment: .leading) {
                         Text("메모")
@@ -150,12 +151,14 @@ struct MemojiDetailView: View {
                         if self.isEditing {
                             var subTitle = ""
                             if self.memojiCard.subTitle.count > 20 {
-                                subTitle = String(self.memojiCard.subTitle[..<self.memojiCard.subTitle.endIndex])
+                                subTitle = String(self.memojiCard.subTitle[..<self.memojiCard.subTitle.index(self.memojiCard.subTitle.startIndex, offsetBy: 20)])
                             } else {
                                 subTitle = self.memojiCard.subTitle
                             }
-                            self.viewModel.memojiCard.description = self.memojiMemo
                             self.viewModel.memojiCard.subTitle = subTitle
+                            self.memojiCard.subTitle = subTitle
+                            self.viewModel.memojiCard.description = self.memojiMemo
+                            
                                 
                             self.viewModel.editMemojiDescription()
                         }

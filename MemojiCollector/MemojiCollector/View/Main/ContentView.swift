@@ -25,11 +25,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack {
-                    Spacer(minLength: 10)
-                    GridCardView(searchText: self.$searchText)
-                    Spacer()
-                }
+                GridCardView(searchText: self.$searchText)
                 
                 VStack{
                     Spacer()
@@ -56,7 +52,9 @@ struct ContentView: View {
                         }
                     }
                 }
+                
             }
+            
             .navigationBarItems(trailing:
                                     HStack{
                 NavigationLink {
@@ -69,8 +67,8 @@ struct ContentView: View {
             )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
+            .searchable(text: self.$searchText, placement: .automatic)
         }
-        .searchable(text: self.$searchText)
     }
 }
 

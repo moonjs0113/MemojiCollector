@@ -59,8 +59,8 @@ struct GridCardView: View {
                 Spacer(minLength: 110)
             }
             .padding(.horizontal, 20)
-            Spacer()
         }
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
