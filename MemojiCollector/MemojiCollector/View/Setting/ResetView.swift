@@ -10,6 +10,7 @@ import FirebaseStorage
 
 struct ResetView: View {
     @State private var showAlert = false
+    @State private var readNotice = false
     @Environment(\.dismiss) var dismiss
     
     func removeMyMemojiCard() {
@@ -39,17 +40,29 @@ struct ResetView: View {
     var body: some View {
         VStack(spacing: 40) {
             VStack(spacing: 10){
-                Text("""
-    ===== 주의 사항 =====
-    """)
+                Text("===== 주의 사항 =====")
                 .frame(alignment: .center)
                 .minimumScaleFactor(0.5)
-                Text("""
-    나의 정보와 미모지 카드,
-    내가 받은 미모지 카드가 모두 삭제되며
-    삭제 후 복구가 불가능 합니다.
-    """)
+                Text("나의 정보와 미모지 카드, 내가 받은 미모지 카드가 모두 삭제되며 삭제 후 복구가 불가능 합니다.")
                     .padding(.top, 25)
+                
+                HStack {
+                    Button {
+                        self.readNotice.toggle()
+                    } label: {
+                        if self.readNotice {
+                            Image(systemName: "checkmark.square.fill")
+                                .foregroundColor(.blue)
+                        } else {
+                            Image(systemName: "square")
+                        }
+                    }
+                    Text("위 주의사항을 확인했습니다.")
+                    Spacer()
+                    
+                }
+                .padding(.top, 25)
+                .padding(.horizontal, 5)
             }
 
             Spacer()
@@ -65,6 +78,7 @@ struct ResetView: View {
                         .foregroundColor(.white)
                 }
             }
+            .disabled(!self.readNotice)
             .frame(height: 60)
             .alert("정말 초기화 하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) {

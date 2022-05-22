@@ -37,11 +37,9 @@ struct ChangeNameView: View {
         VStack(spacing: 40) {
             Text("닉네임 변경 시, 나의 미모지 카드와 공유한 미모지 카드 모두 삭제됩니다.")
                 .padding(.top, 25)
-            
-            Text("변경할 닉네임")
             VStack(spacing: 8) {
                 HStack(spacing: 5) {
-                    Text("닉네임    ")
+                    Text("새 닉네임    ")
                     TextField("NickName", text: self.$newUserName)
                 }
                 .padding(.leading, 15)
@@ -50,9 +48,7 @@ struct ChangeNameView: View {
             Spacer()
             
             Button {
-                if self.newUserName != "" {
-                    self.showAlert.toggle()
-                }
+                self.showAlert.toggle()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 5, style: .circular)
@@ -62,6 +58,7 @@ struct ChangeNameView: View {
                         .foregroundColor(.white)
                 }
             }
+            .disabled(self.userName == "")
             .frame(height: 60)
             .alert("변경하시겠습니까? 나의 미모지 카드가 모두 삭제됩니다!", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) {
