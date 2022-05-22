@@ -116,11 +116,12 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("한글문구    ")
-                            ZStack {
+                            ZStack(alignment: .leading) {
                                 if self.viewModel.korean.count == 1 {
-                                    Text("한글, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#한글, 띄어쓰기, _ 만 입력 가능")
                                         .foregroundColor(.gray)
-                                        .multilineTextAlignment(.center)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.korean)
@@ -138,11 +139,12 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("영어문구    ")
-                            ZStack {
+                            ZStack(alignment: .leading) {
                                 if self.viewModel.english.count == 1 {
-                                    Text("영어, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#영어, 띄어쓰기, _ 만 입력 가능")
                                         .foregroundColor(.gray)
-                                        .multilineTextAlignment(.center)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.english)
@@ -178,7 +180,7 @@ struct MakeMemojiCardView: View {
                             }
                         }
                     }
-                    .disabled(self.isUploading)
+                    .disabled(self.isUploading || self.viewModel.isEmptySomeData())
                     .frame(height: 60)
                     .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                         Button("No", role: .cancel) { }
@@ -267,14 +269,18 @@ struct MemojiTextView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
+        textView.centerVerticalText()
+        textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
+        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,/n문자 및 이모티콘은 입력되지 않습니다."
         textView.delegate = context.coordinator
+        textView.centerVerticalText()
         return textView
     }
     
     func updateUIView(_ textView: UITextView, context: Context) {
-        
+        textView.centerVerticalText()
     }
     
     func makeCoordinator() -> TextViewCoordinator {
@@ -297,6 +303,7 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        textView.centerVerticalText()
         var nsTextAttachmentCount: [NSTextAttachment] = []
         textView.attributedText.enumerateAttribute(NSAttributedString.Key.attachment, in: NSRange(location: 0, length: textView.attributedText.length)) { value, range, _ in
             if value is NSTextAttachment {
@@ -320,6 +327,18 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
             self.textView.isSelecteImage = false
             self.textView.selectedMemoji = UIImage()
         }
+        textView.centerVerticalText()
+    }
+}
+
+extension UITextView {
+    func centerVerticalText() {
+        self.textAlignment = .center
+        let fitSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fitSize)
+        let calculate = (bounds.size.height - size.height * zoomScale) / 2
+        let offset = max(1, calculate)
+        contentOffset.y = -offset
     }
 }
 

@@ -22,6 +22,8 @@ class MakeMemojiViewModel: ObservableObject {
     @Published var korean: String = "#"
     @Published var english: String = "#"
     
+    @Published var isComplete: Bool = false
+    
     var isFirst: Bool = false
     
     func createMemojiModel(uploadMethod: String) -> MemojiCard{
@@ -92,6 +94,11 @@ class MakeMemojiViewModel: ObservableObject {
                 _ = self.english.removeLast()
             }
         }
+    }
+    
+    func isEmptySomeData() -> Bool{
+        print(#function)
+        return self.english.count < 2 || self.korean.count < 2 || !self.isSelecteImage
     }
     
     func saveImageToStorage(memojiModel: MemojiCard, progressHandler: @escaping (StorageTaskSnapshot) -> Void) {
