@@ -39,6 +39,8 @@
 		C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223E283B8F38002F0E21 /* LockView_.swift */; };
 		C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22240283B94F1002F0E21 /* PasswordView_.swift */; };
 		C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22248283B9E09002F0E21 /* SettingViewModel.swift */; };
+		C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */; };
+		C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */; };
 		C7F03073281D21590072CC11 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03072281D21590072CC11 /* FirebaseAuth */; };
 		C7F03075281D21590072CC11 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03074281D21590072CC11 /* FirebaseMessaging */; };
 		C7F03077281D21590072CC11 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C7F03076281D21590072CC11 /* FirebaseStorage */; };
@@ -82,6 +84,8 @@
 		C7E2223E283B8F38002F0E21 /* LockView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView_.swift; sourceTree = "<group>"; };
 		C7E22240283B94F1002F0E21 /* PasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView_.swift; sourceTree = "<group>"; };
 		C7E22248283B9E09002F0E21 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Extension.swift"; sourceTree = "<group>"; };
 		C7F0307C281D27B90072CC11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,6 +252,8 @@
 			isa = PBXGroup;
 			children = (
 				C7D499B6281E47E700440C07 /* App+Extension.swift */,
+				C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */,
+				C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
 				C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */,
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
+				C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */,
 				C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
 				C73C45702819300D00E41406 /* AppStorageKey_.swift in Sources */,
@@ -391,6 +398,7 @@
 				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
 				C73C45682819241100E41406 /* MyMemojiView.swift in Sources */,
 				C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */,
+				C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
 				C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */,

@@ -274,7 +274,7 @@ struct MemojiTextView: UIViewRepresentable {
         textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
-        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,/n문자 및 이모티콘은 입력되지 않습니다."
+        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,\n문자 및 이모티콘은 입력되지 않습니다."
         textView.delegate = context.coordinator
         textView.centerVerticalText()
         return textView
@@ -293,6 +293,29 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
     var textView: MemojiTextView
     init(textView: MemojiTextView) {
         self.textView = textView
+    }
+    
+    func resizingImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -320,26 +343,15 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
                 if let image = attachment.image {
                     self.textView.selectedMemoji = image
                     self.textView.isSelecteImage = true
+                    let newImage = self.resizingImage(image: image, targetSize: textView.frame.size)
+                    textView.attributedText = NSAttributedString(attachment: NSTextAttachment(image: newImage))
                 }
-                textView.attributedText = NSAttributedString(attachment: attachment)
                 textView.endEditing(true)
             }
         } else {
             self.textView.isSelecteImage = false
             self.textView.selectedMemoji = UIImage()
         }
-        textView.centerVerticalText()
-    }
-}
-
-extension UITextView {
-    func centerVerticalText() {
-        self.textAlignment = .center
-        let fitSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
-        let size = sizeThatFits(fitSize)
-        let calculate = (bounds.size.height - size.height * zoomScale) / 2
-        let offset = max(1, calculate)
-        contentOffset.y = -offset
     }
 }
 
