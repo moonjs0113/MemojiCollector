@@ -31,6 +31,7 @@ struct MakeMemojiCardView: View {
     }
     
     var body: some View {
+        
         ScrollView {
             VStack(spacing: 25) {
                 Picker("미모지 업로드 방식", selection: self.$uploadMethod) {
