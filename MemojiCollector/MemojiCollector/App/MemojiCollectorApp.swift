@@ -20,6 +20,9 @@ struct MemojiCollectorApp: App {
     func rootView() -> some View {
         if self.isLock {
             LockView(isLock: self.$isLock, sha256: self.userPW)
+                .onOpenURL { URL in
+                    self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
+                }
         } else {
             ContentView()
                 .onOpenURL { URL in
@@ -35,6 +38,11 @@ struct MemojiCollectorApp: App {
                     }
                     Button("😭", role: .cancel) {
                         self.receiveMemojiCard = nil
+                    }
+                }
+                .onAppear {
+                    if self.receiveMemojiCard != nil {
+                        self.showAlert = true
                     }
                 }
         }
