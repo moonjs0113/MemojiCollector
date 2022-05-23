@@ -11,11 +11,16 @@ import SwiftUI
 struct MemojiCollectorApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
+    @AppStorage(AppStorageKey.password.string) var userPW: String = ""
     @State private var showAlert: Bool = false
+    @State private var isLock: Bool = false
     @State var receiveMemojiCard: MemojiCard?
 
-    var body: some Scene {
-        WindowGroup {
+    @ViewBuilder
+    func rootView() -> some View {
+        if self.isLock {
+            LockView(isLock: self.$isLock, sha256: self.userPW)
+        } else {
             ContentView()
                 .onOpenURL { URL in
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
@@ -31,6 +36,15 @@ struct MemojiCollectorApp: App {
                     Button("😭", role: .cancel) {
                         self.receiveMemojiCard = nil
                     }
+                }
+        }
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            self.rootView()
+                .onAppear {
+                    self.isLock = (self.userPW != "")
                 }
         }
     }

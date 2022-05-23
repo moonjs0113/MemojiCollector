@@ -8,15 +8,25 @@
 import SwiftUI
 
 struct SettingView: View {
-    @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
-//    @Binding var selectedGroupList: [Group]
-    
+    @StateObject private var viewModel: SettingViewModel = SettingViewModel()
+
     var body: some View {
         List {
             Section {
-//                NavigationLink("비밀번호 설정", destination: Text("비밀번호 설정"))
-//                NavigationLink("그룹 설정", destination: GroupView())
-                if !firstUser {
+                HStack { 
+                    Button {
+                        if self.viewModel.userPW == "" {
+                            self.viewModel.goToPasswordView.toggle()
+                        } else {
+                            self.viewModel.showUnlockView.toggle()
+                        }
+                    } label: {
+                        NavigationLink("비밀번호 설정", isActive: self.$viewModel.goToPasswordView) { PasswordView() }
+                            .foregroundColor(.black)
+                    }
+                    .sheet(isPresented: self.$viewModel.showUnlockView) { LockView(isLock: self.$viewModel.goToPasswordView, sha256: self.viewModel.userPW) }
+                }
+                if !self.viewModel.firstUser {
                     NavigationLink("닉네임 변경", destination: ChangeNameView())
                 }
             }
@@ -29,8 +39,8 @@ struct SettingView: View {
     }
 }
 
-//struct SettingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingView()
-//    }
-//}
+struct SettingView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingView()
+    }
+}
