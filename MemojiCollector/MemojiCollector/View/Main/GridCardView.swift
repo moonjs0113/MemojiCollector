@@ -10,24 +10,25 @@ import SwiftUI
 struct GridCardView: View {    
     let gridItems: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()),]
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    
-    @Binding var session: String
     @Binding var searchText: String
     
+    
+    func isContainSearchKeyword(memoji: MemojiCard) -> Bool {
+        let inName = memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText)
+        let inSubTitle = memoji.subTitle.lowercased().contains(self.searchText) || memoji.subTitle.uppercased().contains(self.searchText)
+        return inName || inSubTitle
+    }
+    
     func filterList() -> [MemojiCard] {
-        return JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
+        let filteredList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).sorted {
             $0.name < $1.name
         }.filter {
             !$0.isMyCard
         }.filter { memoji in
-            if self.session == "All" { return true }
-            else {
-                return memoji.session == self.session
-            }
-        }.filter { memoji in
             if self.searchText == "" { return true }
-            else { return memoji.name.lowercased().contains(self.searchText) || memoji.name.uppercased().contains(self.searchText) }
+            else { return self.isContainSearchKeyword(memoji: memoji) }
         }
+        return filteredList
     }
     
     var body: some View {
@@ -35,7 +36,7 @@ struct GridCardView: View {
             Spacer()
             LazyVGrid(columns: self.gridItems) {
                 let memojiList = self.filterList()
-                ForEach(Array(memojiList.enumerated()), id: \.1) { index, memoji in
+                ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
                     MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
                     if index == 0 {
                         if memojiList.count == 1 {
@@ -58,8 +59,8 @@ struct GridCardView: View {
                 Spacer(minLength: 110)
             }
             .padding(.horizontal, 20)
-            Spacer()
         }
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 

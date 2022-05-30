@@ -27,4 +27,40 @@ class JsonManager {
             return Data()
         }
     }
+    
+//    func jsonToGroupDecoder(decodingData: Data) -> [Group] {
+//        let decoder = JSONDecoder()
+//        if let groupList = try? decoder.decode([Group].self, from: decodingData) {
+//            return groupList
+//        } else {
+//            return []
+//        }
+//    }
+//
+//    func groupToJsonEncoder(ecodingData: [Group]) -> Data {
+//        let encoder = JSONEncoder()
+//        if let data = try? encoder.encode(ecodingData) {
+//            return data
+//        } else {
+//            return Data()
+//        }
+//    }
+    
+    func jsonToStringDecoder(decodingData: Data) -> [String] {
+        let decoder = JSONDecoder()
+        if let stringList = try? decoder.decode([String].self, from: decodingData) {
+            return stringList
+        } else {
+            return []
+        }
+    }
+    
+    func stringToJsonEncoder(ecodingData: [String]) -> Data {
+        let encoder = JSONEncoder()
+        if let data = try? encoder.encode(ecodingData) {
+            return data
+        } else {
+            return Data()
+        }
+    }
 }

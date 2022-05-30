@@ -15,21 +15,13 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
     func makeUIViewController(context: UIViewControllerRepresentableContext<MemojiActivityViewController>) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: [ActivityItemSource(), self.memojiModel.urlScheme], applicationActivities: nil)
         
-        controller.excludedActivityTypes = [.message,
-                                            .mail,
-                                            .markupAsPDF,
-                                            .saveToCameraRoll,
-                                            .assignToContact,
-                                            .copyToPasteboard,
-                                            .addToReadingList,
-                                            .openInIBooks,
-                                            .postToFacebook,
-                                            .postToFlickr,
-                                            .postToTencentWeibo,
-                                            .postToTwitter,
-                                            .postToVimeo,
-                                            .postToWeibo,
-                                            .print
+        controller.excludedActivityTypes = [.message, .mail,
+                                            .markupAsPDF, .saveToCameraRoll,
+                                            .assignToContact, .copyToPasteboard,
+                                            .addToReadingList, .openInIBooks,
+                                            .postToFacebook, .postToFlickr,
+                                            .postToTencentWeibo, .postToTwitter,
+                                            .postToVimeo, .postToWeibo, .print
         ]
         return controller
     }

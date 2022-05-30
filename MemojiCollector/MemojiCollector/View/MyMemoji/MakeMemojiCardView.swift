@@ -7,10 +7,9 @@
 
 import SwiftUI
 import PhotosUI
-//import CloudKit
 
 struct MakeMemojiCardView: View {
-    @StateObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
+    @ObservedObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
     
     var uploadMethodArray = ["사진", "미모지 스티커"]
     var isFirst: Bool
@@ -32,6 +31,7 @@ struct MakeMemojiCardView: View {
     }
     
     var body: some View {
+        
         ScrollView {
             VStack(spacing: 25) {
                 Picker("미모지 업로드 방식", selection: self.$uploadMethod) {
@@ -81,7 +81,7 @@ struct MakeMemojiCardView: View {
                         .padding(.horizontal, 40)
                     } else {
                         VStack {
-                            Text("미모지 스티커를 1개만 입력해주세요.\n2개 이상 입력시 등록이 불가합니다.")
+                            Text("미모지 스티커를 1개만 입력해주세요.\n미모지 스티커만 입력가능합니다.")
                                 .font(.caption)
                             MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
                                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
@@ -117,11 +117,21 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("한글문구    ")
-                            TextField("#으로 시작해주세요", text: self.$viewModel.korean)
-                                .onChange(of: self.viewModel.korean) { newValue in
-                                    self.viewModel.hangulTextCheck(newValue: newValue)
+                            ZStack(alignment: .leading) {
+                                if self.viewModel.korean.count == 1 {
+                                    Text("#한글, 띄어쓰기, _ 만 입력 가능")
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(alignment: .leading)
+                                        .minimumScaleFactor(0.1)
                                 }
-                                .focused(self.$focusedField)
+                                TextField("#으로 시작해주세요", text: self.$viewModel.korean)
+                                    .onChange(of: self.viewModel.korean) { newValue in
+                                        self.viewModel.hangulTextCheck(newValue: newValue)
+                                    }
+                                    .focused(self.$focusedField)
+                            }
+                            
                         }
                         .padding(.leading, 15)
                         Divider()
@@ -130,26 +140,25 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("영어문구    ")
-                            TextField("#으로 시작해주세요", text: self.$viewModel.english)
-                                .onChange(of: self.viewModel.korean) { newValue in
-                                    self.viewModel.englishTextCheck(newValue: newValue)
+                            ZStack(alignment: .leading) {
+                                if self.viewModel.english.count == 1 {
+                                    Text("#영어, 띄어쓰기, _ 만 입력 가능")
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(alignment: .leading)
+                                        .minimumScaleFactor(0.1)
                                 }
-                                .focused(self.$focusedField)
+                                TextField("#으로 시작해주세요", text: self.$viewModel.english)
+                                    .onChange(of: self.viewModel.english) { newValue in
+                                        self.viewModel.englishTextCheck(newValue: newValue)
+                                    }
+                                    .focused(self.$focusedField)
+                            }
                         }
                         .padding(.leading, 15)
                         Divider()
                     }
-                    
-                    VStack(spacing: 8) {
-                        HStack(spacing: 5) {
-                            Text("Session     ")
-                            TextField("NickName", text: self.$viewModel.userSession)
-                                .disabled(true)
-                        }
-                        .padding(.leading, 15)
-                        Divider()
-                    }
-                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.")
+                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.\n_ 외엔 다른 기호는 사용할 수 없습니다.")
                         .font(.caption)
                     
                     Spacer()
@@ -160,19 +169,19 @@ struct MakeMemojiCardView: View {
                         }
                     } label: {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 15, style: .circular)
+                            RoundedRectangle(cornerRadius: 5, style: .circular)
                                 .fill(.tint)
                             if self.isUploading {
                                 ProgressView(value: self.progressValue)
                                     .progressViewStyle(.circular)
                             } else {
                                 Text("등록하기")
-                                    .font(.title)
+                                    .font(.body)
                                     .foregroundColor(.white)
                             }
                         }
                     }
-                    .disabled(self.isUploading)
+                    .disabled(self.isUploading || self.viewModel.isEmptySomeData())
                     .frame(height: 60)
                     .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                         Button("No", role: .cancel) { }
@@ -190,7 +199,7 @@ struct MakeMemojiCardView: View {
                 .padding()
             }
             .onAppear {
-                self.viewModel.isFirst = isFirst
+                self.viewModel.isFirst = self.isFirst
             }
             .navigationBarBackButtonHidden(self.isUploading)
         }
@@ -206,12 +215,11 @@ struct ImagePicker : UIViewControllerRepresentable {
     @Binding var images : UIImage
     @Binding var picker : Bool
     @Binding var isSelecteImage : Bool
-    
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
-        config.filter = .images
         config.selectionLimit = 1
         let picker = PHPickerViewController(configuration: config)
+        config.filter = .images
         picker.delegate = context.coordinator
         return picker
     }
@@ -262,14 +270,18 @@ struct MemojiTextView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
+        textView.centerVerticalText()
+        textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
+        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,\n문자 및 이모티콘은 입력되지 않습니다."
         textView.delegate = context.coordinator
+        textView.centerVerticalText()
         return textView
     }
     
     func updateUIView(_ textView: UITextView, context: Context) {
-        
+        textView.centerVerticalText()
     }
     
     func makeCoordinator() -> TextViewCoordinator {
@@ -283,6 +295,29 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
         self.textView = textView
     }
     
+    func resizingImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let character = text.first, character.isNewline {
             textView.resignFirstResponder()
@@ -292,20 +327,26 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        textView.centerVerticalText()
         var nsTextAttachmentCount: [NSTextAttachment] = []
         textView.attributedText.enumerateAttribute(NSAttributedString.Key.attachment, in: NSRange(location: 0, length: textView.attributedText.length)) { value, range, _ in
             if value is NSTextAttachment {
                 if let attachment = (value as? NSTextAttachment) {
                     nsTextAttachmentCount.append(attachment)
                 }
+            } else {
+                textView.attributedText = NSAttributedString(string: "")
             }
         }
-        if nsTextAttachmentCount.count == 1 {
+        if nsTextAttachmentCount.count > 0 {
             if let attachment = nsTextAttachmentCount.first {
                 if let image = attachment.image {
                     self.textView.selectedMemoji = image
                     self.textView.isSelecteImage = true
+                    let newImage = self.resizingImage(image: image, targetSize: textView.frame.size)
+                    textView.attributedText = NSAttributedString(attachment: NSTextAttachment(image: newImage))
                 }
+                textView.endEditing(true)
             }
         } else {
             self.textView.isSelecteImage = false

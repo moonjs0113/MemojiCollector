@@ -48,6 +48,8 @@ struct MemojiCardView: View {
                                 Image(uiImage: (UIImage(data: self.viewModel.imageData) ?? UIImage()))
                                     .resizable()
                                     .scaledToFit()
+                                    .cornerRadius(10)
+                                    .clipped()
                                     .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
                             }
                             
@@ -57,9 +59,9 @@ struct MemojiCardView: View {
                                 .lineLimit(1)
                                 .foregroundColor(self.textColor)
                             if !(self.viewModel.memojiCard?.isMyCard ?? false) {
-                                VStack(alignment: .leading) {
-                                    Text(self.viewModel.memojiCard?.session ?? "")
-                                        .frame(alignment: .leading)
+                                VStack(alignment: .center) {
+                                    Text(self.viewModel.memojiCard?.subTitle ?? "")
+                                        .frame(alignment: .center)
                                         .font(.system(.caption2, design: .rounded))
                                         .lineLimit(1)
                                         .foregroundColor(.gray)

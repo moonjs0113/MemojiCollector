@@ -9,11 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    var sessionArray = ["All", "Morning", "Afternoon"]
-    @State private var session = "All"
     @State private var searchText = ""
     @State private var isShowMyPage = false
-    
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @ViewBuilder
@@ -28,22 +25,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack {
-                    Picker("",selection: self.$session) {
-                        ForEach(self.sessionArray, id: \.self) { session in
-                            Text(session)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    
-                    GridCardView(session: self.$session, searchText: self.$searchText)
-                    Spacer()
-                }
+                GridCardView(searchText: self.$searchText)
                 
                 VStack{
                     Spacer()
-                    HStack{
+                    HStack {
                         Spacer()
                         Button {
                             self.isShowMyPage.toggle()
@@ -66,11 +52,23 @@ struct ContentView: View {
                         }
                     }
                 }
+                
             }
+            
+            .navigationBarItems(trailing:
+                                    HStack{
+                NavigationLink {
+                    SettingView()
+                }
+            label: {
+                Image(systemName: "gear")
+            }
+            }
+            )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
+            .searchable(text: self.$searchText, placement: .automatic)
         }
-        .searchable(text: self.$searchText)
     }
 }
 

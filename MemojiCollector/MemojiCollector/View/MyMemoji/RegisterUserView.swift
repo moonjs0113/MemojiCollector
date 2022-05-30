@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RegisterUserView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
-    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
+//    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     
     @Environment(\.dismiss) var dismiss
@@ -31,45 +31,33 @@ struct RegisterUserView: View {
                     .padding(.leading, 15)
                     Divider()
                 }
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Session")
-                    Picker("",selection: self.$userSession) {
-                        ForEach(["Morning", "Afternoon"], id: \.self) { session in
-                            Text(session)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-
-                Text("*중복 데이터 방지를 위해 닉네임과 세션은 이후 변경할 수 없습니다.\n변경을 위해서는 어플을 재설치 해야하며, 수집한 미모지 카드는 저장되지 않습니다.")
+                Text("닉네임은 이후 변경이 가능하지만, 변경 시 나의 미모지 카드가 모두 삭제됩니다.\n(내가 공유한 미모지 카드 포함)")
                     .font(.caption)
             }
             .padding(.top, 25)
 
             Spacer()
             Button {
-                if self.userName != "" {
-                    self.showAlert.toggle()
-                }
+                self.showAlert.toggle()
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 15, style: .circular)
-                        .fill(Color("MainColor"))
+                    RoundedRectangle(cornerRadius: 5, style: .circular)
+                        .fill(.tint)
                     Text("등록하기")
-                        .font(.title)
+                        .font(.body)
                         .foregroundColor(.white)
                 }
             }
+            .disabled(self.userName == "")
             .frame(height: 60)
-            .alert("등록하시겠습니까? 이후 수정이 불가합니다!", isPresented: self.$showAlert) {
+            .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
                     self.firstUser = false
                     self.dismiss()
                 }
             } message: {
-                Text("닉네임: \(self.userName)\n세션: \(self.userSession)")
+                Text("닉네임: \(self.userName)")
             }
             .disabled(self.userName == "")
         }
