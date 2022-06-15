@@ -11,10 +11,10 @@ import PhotosUI
 struct MakeMemojiCardView: View {
     @ObservedObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
     
-    var uploadMethodArray = ["사진", "미모지 스티커"]
+    var uploadMethodArray = ["미모지 스티커", "사진",]
     var isFirst: Bool
     
-    @State private var uploadMethod: String = "사진"
+    @State private var uploadMethod: String = "미모지 스티커"
     @State private var isShowImagePicker: Bool = false
     @State private var isUploading: Bool = false
     @State private var showAlert = false

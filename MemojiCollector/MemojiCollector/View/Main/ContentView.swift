@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var isShowMyPage = false
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+    @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
     
     @ViewBuilder
     func goToMyMemojiView() -> some View{
@@ -50,19 +51,22 @@ struct ContentView: View {
                         .sheet(isPresented: self.$isShowMyPage) {
                             self.goToMyMemojiView()
                         }
+                        .sheet(isPresented: $firstGuide) {
+                            GuideView()
+                        }
+//                        .sheet(isPresented: $firstGuide, onDismiss: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>) {
+//
+//                        }
                     }
                 }
-                
             }
-            
             .navigationBarItems(trailing:
-                                    HStack{
+                                    HStack {
                 NavigationLink {
                     SettingView()
+                } label: {
+                    Image(systemName: "gear")
                 }
-            label: {
-                Image(systemName: "gear")
-            }
             }
             )
             .navigationTitle("Memoji Collector")
