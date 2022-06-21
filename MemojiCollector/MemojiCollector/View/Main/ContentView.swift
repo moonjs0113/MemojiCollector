@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var searchText = ""
     @State private var isShowMyPage = false
+    @State private var isShowGuide = false
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
     @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
     
@@ -51,17 +52,25 @@ struct ContentView: View {
                         .sheet(isPresented: self.$isShowMyPage) {
                             self.goToMyMemojiView()
                         }
-                        .sheet(isPresented: $firstGuide) {
+                        .sheet(isPresented: $isShowGuide) {
                             GuideView()
                         }
-//                        .sheet(isPresented: $firstGuide, onDismiss: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>) {
-//
-//                        }
+                        .onAppear {
+                            if firstGuide {
+                                firstGuide = false
+                                isShowGuide.toggle()
+                            }
+                        }
                     }
                 }
             }
             .navigationBarItems(trailing:
                                     HStack {
+                Button {
+                    self.isShowGuide = true
+                } label: {
+                    Image(systemName: "questionmark.circle")
+                }
                 NavigationLink {
                     SettingView()
                 } label: {

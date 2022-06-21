@@ -40,7 +40,11 @@ struct ChangeNameView: View {
             VStack(spacing: 8) {
                 HStack(spacing: 5) {
                     Text("새 닉네임    ")
-                    TextField("NickName", text: self.$newUserName)
+                    TextField("NickName(최대 10자)", text: self.$newUserName)
+                        .onChange(of: self.newUserName) { _ in
+                            self.newUserName = self.newUserName.replacingOccurrences(of: " ", with: "")
+                        }
+                        .keyboardType(.webSearch)
                 }
                 .padding(.leading, 15)
                 Divider()
@@ -58,7 +62,7 @@ struct ChangeNameView: View {
                         .foregroundColor(.white)
                 }
             }
-            .disabled(self.userName == "")
+            .disabled(self.newUserName == "" || self.newUserName.count >= 10 || self.newUserName == self.userName)
             .frame(height: 60)
             .alert("변경하시겠습니까? 나의 미모지 카드가 모두 삭제됩니다!", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) {
