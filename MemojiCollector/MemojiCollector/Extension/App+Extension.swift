@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import SwiftUI
 
-extension  MemojiCollectorApp {
+extension IntroView {
     func convertURLtoMemojiCard(url: URL) -> MemojiCard? {
         let urlString = url.absoluteString
         let components = URLComponents(string: urlString)

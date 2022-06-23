@@ -23,6 +23,7 @@
 		C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456D28192EA100E41406 /* RegisterUserView.swift */; };
 		C73C45702819300D00E41406 /* AppStorageKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey_.swift */; };
 		C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74EA4D728214FA1001CDE03 /* GridCardView.swift */; };
+		C771269928647B5300E5954B /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C771269828647B5300E5954B /* IntroView.swift */; };
 		C77440BD28352F3100EEB6DE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */; };
 		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
 		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
@@ -69,6 +70,7 @@
 		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
 		C73C456F2819300D00E41406 /* AppStorageKey_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey_.swift; sourceTree = "<group>"; };
 		C74EA4D728214FA1001CDE03 /* GridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCardView.swift; sourceTree = "<group>"; };
+		C771269828647B5300E5954B /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		C77DA2EA28315B2800455C74 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				C771269828647B5300E5954B /* IntroView.swift */,
 				C701990B2818C5C400AAEF0A /* ContentView.swift */,
 				C74EA4D728214FA1001CDE03 /* GridCardView.swift */,
 				C7C5025528594EEC00B9C5BD /* GuideView.swift */,
@@ -397,6 +400,7 @@
 				C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */,
 				C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */,
 				C7C5025628594EEC00B9C5BD /* GuideView.swift in Sources */,
+				C771269928647B5300E5954B /* IntroView.swift in Sources */,
 				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
 				C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */,
 				C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */,
