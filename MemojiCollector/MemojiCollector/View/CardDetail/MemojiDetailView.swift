@@ -15,62 +15,71 @@ struct MemojiDetailView: View {
     @State private var isActivityViewPresented: Bool = false
     @State private var isEditing: Bool = false
     @State private var memojiMemo: String = ""
+    @State private var cardRect: CGRect = .zero
+    
     
     @FocusState var isFocus: Bool
     @Environment(\.dismiss) var dismiss
     
-    var body: some View {
-        VStack {
-            VStack{
-                VStack(alignment: .leading) {
-                    Text("\(self.memojiCard.kor)\n\(self.memojiCard.eng)")
-                        .lineLimit(2)
-                        .font(.system(.title, design: .rounded))
-                        .minimumScaleFactor(0.01)
-                        .multilineTextAlignment(.leading)
-                        .frame(alignment: .leading)
+    var cardView: some View {
+        VStack{
+            VStack(alignment: .leading) {
+                Text("\(self.memojiCard.kor)\n\(self.memojiCard.eng)")
+                    .lineLimit(2)
+                    .font(.system(.title, design: .rounded))
+                    .minimumScaleFactor(0.01)
+                    .multilineTextAlignment(.leading)
+                    .frame(alignment: .leading)
+                    .foregroundColor(.black)
+                    .padding(.top, 35)
+                    .padding(.horizontal, 30)
+                
+                VStack {
+                    Image(uiImage: (UIImage(data: self.memojiCard.imageData) ?? UIImage()))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
+                        .cornerRadius(20)
+                        .clipped()
+                        .onAppear()
+                    Text(self.memojiCard.name)
+                        .font(.system(.largeTitle, design: .rounded))
+                        .fontWeight(.bold)
+                        .lineLimit(1)
                         .foregroundColor(.black)
-                        .padding(.top, 35)
-                        .padding(.horizontal, 30)
-                    
-                    VStack {
-                        Image(uiImage: (UIImage(data: self.memojiCard.imageData) ?? UIImage()))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
-                            .cornerRadius(20)
-                            .clipped()
-                            .onAppear()
-                        Text(self.memojiCard.name)
-                            .font(.system(.largeTitle, design: .rounded))
-                            .fontWeight(.bold)
-                            .lineLimit(1)
-                            .foregroundColor(.black)
-                            .minimumScaleFactor(0.05)
-                        Text(self.memojiCard.subTitle)
-                            .font(.system(.body, design: .rounded))
-                            .lineLimit(1)
-                            .foregroundColor(.gray)
-                            .minimumScaleFactor(0.05)
-                    }
-                    Spacer()
+                        .minimumScaleFactor(0.05)
+                    Text(self.memojiCard.subTitle)
+                        .font(.system(.body, design: .rounded))
+                        .lineLimit(1)
+                        .foregroundColor(.gray)
+                        .minimumScaleFactor(0.05)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 30)
                 Spacer()
             }
-            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
-            .aspectRatio(11/17, contentMode: .fit)
-            .background {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.white)
-                    .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 2)
-            }
-            .padding(.top, 10)
-            .padding(.horizontal,50)
-            .onTapGesture {
-                self.isFocus = false
-            }
+            .padding(.horizontal)
+            .padding(.bottom, 30)
+            Spacer()
+        }
+        .aspectRatio(11/17, contentMode: .fit)
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.white)
+                .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 2)
+        }
+        .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
+        .padding()
+        .edgesIgnoringSafeArea(.all)
+        
+    }
+    
+    var body: some View {
+        VStack {
+            cardView
+//                .padding(.top, 10)
+                .padding(.horizontal,40)
+                .onTapGesture {
+                    self.isFocus = false
+                }
             
             Spacer()
             
@@ -90,7 +99,7 @@ struct MemojiDetailView: View {
                                 .fill(.gray)
                         )
                         .focused(self.$isFocus)
-                        
+                    
                     VStack(alignment: .leading) {
                         Text("메모")
                             .frame(alignment: .leading)
@@ -128,16 +137,40 @@ struct MemojiDetailView: View {
                                 HStack {
             
             if self.memojiCard.isMyCard {
+                Menu {
+                    Button {
+                        print("QR Code")
+                    } label: {
+                        HStack {
+                            Image(systemName: "qrcode")
+                            Text("QR Code")
+                        }
+                    }
+                    Button {
+                        self.isActivityViewPresented.toggle()
+                    } label: {
+                        HStack {
+                            Image(systemName: "airplayaudio")
+                            Text("AirDrop")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                
                 Button {
                     self.showAlert.toggle()
                 } label: {
                     Image(systemName: "trash")
                 }
+                
                 Button {
-                    self.isActivityViewPresented.toggle()
+                    UIImageWriteToSavedPhotosAlbum(cardView.convertViewUIImage(), nil, nil, nil)
                 } label: {
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: "square.and.arrow.down")
                 }
+                
+                
             } else {
                 if self.isEditing {
                     Button {
@@ -158,8 +191,6 @@ struct MemojiDetailView: View {
                             self.viewModel.memojiCard.subTitle = subTitle
                             self.memojiCard.subTitle = subTitle
                             self.viewModel.memojiCard.description = self.memojiMemo
-                            
-                                
                             self.viewModel.editMemojiDescription()
                         }
                         self.isEditing.toggle()
@@ -189,5 +220,31 @@ struct MemojiDetailView: View {
 struct MemojiDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MemojiDetailView(memojiCard: MemojiCard(token: ""))
+    }
+}
+
+extension View {
+    func convertViewUIImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        if let view = controller.view {
+            let contentSize = view.intrinsicContentSize
+            view.bounds = CGRect(origin: .zero, size: contentSize)
+            view.backgroundColor = .clear
+            
+            let renderer = UIGraphicsImageRenderer(size: contentSize)
+            return renderer.image { _ in
+                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+            }
+        }
+        return UIImage()
+    }
+}
+
+extension UIView {
+    func asImage(rect: CGRect) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: rect)
+        return renderer.image { rendererContext in
+            self.drawHierarchy(in: rect, afterScreenUpdates: true)
+        }
     }
 }

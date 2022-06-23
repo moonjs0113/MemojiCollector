@@ -11,6 +11,7 @@
 		C701990C2818C5C400AAEF0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C701990B2818C5C400AAEF0A /* ContentView.swift */; };
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
+		C715D43F2859890C005A22A9 /* TempMemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715D43E2859890C005A22A9 /* TempMemojiCardView.swift */; };
 		C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54B2822594A00526965 /* MyMemojiViewModel.swift */; };
 		C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */; };
 		C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A5502822622A00526965 /* MemojiCardViewModel.swift */; };
@@ -58,6 +59,7 @@
 		C701990D2818C5C500AAEF0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C709F46B2819948A00C3F74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C715D43E2859890C005A22A9 /* TempMemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMemojiCardView.swift; sourceTree = "<group>"; };
 		C730A54B2822594A00526965 /* MyMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A5502822622A00526965 /* MemojiCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardViewModel.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				C73C45652819155600E41406 /* MemojiCardView.swift */,
+				C715D43E2859890C005A22A9 /* TempMemojiCardView.swift */,
 				C7B369F62820347800B05DED /* DeletedCardView.swift */,
 				C7B369FA2820350200B05DED /* MakeCardView.swift */,
 				C7B369F8282034BC00B05DED /* EmptyCardView.swift */,
@@ -394,6 +397,7 @@
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */,
 				C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */,
+				C715D43F2859890C005A22A9 /* TempMemojiCardView.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
 				C73C45702819300D00E41406 /* AppStorageKey_.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
@@ -539,7 +543,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemojiCollector/Preview Content\"";
 				DEVELOPMENT_TEAM = Z629PZ4XVL;
 				ENABLE_PREVIEWS = YES;
@@ -574,7 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MemojiCollector/Preview Content\"";
 				DEVELOPMENT_TEAM = Z629PZ4XVL;
 				ENABLE_PREVIEWS = YES;

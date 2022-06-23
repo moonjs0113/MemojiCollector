@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RegisterUserView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
-//    @AppStorage(AppStorageKey.userSession.string) private var userSession = "Morning"
     @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+    @State private var newUserName = ""
     
     @Environment(\.dismiss) var dismiss
     
@@ -26,7 +26,11 @@ struct RegisterUserView: View {
                 VStack(spacing: 8) {
                     HStack(spacing: 5) {
                         Text("닉네임    ")
-                        TextField("NickName", text: self.$userName)
+                        TextField("NickName(최대 10자)", text: self.$newUserName)
+                            .onChange(of: self.newUserName) { _ in
+                                self.newUserName = self.newUserName.replacingOccurrences(of: " ", with: "")
+                            }
+                            .keyboardType(.webSearch)
                     }
                     .padding(.leading, 15)
                     Divider()
@@ -48,18 +52,18 @@ struct RegisterUserView: View {
                         .foregroundColor(.white)
                 }
             }
-            .disabled(self.userName == "")
+            .disabled(self.newUserName == "" || self.newUserName.count >= 10)
             .frame(height: 60)
             .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
+                    self.userName = self.newUserName
                     self.firstUser = false
                     self.dismiss()
                 }
             } message: {
-                Text("닉네임: \(self.userName)")
+                Text("닉네임: \(self.newUserName)")
             }
-            .disabled(self.userName == "")
         }
         .padding()
         .onDisappear {

@@ -36,22 +36,26 @@ struct GridCardView: View {
             Spacer()
             LazyVGrid(columns: self.gridItems) {
                 let memojiList = self.filterList()
-                ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
-                    MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
-                    if index == 0 {
-                        if memojiList.count == 1 {
-                            EmptyCardView(memojiCard: memoji)
-                        } else if memoji.token != memojiList[index + 1].token {
-                            EmptyCardView(memojiCard: memoji)
-                        }
-                    } else if index == memojiList.count - 1 {
-                        if memoji.token != memojiList[index - 1].token {
-                            EmptyCardView(memojiCard: memoji)
-                        }
-                    } else {
-                        if memoji.token != memojiList[index + 1].token {
+                if memojiList.isEmpty {
+                    TempMemojiCardView()
+                } else {
+                    ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
+                        MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)
+                        if index == 0 {
+                            if memojiList.count == 1 {
+                                EmptyCardView(memojiCard: memoji)
+                            } else if memoji.token != memojiList[index + 1].token {
+                                EmptyCardView(memojiCard: memoji)
+                            }
+                        } else if index == memojiList.count - 1 {
                             if memoji.token != memojiList[index - 1].token {
                                 EmptyCardView(memojiCard: memoji)
+                            }
+                        } else {
+                            if memoji.token != memojiList[index + 1].token {
+                                if memoji.token != memojiList[index - 1].token {
+                                    EmptyCardView(memojiCard: memoji)
+                                }
                             }
                         }
                     }

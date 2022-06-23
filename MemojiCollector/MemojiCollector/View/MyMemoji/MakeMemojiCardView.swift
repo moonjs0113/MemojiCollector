@@ -34,6 +34,7 @@ struct MakeMemojiCardView: View {
         
         ScrollView {
             VStack(spacing: 25) {
+                // ---------------- 1.1 Version Delete
                 Picker("미모지 업로드 방식", selection: self.$uploadMethod) {
                     ForEach(self.uploadMethodArray, id: \.self) { uploadMethod in
                         Text(uploadMethod)
@@ -42,6 +43,8 @@ struct MakeMemojiCardView: View {
                 .pickerStyle(.segmented)
                 .compositingGroup()
                 .padding(.horizontal)
+//                .hidden()
+                // ----------------
                 
                 VStack {
                     if self.uploadMethod == "사진" {
@@ -201,6 +204,7 @@ struct MakeMemojiCardView: View {
             .onAppear {
                 self.viewModel.isFirst = self.isFirst
             }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(self.isUploading)
         }
         
