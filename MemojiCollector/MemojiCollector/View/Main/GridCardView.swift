@@ -68,8 +68,15 @@ struct GridCardView: View {
     }
 }
 
-//struct GridCardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GridCardView(session: "Morning", searchText: "")
-//    }
-//}
+struct GridCardViewPreviewsContainer: View {
+    @State private var searchText = ""
+    var body: some View {
+        GridCardView(searchText: self.$searchText)
+    }
+}
+
+struct GridCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        GridCardViewPreviewsContainer()
+    }
+}

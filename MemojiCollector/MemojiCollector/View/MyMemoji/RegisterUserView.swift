@@ -74,8 +74,16 @@ struct RegisterUserView: View {
     }
 }
 
-//struct RegisterUserView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RegisterUserView()
-//    }
-//}
+struct RegisterUserViewPreviewsContainer: View {
+    @State var isShowMyPage: Bool = false
+    var body: some View {
+        RegisterUserView(isShowMyPage: self.$isShowMyPage)
+    }
+}
+
+
+struct RegisterUserView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegisterUserViewPreviewsContainer()
+    }
+}

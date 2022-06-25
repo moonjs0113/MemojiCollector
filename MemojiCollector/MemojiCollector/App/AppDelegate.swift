@@ -17,7 +17,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
-//        print(Messaging.messaging().fcmToken)
         Messaging.messaging().token { token, error in
             if let error = error {
                 debugPrint(error.localizedDescription)

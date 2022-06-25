@@ -195,7 +195,6 @@ struct MemojiDetailView: View {
             }
             .sheet(isPresented: self.$isQRCodeViewPresented) {
                 QRCodeView(memojiModel: self.memojiCard)
-                //            MemojiActivityViewController(memojiModel: self.memojiCard)
             }
             .alert("삭제하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }

@@ -16,7 +16,6 @@ struct QRCodeView: View {
     
     @State var time = 60
     @State var qrImage = UIImage()
-//    @State var timerRunning = false
     
     func generateQRCode() -> UIImage {
         let urlString = self.memojiModel.urlString + "&timeStamp=\(Date.now)"

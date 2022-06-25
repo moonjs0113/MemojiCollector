@@ -16,7 +16,6 @@ class MakeMemojiViewModel: ObservableObject {
     @AppStorage(AppStorageKey.token.string) var token: String = ""
     
     // MARK: - Published
-//    @Published var selectedImage: UIImage = UIImage()
     @Published var selectedMemoji: UIImage = UIImage()
     @Published var isSelecteImage: Bool = false
     @Published var korean: String = "#"
@@ -55,16 +54,6 @@ class MakeMemojiViewModel: ObservableObject {
         return (self.korean.count > 1 && self.english.count > 1 && self.isSelecteImage)
     }
     
-//    func initMemojiImage(uploadMethod: String) {
-//        if uploadMethod == "사진" {
-//            self.selectedMemoji = UIImage()
-//        } else {
-//            self.isSelecteImage = false
-//            self.selectedImage = UIImage()
-//        }
-//    }
-    
-    // ---------------- 1.1 Version Update
     func firstTextCheck(newValue: String) {
         if newValue.count == 0 {
             self.korean = "#"
@@ -73,46 +62,11 @@ class MakeMemojiViewModel: ObservableObject {
         }
     }
     
-    // ---------------- 1.1 Version Update
     func secondTextCheck(newValue: String) {
         if newValue.count == 0 {
             self.english = "#"
         } else if newValue.count > 21 {
             self.english = String(Array(newValue)[0..<21])
-        }
-    }
-    
-    // ---------------- 1.1 Version Delete
-    func hangulTextCheck(newValue: String) {
-        let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ0-9_# ]{2,20}$"
-        let regex = try? NSRegularExpression(pattern: pattern)
-        if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-            if self.korean.count == 0 {
-                self.korean = "#"
-            } else if self.korean.count > 1 {
-                _ = self.korean.removeLast()
-            }
-        } else {
-            if self.korean.last == "#" {
-                _ = self.korean.removeLast()
-            }
-        }
-    }
-    
-    // ---------------- 1.1 Version Delete
-    func englishTextCheck(newValue: String){
-        let pattern = "^[a-zA-Z0-9_# ]{2,20}$"
-        let regex = try? NSRegularExpression(pattern: pattern)
-        if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-            if self.english.count == 0 {
-                self.english = "#"
-            } else if self.english.count > 1 {
-                _ = self.english.removeLast()
-            }
-        } else {
-            if self.english.last == "#" {
-                _ = self.english.removeLast()
-            }
         }
     }
     
@@ -126,8 +80,8 @@ class MakeMemojiViewModel: ObservableObject {
         let metaDataDictionary: [String : Any] = [ "contentType" : "image/png" ]
         
         let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
-        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
-        let uploadTask = storageRef.putData(uploadImageData, metadata: storageMetadata)
+//        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
+        let uploadTask = storageRef.putData(memojiModel.imageData, metadata: storageMetadata)
         uploadTask.observe(.progress, handler: progressHandler)
     }
     

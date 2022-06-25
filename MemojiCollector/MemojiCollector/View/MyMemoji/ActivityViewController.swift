@@ -13,7 +13,11 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
     let memojiModel: MemojiCard
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<MemojiActivityViewController>) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: [ActivityItemSource(), self.memojiModel.urlScheme], applicationActivities: nil)
+        guard let URLScheme = self.memojiModel.urlScheme else {
+            return UIActivityViewController(activityItems: [ActivityItemSource()], applicationActivities: [])
+        }
+        
+        let controller = UIActivityViewController(activityItems: [ActivityItemSource(), URLScheme], applicationActivities: nil)
         
         controller.excludedActivityTypes = [.message, .mail,
                                             .markupAsPDF, .saveToCameraRoll,
