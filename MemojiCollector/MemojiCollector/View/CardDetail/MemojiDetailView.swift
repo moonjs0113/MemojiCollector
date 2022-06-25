@@ -12,6 +12,7 @@ struct MemojiDetailView: View {
     @State var memojiCard: MemojiCard
     
     @State private var showAlert = false
+    @State private var showSaveImageAlert = false
     @State private var isActivityViewPresented: Bool = false
     @State private var isQRCodeViewPresented: Bool = false
     
@@ -205,6 +206,11 @@ struct MemojiDetailView: View {
                 }
             } message: {
                 Text("삭제 후엔 되돌릴 수 없습니다.")
+            }
+            .alert("저장완료", isPresented: self.$showSaveImageAlert) {
+                
+            } message: {
+                Text("미모지 카드가 저장되었습니다.")
             }
         }
         
