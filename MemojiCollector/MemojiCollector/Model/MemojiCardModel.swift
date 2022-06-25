@@ -18,7 +18,6 @@ struct MemojiCard: Codable, Hashable {
     
     var saveCount: Int = 0
     var token: String
-//    var group: [String] = []
     var description: String = ""
     
     var imageName: String {
@@ -26,7 +25,7 @@ struct MemojiCard: Codable, Hashable {
     }
     
     var urlString: String {
-        return "MemojiCollector://?imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return "MemojiCollector://?" + ("imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
     }
     
     var urlScheme: URL? {

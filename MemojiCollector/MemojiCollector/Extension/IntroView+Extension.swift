@@ -1,5 +1,5 @@
 //
-//  App+Extension.swift
+//  IntroView+Extension.swift
 //  MemojiCollector
 //
 //  Created by Moon Jongseek on 2022/05/01.
@@ -9,12 +9,12 @@ import Foundation
 import Firebase
 import SwiftUI
 
-extension  MemojiCollectorApp {
+extension IntroView {
     func convertURLtoMemojiCard(url: URL) -> MemojiCard? {
         let urlString = url.absoluteString
         let components = URLComponents(string: urlString)
         var memojiCard = MemojiCard(token: "")
-        
+        print(urlString)
         if let queryItems = components?.queryItems {
             for item in queryItems {
                 if let kor = item.value, item.name == "kor" {
@@ -33,6 +33,17 @@ extension  MemojiCollectorApp {
                             }
                         }
                     }
+                } else if let timeStamp = item.value, item.name == "timeStamp" {
+                    print(timeStamp.components(separatedBy: " "))
+                    let timeStampArray = timeStamp.components(separatedBy: " ")
+                    if let date = "\(timeStampArray[0]) \(timeStampArray[1])".convertToDate() {
+                        print(Date.now)
+                        print(date.addingTimeInterval(60))
+                        if Date.now > date.addingTimeInterval(60) {
+                            print("못받아!")
+                        }
+                    }
+
                 }
             }
             return memojiCard
@@ -47,4 +58,5 @@ extension  MemojiCollectorApp {
         }
         self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
     }
+    
 }

@@ -16,7 +16,6 @@ class MakeMemojiViewModel: ObservableObject {
     @AppStorage(AppStorageKey.token.string) var token: String = ""
     
     // MARK: - Published
-    @Published var selectedImage: UIImage = UIImage()
     @Published var selectedMemoji: UIImage = UIImage()
     @Published var isSelecteImage: Bool = false
     @Published var korean: String = "#"
@@ -26,11 +25,11 @@ class MakeMemojiViewModel: ObservableObject {
     
     var isFirst: Bool = false
     
-    func createMemojiModel(uploadMethod: String) -> MemojiCard{
+    func createMemojiModel() -> MemojiCard{
         let memojiCard = MemojiCard(name: self.userName,
                                     isFirst: self.isFirst,
                                     isMyCard: true,
-                                    imageData: (uploadMethod == "사진" ? self.selectedImage : self.selectedMemoji).pngData() ?? Data(),
+                                    imageData: self.selectedMemoji.pngData() ?? Data(),
                                     kor: self.korean.replacingOccurrences(of: " ", with: "_"),
                                     eng: self.english.replacingOccurrences(of: " ", with: "_"),
                                     saveCount: self.saveCount,
@@ -55,49 +54,23 @@ class MakeMemojiViewModel: ObservableObject {
         return (self.korean.count > 1 && self.english.count > 1 && self.isSelecteImage)
     }
     
-    func initMemojiImage(uploadMethod: String) {
-        if uploadMethod == "사진" {
-            self.selectedMemoji = UIImage()
-        } else {
-            self.isSelecteImage = false
-            self.selectedImage = UIImage()
+    func firstTextCheck(newValue: String) {
+        if newValue.count == 0 {
+            self.korean = "#"
+        } else if newValue.count > 21 {
+            self.korean = String(Array(newValue)[0..<21])
         }
     }
     
-    func hangulTextCheck(newValue: String) {
-        let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ0-9_# ]{2,20}$"
-        let regex = try? NSRegularExpression(pattern: pattern)
-        if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-            if self.korean.count == 0 {
-                self.korean = "#"
-            } else if self.korean.count > 1 {
-                _ = self.korean.removeLast()
-            }
-        } else {
-            if self.korean.last == "#" {
-                _ = self.korean.removeLast()
-            }
-        }
-    }
-    
-    func englishTextCheck(newValue: String){
-        let pattern = "^[a-zA-Z0-9_# ]{2,20}$"
-        let regex = try? NSRegularExpression(pattern: pattern)
-        if regex?.firstMatch(in: newValue, options: [], range: NSRange(location: 0, length: newValue.count)) == nil {
-            if self.english.count == 0 {
-                self.english = "#"
-            } else if self.english.count > 1 {
-                _ = self.english.removeLast()
-            }
-        } else {
-            if self.english.last == "#" {
-                _ = self.english.removeLast()
-            }
+    func secondTextCheck(newValue: String) {
+        if newValue.count == 0 {
+            self.english = "#"
+        } else if newValue.count > 21 {
+            self.english = String(Array(newValue)[0..<21])
         }
     }
     
     func isEmptySomeData() -> Bool{
-        print(#function)
         return self.english.count < 2 || self.korean.count < 2 || !self.isSelecteImage
     }
     
@@ -107,8 +80,8 @@ class MakeMemojiViewModel: ObservableObject {
         let metaDataDictionary: [String : Any] = [ "contentType" : "image/png" ]
         
         let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
-        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
-        let uploadTask = storageRef.putData(uploadImageData, metadata: storageMetadata)
+//        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
+        let uploadTask = storageRef.putData(memojiModel.imageData, metadata: storageMetadata)
         uploadTask.observe(.progress, handler: progressHandler)
     }
     

@@ -13,7 +13,11 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
     let memojiModel: MemojiCard
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<MemojiActivityViewController>) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: [ActivityItemSource(), self.memojiModel.urlScheme], applicationActivities: nil)
+        guard let URLScheme = self.memojiModel.urlScheme else {
+            return UIActivityViewController(activityItems: [ActivityItemSource()], applicationActivities: [])
+        }
+        
+        let controller = UIActivityViewController(activityItems: [ActivityItemSource(), URLScheme], applicationActivities: nil)
         
         controller.excludedActivityTypes = [.message, .mail,
                                             .markupAsPDF, .saveToCameraRoll,
@@ -21,7 +25,9 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
                                             .addToReadingList, .openInIBooks,
                                             .postToFacebook, .postToFlickr,
                                             .postToTencentWeibo, .postToTwitter,
-                                            .postToVimeo, .postToWeibo, .print
+                                            .postToVimeo, .postToWeibo, .print,
+                                            .init("com.apple.mobilenotes.SharingExtension"),
+                                            .init(rawValue: "com.apple.reminders.RemindersEditorExtension"),
         ]
         return controller
     }
@@ -30,7 +36,6 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
         
     }
 }
-
 
 class ActivityItemSource: NSObject, UIActivityItemSource {
     var title: String = "Memoji Collector"

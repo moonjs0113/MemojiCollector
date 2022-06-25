@@ -10,12 +10,8 @@ import PhotosUI
 
 struct MakeMemojiCardView: View {
     @ObservedObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
-    
-    var uploadMethodArray = ["사진", "미모지 스티커"]
     var isFirst: Bool
     
-    @State private var uploadMethod: String = "사진"
-    @State private var isShowImagePicker: Bool = false
     @State private var isUploading: Bool = false
     @State private var showAlert = false
     @State private var progressValue = 0.0
@@ -34,72 +30,21 @@ struct MakeMemojiCardView: View {
         
         ScrollView {
             VStack(spacing: 25) {
-                Picker("미모지 업로드 방식", selection: self.$uploadMethod) {
-                    ForEach(self.uploadMethodArray, id: \.self) { uploadMethod in
-                        Text(uploadMethod)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .compositingGroup()
-                .padding(.horizontal)
-                
                 VStack {
-                    if self.uploadMethod == "사진" {
-                        Text("모두가 서비스를 정상적으로 이용할 수 있도록\n미모지만 업로드 해주세요.")
-                            .font(.caption)
-                        Button {
-                            self.isShowImagePicker.toggle()
-                        } label: {
-                            if self.viewModel.isSelecteImage {
-                                Image(uiImage: self.viewModel.selectedImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .cornerRadius(20)
-                                    .clipped()
-                            } else {
-                                Text ("Selecte Image")
-                                    .font(.headline)
-                                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                            }
-                            
-                        }
+                    Text("1개의 미모지 스티커만 입력가능합니다.")
+                        .font(.caption)
+                    MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
+                        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                        .cornerRadius(20)
+                        .clipped()
                         .overlay {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(lineWidth: 1)
                                 .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
                         }
-                        .sheet(isPresented: self.$isShowImagePicker) {
-                            ImagePicker(images: self.$viewModel.selectedImage, picker: self.$isShowImagePicker, isSelecteImage: self.$viewModel.isSelecteImage)
-                        }
-                        .onAppear {
-                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
-                            
-                        }
-                        .padding(.horizontal, 40)
-                    } else {
-                        VStack {
-                            Text("미모지 스티커를 1개만 입력해주세요.\n미모지 스티커만 입력가능합니다.")
-                                .font(.caption)
-                            MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
-                                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                .aspectRatio(1, contentMode: .fit)
-                                .cornerRadius(20)
-                                .clipped()
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(lineWidth: 1)
-                                        .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
-                                }
-                                .focused(self.$focusedField)
-                                .padding(.horizontal, 50)
-                        }
-                        .onAppear {
-                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
-                        }
-                    }
+                        .focused(self.$focusedField)
+                        .padding(.horizontal, 50)
                 }
                 
                 
@@ -116,10 +61,10 @@ struct MakeMemojiCardView: View {
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
-                            Text("한글문구    ")
+                            Text("첫번째문구  ")
                             ZStack(alignment: .leading) {
                                 if self.viewModel.korean.count == 1 {
-                                    Text("#한글, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
@@ -127,7 +72,7 @@ struct MakeMemojiCardView: View {
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.korean)
                                     .onChange(of: self.viewModel.korean) { newValue in
-                                        self.viewModel.hangulTextCheck(newValue: newValue)
+                                        self.viewModel.firstTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
                             }
@@ -139,10 +84,10 @@ struct MakeMemojiCardView: View {
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
-                            Text("영어문구    ")
+                            Text("두번째문구  ")
                             ZStack(alignment: .leading) {
                                 if self.viewModel.english.count == 1 {
-                                    Text("#영어, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
@@ -150,7 +95,7 @@ struct MakeMemojiCardView: View {
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.english)
                                     .onChange(of: self.viewModel.english) { newValue in
-                                        self.viewModel.englishTextCheck(newValue: newValue)
+                                        self.viewModel.secondTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
                             }
@@ -158,7 +103,7 @@ struct MakeMemojiCardView: View {
                         .padding(.leading, 15)
                         Divider()
                     }
-                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.\n_ 외엔 다른 기호는 사용할 수 없습니다.")
+                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.")
                         .font(.caption)
                     
                     Spacer()
@@ -187,7 +132,7 @@ struct MakeMemojiCardView: View {
                         Button("No", role: .cancel) { }
                         Button("Yes", role: .none){
                             self.isUploading = true
-                            let memojiModel = self.viewModel.createMemojiModel(uploadMethod: self.uploadMethod)
+                            let memojiModel = self.viewModel.createMemojiModel()
                             self.viewModel.saveData(memojiCard: memojiModel) {
                                 self.dismiss()
                             }
@@ -201,157 +146,10 @@ struct MakeMemojiCardView: View {
             .onAppear {
                 self.viewModel.isFirst = self.isFirst
             }
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(self.isUploading)
         }
         
-    }
-}
-
-struct ImagePicker : UIViewControllerRepresentable {
-    func makeCoordinator() -> Coordinator {
-        return ImagePicker.Coordinator(parent: self)
-    }
-    
-    @Binding var images : UIImage
-    @Binding var picker : Bool
-    @Binding var isSelecteImage : Bool
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        var config = PHPickerConfiguration()
-        config.selectionLimit = 1
-        let picker = PHPickerViewController(configuration: config)
-        config.filter = .images
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-        
-    }
-    
-    class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        var parent :ImagePicker
-        
-        init(parent : ImagePicker) {
-            self.parent = parent
-        }
-        
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            self.parent.picker.toggle()
-            
-            for img in results {
-                if img.itemProvider.canLoadObject(ofClass: UIImage.self){
-                    img.itemProvider.loadObject(ofClass: UIImage.self) { (image, err) in
-                        guard let selectedImage = image else {
-                            if let error = err {
-                                debugPrint(error)
-                            }
-                            return
-                        }
-                        if let uiImage = selectedImage as? UIImage {
-                            DispatchQueue.main.async { [weak self] in
-                                self?.parent.images = uiImage
-                                self?.parent.isSelecteImage = true
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-protocol MemojiTextViewDelegate {
-    func getImageFromTextView(image: UIImage) -> ()
-}
-
-struct MemojiTextView: UIViewRepresentable {
-    @Binding var selectedMemoji: UIImage
-    @Binding var isSelecteImage : Bool
-    
-    func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
-        textView.centerVerticalText()
-        textView.textAlignment = .center
-        textView.backgroundColor = .clear
-        textView.returnKeyType = .done
-        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,\n문자 및 이모티콘은 입력되지 않습니다."
-        textView.delegate = context.coordinator
-        textView.centerVerticalText()
-        return textView
-    }
-    
-    func updateUIView(_ textView: UITextView, context: Context) {
-        textView.centerVerticalText()
-    }
-    
-    func makeCoordinator() -> TextViewCoordinator {
-        TextViewCoordinator(textView: self)
-    }
-}
-
-class TextViewCoordinator: NSObject, UITextViewDelegate {
-    var textView: MemojiTextView
-    init(textView: MemojiTextView) {
-        self.textView = textView
-    }
-    
-    func resizingImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if let character = text.first, character.isNewline {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        textView.centerVerticalText()
-        var nsTextAttachmentCount: [NSTextAttachment] = []
-        textView.attributedText.enumerateAttribute(NSAttributedString.Key.attachment, in: NSRange(location: 0, length: textView.attributedText.length)) { value, range, _ in
-            if value is NSTextAttachment {
-                if let attachment = (value as? NSTextAttachment) {
-                    nsTextAttachmentCount.append(attachment)
-                }
-            } else {
-                textView.attributedText = NSAttributedString(string: "")
-            }
-        }
-        if nsTextAttachmentCount.count > 0 {
-            if let attachment = nsTextAttachmentCount.first {
-                if let image = attachment.image {
-                    self.textView.selectedMemoji = image
-                    self.textView.isSelecteImage = true
-                    let newImage = self.resizingImage(image: image, targetSize: textView.frame.size)
-                    textView.attributedText = NSAttributedString(attachment: NSTextAttachment(image: newImage))
-                }
-                textView.endEditing(true)
-            }
-        } else {
-            self.textView.isSelecteImage = false
-            self.textView.selectedMemoji = UIImage()
-        }
     }
 }
 
