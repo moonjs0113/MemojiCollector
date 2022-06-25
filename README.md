@@ -2,8 +2,6 @@
     <img style="height:50px; vertical-align:middle; border-radius:10px;" src="readmeSource/AppIcon.png"/> Memoji Collector
 </h1>
 
-2022.05.06 ~ 2022.05.06
-
 [![Swift Version][swift-image]](https://swift.org/)
 [![Platform][Platform-image]](https://developer.apple.com/kr/ios/)
 ![Version][Version-image]
