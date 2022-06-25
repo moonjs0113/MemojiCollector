@@ -13,13 +13,15 @@ struct MemojiDetailView: View {
     
     @State private var showAlert = false
     @State private var isActivityViewPresented: Bool = false
-    @State private var isEditing: Bool = false
-    @State private var memojiMemo: String = ""
-    @State private var cardRect: CGRect = .zero
+    @State private var isQRCodeViewPresented: Bool = false
     
+    
+    @State private var cardRect: CGRect = .zero
     
     @FocusState var isFocus: Bool
     @Environment(\.dismiss) var dismiss
+    
+    
     
     var cardView: some View {
         VStack{
@@ -68,183 +70,149 @@ struct MemojiDetailView: View {
         }
         .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity)
         .padding()
-        .edgesIgnoringSafeArea(.all)
-        
     }
     
     var body: some View {
-        VStack {
-            cardView
-//                .padding(.top, 10)
-                .padding(.horizontal,40)
-                .onTapGesture {
-                    self.isFocus = false
-                }
-            
-            Spacer()
-            
-            if self.isEditing {
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("부제(최대20자)")
-                            .frame(alignment: .leading)
+        ScrollView {
+            VStack {
+                cardView
+                    .padding(.horizontal,40)
+                    .onTapGesture {
+                        self.isFocus = false
                     }
-                    
-                    TextField("최대 20자까지 저장 가능합니다.", text: self.$memojiCard.subTitle)
-                        .frame(height: 25)
-                        .padding(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .circular)
-                                .stroke(lineWidth: 1)
-                                .fill(.gray)
-                        )
-                        .focused(self.$isFocus)
-                    
-                    VStack(alignment: .leading) {
-                        Text("메모")
-                            .frame(alignment: .leading)
-                    }
-                    .frame(alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                    TextEditor(text: self.$memojiMemo)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10, style: .circular)
-                                .stroke(lineWidth: 1)
-                                .fill(.gray)
-                        )
-                        .frame(minWidth: 50, maxWidth: .infinity, minHeight: 70, maxHeight: 100)
-                        .focused(self.$isFocus)
-                }
-                .padding([.horizontal, .bottom])
-            }
-        }
-        .onAppear{
-            self.memojiMemo = self.memojiCard.description
-            self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
-            self.memojiCard = self.viewModel.memojiCard
-            //            print(self.memojiCard.group)
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
+                    .layoutPriority(1)
+                
                 Spacer()
-                Button("Done") {
-                    self.isFocus = false
+                
+                if self.viewModel.isEditing {
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            Text("부제(최대20자)")
+                                .frame(alignment: .leading)
+                        }
+                        
+                        TextField("최대 20자까지 저장 가능합니다.", text: self.$memojiCard.subTitle)
+                            .frame(height: 25)
+                            .padding(5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10, style: .circular)
+                                    .stroke(lineWidth: 1)
+                                    .fill(.gray)
+                            )
+                            .focused(self.$isFocus)
+                        
+                        VStack(alignment: .leading) {
+                            Text("메모")
+                                .frame(alignment: .leading)
+                        }
+                        .frame(alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        TextEditor(text: self.$viewModel.memojiMemo)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10, style: .circular)
+                                    .stroke(lineWidth: 1)
+                                    .fill(.gray)
+                            )
+                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 70, maxHeight: 100)
+                            .focused(self.$isFocus)
+                    }
+                    .padding([.horizontal, .bottom])
                 }
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing:
-                                HStack {
-            
-            if self.memojiCard.isMyCard {
-                Menu {
-                    Button {
-                        print("QR Code")
-                    } label: {
-                        HStack {
-                            Image(systemName: "qrcode")
-                            Text("QR Code")
-                        }
+            .onAppear{
+                self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
+                self.memojiCard = self.viewModel.memojiCard
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        self.isFocus = false
                     }
-                    Button {
-                        self.isActivityViewPresented.toggle()
-                    } label: {
-                        HStack {
-                            Image(systemName: "airplayaudio")
-                            Text("AirDrop")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
                 }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                                    HStack {
                 
-                Button {
-                    self.showAlert.toggle()
-                } label: {
-                    Image(systemName: "trash")
-                }
-                
-                Button {
-                    UIImageWriteToSavedPhotosAlbum(cardView.convertViewUIImage(), nil, nil, nil)
-                } label: {
-                    Image(systemName: "square.and.arrow.down")
-                }
-                
-                
-            } else {
-                if self.isEditing {
+                if self.memojiCard.isMyCard {
                     Button {
                         self.showAlert.toggle()
                     } label: {
                         Image(systemName: "trash")
                     }
-                }
-                Button {
-                    withAnimation {
-                        if self.isEditing {
-                            var subTitle = ""
-                            if self.memojiCard.subTitle.count > 20 {
-                                subTitle = String(self.memojiCard.subTitle[..<self.memojiCard.subTitle.index(self.memojiCard.subTitle.startIndex, offsetBy: 20)])
-                            } else {
-                                subTitle = self.memojiCard.subTitle
+                    Menu {
+                        Button {
+                            self.isActivityViewPresented.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "airplayaudio")
+                                Text("AirDrop으로 공유하기")
                             }
-                            self.viewModel.memojiCard.subTitle = subTitle
-                            self.memojiCard.subTitle = subTitle
-                            self.viewModel.memojiCard.description = self.memojiMemo
-                            self.viewModel.editMemojiDescription()
                         }
-                        self.isEditing.toggle()
+                        
+                        Button {
+                            self.isQRCodeViewPresented.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "qrcode")
+                                Text("QR Code로 공유하기")
+                            }
+                        }
+                        
+                        Button {
+                            self.viewModel.convertViewUIImage(cardView: cardView)
+                            
+                        } label: {
+                            Image(systemName: "square.and.arrow.down")
+                            Text("이미지로 저장하기")
+                        }
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
                     }
-                } label: {
-                    Text(self.isEditing ? "완료" : "편집")
+                    
+                } else {
+                    if self.viewModel.isEditing {
+                        Button {
+                            self.showAlert.toggle()
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
+                    Button {
+                        withAnimation {
+                            self.memojiCard = self.viewModel.willBeginEditing(newMemojiCard: self.memojiCard)
+                        }
+                    } label: {
+                        Text(self.viewModel.isEditing ? "완료" : "편집")
+                    }
                 }
             }
-        }
-        )
-        .sheet(isPresented: self.$isActivityViewPresented) {
-            MemojiActivityViewController(memojiModel: self.memojiCard)
-        }
-        .alert("삭제하시겠습니까?", isPresented: self.$showAlert) {
-            Button("No", role: .cancel) { }
-            Button("Yes", role: .none){
-                self.viewModel.deleteMemojiCard() {
-                    self.dismiss()
-                }
+            )
+            .sheet(isPresented: self.$isActivityViewPresented) {
+                MemojiActivityViewController(memojiModel: self.memojiCard)
             }
-        } message: {
-            Text("삭제 후엔 되돌릴 수 없습니다.")
+            .sheet(isPresented: self.$isQRCodeViewPresented) {
+                QRCodeView(memojiModel: self.memojiCard)
+                //            MemojiActivityViewController(memojiModel: self.memojiCard)
+            }
+            .alert("삭제하시겠습니까?", isPresented: self.$showAlert) {
+                Button("No", role: .cancel) { }
+                Button("Yes", role: .none){
+                    self.viewModel.deleteMemojiCard() {
+                        self.dismiss()
+                    }
+                }
+            } message: {
+                Text("삭제 후엔 되돌릴 수 없습니다.")
+            }
         }
+        
     }
 }
 
 struct MemojiDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MemojiDetailView(memojiCard: MemojiCard(token: ""))
-    }
-}
-
-extension View {
-    func convertViewUIImage() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        if let view = controller.view {
-            let contentSize = view.intrinsicContentSize
-            view.bounds = CGRect(origin: .zero, size: contentSize)
-            view.backgroundColor = .clear
-            
-            let renderer = UIGraphicsImageRenderer(size: contentSize)
-            return renderer.image { _ in
-                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-            }
-        }
-        return UIImage()
-    }
-}
-
-extension UIView {
-    func asImage(rect: CGRect) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: rect)
-        return renderer.image { rendererContext in
-            self.drawHierarchy(in: rect, afterScreenUpdates: true)
-        }
     }
 }

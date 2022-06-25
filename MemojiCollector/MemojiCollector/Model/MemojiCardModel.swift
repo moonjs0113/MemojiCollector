@@ -25,8 +25,9 @@ struct MemojiCard: Codable, Hashable {
         return "\(self.name)___\(self.saveCount)___\(self.token).png"
     }
     
+    
     var urlString: String {
-        return "MemojiCollector://?imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        return "MemojiCollector://?" + ("imageName=\(self.imageName)&kor=\(self.kor)&eng=\(self.eng)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
     }
     
     var urlScheme: URL? {

@@ -21,7 +21,9 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
                                             .addToReadingList, .openInIBooks,
                                             .postToFacebook, .postToFlickr,
                                             .postToTencentWeibo, .postToTwitter,
-                                            .postToVimeo, .postToWeibo, .print
+                                            .postToVimeo, .postToWeibo, .print,
+                                            .init("com.apple.mobilenotes.SharingExtension"),
+                                            .init(rawValue: "com.apple.reminders.RemindersEditorExtension"),
         ]
         return controller
     }
@@ -30,7 +32,6 @@ struct MemojiActivityViewController: UIViewControllerRepresentable {
         
     }
 }
-
 
 class ActivityItemSource: NSObject, UIActivityItemSource {
     var title: String = "Memoji Collector"

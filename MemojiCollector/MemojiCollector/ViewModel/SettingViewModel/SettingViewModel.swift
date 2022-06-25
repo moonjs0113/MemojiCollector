@@ -8,7 +8,7 @@
 import SwiftUI
 
 class SettingViewModel: ObservableObject {
-    @AppStorage(AppStorageKey.firstUser.string) var firstUser: Bool = true
+    @AppStorage(AppStorageKey.isUserNameRegister.string) var isUserNameRegister: Bool = true
     @AppStorage(AppStorageKey.password.string) var userPW: String = ""
     @Published var showUnlockView: Bool = false
     @Published var goToPasswordView: Bool = false

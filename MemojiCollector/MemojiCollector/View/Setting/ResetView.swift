@@ -16,7 +16,7 @@ struct ResetView: View {
     func removeMyMemojiCard() {
         @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
         @AppStorage(AppStorageKey.userName.string) var userName = ""
-        @AppStorage(AppStorageKey.firstUser.string) var firstUser: Bool = true
+        @AppStorage(AppStorageKey.isUserNameRegister.string) var isUserNameRegister: Bool = true
         
         let _ = JsonManager.shared.jsonDecoder(decodingData: cardInfoList).filter {
             if $0.isMyCard {
@@ -28,7 +28,7 @@ struct ResetView: View {
         }
         cardInfoList = Data()
         userName = ""
-        firstUser = true
+        isUserNameRegister = true
     }
     
     func removeImageToStorage(memojiModel: MemojiCard) {

@@ -26,7 +26,7 @@ struct SettingView: View {
                     }
                     .sheet(isPresented: self.$viewModel.showUnlockView) { LockView(isLock: self.$viewModel.goToPasswordView, sha256: self.viewModel.userPW) }
                 }
-                if !self.viewModel.firstUser {
+                if !self.viewModel.isUserNameRegister {
                     NavigationLink("닉네임 변경", destination: ChangeNameView())
                 }
             }

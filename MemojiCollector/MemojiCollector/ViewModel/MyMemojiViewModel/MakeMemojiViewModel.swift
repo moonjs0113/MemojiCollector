@@ -64,6 +64,25 @@ class MakeMemojiViewModel: ObservableObject {
         }
     }
     
+    // ---------------- 1.1 Version Update
+    func firstTextCheck(newValue: String) {
+        if newValue.count == 0 {
+            self.korean = "#"
+        } else if newValue.count > 21 {
+            self.korean = String(Array(newValue)[0..<21])
+        }
+    }
+    
+    // ---------------- 1.1 Version Update
+    func secondTextCheck(newValue: String) {
+        if newValue.count == 0 {
+            self.english = "#"
+        } else if newValue.count > 21 {
+            self.english = String(Array(newValue)[0..<21])
+        }
+    }
+    
+    // ---------------- 1.1 Version Delete
     func hangulTextCheck(newValue: String) {
         let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ0-9_# ]{2,20}$"
         let regex = try? NSRegularExpression(pattern: pattern)
@@ -80,6 +99,7 @@ class MakeMemojiViewModel: ObservableObject {
         }
     }
     
+    // ---------------- 1.1 Version Delete
     func englishTextCheck(newValue: String){
         let pattern = "^[a-zA-Z0-9_# ]{2,20}$"
         let regex = try? NSRegularExpression(pattern: pattern)
@@ -97,7 +117,6 @@ class MakeMemojiViewModel: ObservableObject {
     }
     
     func isEmptySomeData() -> Bool{
-        print(#function)
         return self.english.count < 2 || self.korean.count < 2 || !self.isSelecteImage
     }
     

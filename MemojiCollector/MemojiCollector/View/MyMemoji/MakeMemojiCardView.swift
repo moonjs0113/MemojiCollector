@@ -34,18 +34,6 @@ struct MakeMemojiCardView: View {
         
         ScrollView {
             VStack(spacing: 25) {
-                // ---------------- 1.1 Version Delete
-                Picker("미모지 업로드 방식", selection: self.$uploadMethod) {
-                    ForEach(self.uploadMethodArray, id: \.self) { uploadMethod in
-                        Text(uploadMethod)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .compositingGroup()
-                .padding(.horizontal)
-//                .hidden()
-                // ----------------
-                
                 VStack {
                     if self.uploadMethod == "사진" {
                         Text("모두가 서비스를 정상적으로 이용할 수 있도록\n미모지만 업로드 해주세요.")
@@ -119,10 +107,10 @@ struct MakeMemojiCardView: View {
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
-                            Text("한글문구    ")
+                            Text("첫번째문구  ")
                             ZStack(alignment: .leading) {
                                 if self.viewModel.korean.count == 1 {
-                                    Text("#한글, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
@@ -130,7 +118,8 @@ struct MakeMemojiCardView: View {
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.korean)
                                     .onChange(of: self.viewModel.korean) { newValue in
-                                        self.viewModel.hangulTextCheck(newValue: newValue)
+                                        self.viewModel.firstTextCheck(newValue: newValue)
+//                                        self.viewModel.hangulTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
                             }
@@ -142,10 +131,10 @@ struct MakeMemojiCardView: View {
                     
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
-                            Text("영어문구    ")
+                            Text("두번째문구  ")
                             ZStack(alignment: .leading) {
                                 if self.viewModel.english.count == 1 {
-                                    Text("#영어, 띄어쓰기, _ 만 입력 가능")
+                                    Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
@@ -153,7 +142,8 @@ struct MakeMemojiCardView: View {
                                 }
                                 TextField("#으로 시작해주세요", text: self.$viewModel.english)
                                     .onChange(of: self.viewModel.english) { newValue in
-                                        self.viewModel.englishTextCheck(newValue: newValue)
+                                        self.viewModel.secondTextCheck(newValue: newValue)
+//                                        self.viewModel.englishTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
                             }
@@ -161,7 +151,7 @@ struct MakeMemojiCardView: View {
                         .padding(.leading, 15)
                         Divider()
                     }
-                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.\n_ 외엔 다른 기호는 사용할 수 없습니다.")
+                    Text("*띄어쓰기는 저장 시 _로 변환됩니다.")
                         .font(.caption)
                     
                     Spacer()
@@ -278,7 +268,7 @@ struct MemojiTextView: UIViewRepresentable {
         textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
-        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 키보드 이모티콘 가장 왼쪽에 있습니다.\n미모지 스티커만 입력 가능하며,\n문자 및 이모티콘은 입력되지 않습니다."
+        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드에서 가장 왼쪽에 있습니다."
         textView.delegate = context.coordinator
         textView.centerVerticalText()
         return textView
@@ -343,7 +333,7 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
             }
         }
         if nsTextAttachmentCount.count > 0 {
-            if let attachment = nsTextAttachmentCount.first {
+            if let attachment = nsTextAttachmentCount.last {
                 if let image = attachment.image {
                     self.textView.selectedMemoji = image
                     self.textView.isSelecteImage = true

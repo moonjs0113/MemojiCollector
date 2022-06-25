@@ -1,6 +1,6 @@
 
 //
-//  ContentView.swift
+//  MainView.swift
 //  MemojiCollector
 //
 //  Created by Moon Jongseek on 2022/04/27.
@@ -8,16 +8,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     @State private var searchText = ""
     @State private var isShowMyPage = false
     @State private var isShowGuide = false
-    @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+    @AppStorage(AppStorageKey.isUserNameRegister.string) private var isUserNameRegister: Bool = true
     @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
+    
+    func requestAppStoreVersion() {
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
+        
+        guard let bundelId = Bundle.main.bundleIdentifier else {
+            return
+        }
+        guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(bundelId)") else {
+            return
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            return
+        }
+        
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+            return
+        }
+        
+        let results = json["results"] as? [[String: Any]]
+        let appStoreVersion = (results?[0]["version"] as? String) ?? "1.0"
+        
+//        if appStoreVersion > version {
+//            self.appVersionUpdateAlert()
+//        } else {
+//            self.getLoginData()
+//        }
+        print("Current Version: \(version)")
+        print("App Store Version: \(appStoreVersion)")
+    }
     
     @ViewBuilder
     func goToMyMemojiView() -> some View{
-        if self.firstUser {
+        if self.isUserNameRegister {
             RegisterUserView(isShowMyPage: self.$isShowMyPage)
         } else {
             MyMemojiView()
@@ -55,10 +85,17 @@ struct ContentView: View {
                         .sheet(isPresented: $isShowGuide) {
                             GuideView()
                         }
+//                        .fullScreenCover(isPresented: $isShowGuide) {
+//                            GuideView()
+//                                .ignoresSafeArea(.all, edges: .top)
+//                        }
                         .onAppear {
                             if firstGuide {
                                 firstGuide = false
                                 isShowGuide.toggle()
+                            }
+                            DispatchQueue.global().async {
+                                self.requestAppStoreVersion()
                             }
                         }
                     }
@@ -85,8 +122,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }

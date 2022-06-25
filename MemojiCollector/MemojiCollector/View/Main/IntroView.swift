@@ -9,19 +9,19 @@ import SwiftUI
 
 struct IntroView: View {
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    @AppStorage(AppStorageKey.password.string) var userPW: String = ""
+    
     @State private var showAlert: Bool = false
     @State var isLock: Bool
     @State var receiveMemojiCard: MemojiCard?
-
+    
     var body: some View {
         if self.isLock {
-            LockView(isLock: self.$isLock, sha256: self.userPW)
+            LockView(isLock: self.$isLock)
                 .onOpenURL { URL in
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
                 }
         } else {
-            ContentView()
+            MainView()
                 .onOpenURL { URL in
                     self.receiveMemojiCard = self.convertURLtoMemojiCard(url: URL)
                     self.showAlert = true

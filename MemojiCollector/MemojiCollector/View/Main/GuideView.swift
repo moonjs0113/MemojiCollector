@@ -23,7 +23,7 @@ struct GuideView: View {
     }
     
     init() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = .black
+        UIPageControl.appearance().currentPageIndicatorTintColor = .systemBlue
         UIPageControl.appearance().pageIndicatorTintColor = .black.withAlphaComponent(0.2)
     }
     
@@ -32,6 +32,7 @@ struct GuideView: View {
             ForEach(1..<6, id: \.self) { index in
                 VStack {
                     Text(guideText[index-1])
+                        .padding(.top, 20)
                     
                     if index == 3 {
                         Button {
@@ -49,14 +50,17 @@ struct GuideView: View {
                     }
                     
                     Spacer()
+                    
                     Image("GuideImage_\(index)")
                         .resizable()
                         .scaledToFit()
                         .aspectRatio(contentMode: .fit)
                     
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(height: 30)
                 }
-                .padding(.top, 20)
-                .padding()
+                .padding(.horizontal)
             }
         }
         .tabViewStyle(PageTabViewStyle())

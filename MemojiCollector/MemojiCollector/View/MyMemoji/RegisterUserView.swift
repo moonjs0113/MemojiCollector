@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RegisterUserView: View {
     @AppStorage(AppStorageKey.userName.string) private var userName = ""
-    @AppStorage(AppStorageKey.firstUser.string) private var firstUser: Bool = true
+    @AppStorage(AppStorageKey.isUserNameRegister.string) private var isUserNameRegister: Bool = true
     @State private var newUserName = ""
     
     @Environment(\.dismiss) var dismiss
@@ -58,7 +58,7 @@ struct RegisterUserView: View {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
                     self.userName = self.newUserName
-                    self.firstUser = false
+                    self.isUserNameRegister = false
                     self.dismiss()
                 }
             } message: {
@@ -67,7 +67,7 @@ struct RegisterUserView: View {
         }
         .padding()
         .onDisappear {
-            if self.firstUser == false {
+            if self.isUserNameRegister == false {
                 self.isShowMyPage = true
             }
         }
