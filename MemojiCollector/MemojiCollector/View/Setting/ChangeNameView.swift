@@ -37,6 +37,7 @@ struct ChangeNameView: View {
         VStack(spacing: 40) {
             Text("닉네임 변경 시, 나의 미모지 카드와 공유한 미모지 카드 모두 삭제됩니다.")
                 .padding(.top, 25)
+            
             VStack(spacing: 8) {
                 HStack(spacing: 5) {
                     Text("새 닉네임    ")
@@ -49,6 +50,7 @@ struct ChangeNameView: View {
                 .padding(.leading, 15)
                 Divider()
             }
+            
             Spacer()
             
             Button {
@@ -77,7 +79,7 @@ struct ChangeNameView: View {
             .disabled(self.newUserName == "")
         }
         .padding()
-        
+        .navigationTitle("닉네임 변경")
     }
 }
 

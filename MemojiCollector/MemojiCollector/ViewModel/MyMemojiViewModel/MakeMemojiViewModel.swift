@@ -16,7 +16,7 @@ class MakeMemojiViewModel: ObservableObject {
     @AppStorage(AppStorageKey.token.string) var token: String = ""
     
     // MARK: - Published
-    @Published var selectedImage: UIImage = UIImage()
+//    @Published var selectedImage: UIImage = UIImage()
     @Published var selectedMemoji: UIImage = UIImage()
     @Published var isSelecteImage: Bool = false
     @Published var korean: String = "#"
@@ -26,11 +26,11 @@ class MakeMemojiViewModel: ObservableObject {
     
     var isFirst: Bool = false
     
-    func createMemojiModel(uploadMethod: String) -> MemojiCard{
+    func createMemojiModel() -> MemojiCard{
         let memojiCard = MemojiCard(name: self.userName,
                                     isFirst: self.isFirst,
                                     isMyCard: true,
-                                    imageData: (uploadMethod == "사진" ? self.selectedImage : self.selectedMemoji).pngData() ?? Data(),
+                                    imageData: self.selectedMemoji.pngData() ?? Data(),
                                     kor: self.korean.replacingOccurrences(of: " ", with: "_"),
                                     eng: self.english.replacingOccurrences(of: " ", with: "_"),
                                     saveCount: self.saveCount,
@@ -55,14 +55,14 @@ class MakeMemojiViewModel: ObservableObject {
         return (self.korean.count > 1 && self.english.count > 1 && self.isSelecteImage)
     }
     
-    func initMemojiImage(uploadMethod: String) {
-        if uploadMethod == "사진" {
-            self.selectedMemoji = UIImage()
-        } else {
-            self.isSelecteImage = false
-            self.selectedImage = UIImage()
-        }
-    }
+//    func initMemojiImage(uploadMethod: String) {
+//        if uploadMethod == "사진" {
+//            self.selectedMemoji = UIImage()
+//        } else {
+//            self.isSelecteImage = false
+//            self.selectedImage = UIImage()
+//        }
+//    }
     
     // ---------------- 1.1 Version Update
     func firstTextCheck(newValue: String) {

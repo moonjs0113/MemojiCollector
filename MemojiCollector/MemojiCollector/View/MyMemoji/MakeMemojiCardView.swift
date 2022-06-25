@@ -14,8 +14,8 @@ struct MakeMemojiCardView: View {
     var uploadMethodArray = ["미모지 스티커", "사진",]
     var isFirst: Bool
     
-    @State private var uploadMethod: String = "미모지 스티커"
-    @State private var isShowImagePicker: Bool = false
+//    @State private var uploadMethod: String = "미모지 스티커"
+//    @State private var isShowImagePicker: Bool = false
     @State private var isUploading: Bool = false
     @State private var showAlert = false
     @State private var progressValue = 0.0
@@ -35,62 +35,20 @@ struct MakeMemojiCardView: View {
         ScrollView {
             VStack(spacing: 25) {
                 VStack {
-                    if self.uploadMethod == "사진" {
-                        Text("모두가 서비스를 정상적으로 이용할 수 있도록\n미모지만 업로드 해주세요.")
-                            .font(.caption)
-                        Button {
-                            self.isShowImagePicker.toggle()
-                        } label: {
-                            if self.viewModel.isSelecteImage {
-                                Image(uiImage: self.viewModel.selectedImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .cornerRadius(20)
-                                    .clipped()
-                            } else {
-                                Text ("Selecte Image")
-                                    .font(.headline)
-                                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                            }
-                            
-                        }
+                    Text("1개의 미모지 스티커만 입력가능합니다.")
+                        .font(.caption)
+                    MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
+                        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                        .cornerRadius(20)
+                        .clipped()
                         .overlay {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(lineWidth: 1)
                                 .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
                         }
-                        .sheet(isPresented: self.$isShowImagePicker) {
-                            ImagePicker(images: self.$viewModel.selectedImage, picker: self.$isShowImagePicker, isSelecteImage: self.$viewModel.isSelecteImage)
-                        }
-                        .onAppear {
-                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
-                            
-                        }
-                        .padding(.horizontal, 40)
-                    } else {
-                        VStack {
-                            Text("미모지 스티커를 1개만 입력해주세요.\n미모지 스티커만 입력가능합니다.")
-                                .font(.caption)
-                            MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
-                                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                                .aspectRatio(1, contentMode: .fit)
-                                .cornerRadius(20)
-                                .clipped()
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(lineWidth: 1)
-                                        .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
-                                }
-                                .focused(self.$focusedField)
-                                .padding(.horizontal, 50)
-                        }
-                        .onAppear {
-                            self.viewModel.initMemojiImage(uploadMethod: self.uploadMethod)
-                        }
-                    }
+                        .focused(self.$focusedField)
+                        .padding(.horizontal, 50)
                 }
                 
                 
@@ -180,7 +138,7 @@ struct MakeMemojiCardView: View {
                         Button("No", role: .cancel) { }
                         Button("Yes", role: .none){
                             self.isUploading = true
-                            let memojiModel = self.viewModel.createMemojiModel(uploadMethod: self.uploadMethod)
+                            let memojiModel = self.viewModel.createMemojiModel()
                             self.viewModel.saveData(memojiCard: memojiModel) {
                                 self.dismiss()
                             }
@@ -268,7 +226,7 @@ struct MemojiTextView: UIViewRepresentable {
         textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
-        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드에서 가장 왼쪽에 있습니다."
+        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드의 가장 왼쪽에 있습니다."
         textView.delegate = context.coordinator
         textView.centerVerticalText()
         return textView
