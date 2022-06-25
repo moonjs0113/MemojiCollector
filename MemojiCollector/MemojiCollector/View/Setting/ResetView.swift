@@ -86,7 +86,6 @@ struct ResetView: View {
                 }
                 Button("Yes", role: .destructive){
                     self.removeMyMemojiCard()
-                    
                     self.dismiss()
                 }
             }

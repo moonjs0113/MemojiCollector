@@ -9,46 +9,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var searchText = ""
-    @State private var isShowMyPage = false
-    @State private var isShowGuide = false
-    @AppStorage(AppStorageKey.isUserNameRegister.string) private var isUserNameRegister: Bool = true
-    @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
-    
-    func requestAppStoreVersion() {
-        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String
-        
-        guard let bundelId = Bundle.main.bundleIdentifier else {
-            return
-        }
-        guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(bundelId)") else {
-            return
-        }
-        
-        guard let data = try? Data(contentsOf: url) else {
-            return
-        }
-        
-        guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-            return
-        }
-        
-        let results = json["results"] as? [[String: Any]]
-        let appStoreVersion = (results?[0]["version"] as? String) ?? "1.0"
-        
-//        if appStoreVersion > version {
-//            self.appVersionUpdateAlert()
-//        } else {
-//            self.getLoginData()
-//        }
-        print("Current Version: \(version)")
-        print("App Store Version: \(appStoreVersion)")
-    }
+    @StateObject private var viewModel: MainViewModel = MainViewModel()
     
     @ViewBuilder
     func goToMyMemojiView() -> some View{
-        if self.isUserNameRegister {
-            RegisterUserView(isShowMyPage: self.$isShowMyPage)
+        if self.viewModel.isUserNameRegister {
+            RegisterUserView(isShowMyPage: self.$viewModel.isShowMyPage)
         } else {
             MyMemojiView()
         }
@@ -57,14 +23,14 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                GridCardView(searchText: self.$searchText)
+                GridCardView(searchText: self.$viewModel.searchText)
                 
                 VStack{
                     Spacer()
                     HStack {
                         Spacer()
                         Button {
-                            self.isShowMyPage.toggle()
+                            self.viewModel.isShowMyPage.toggle()
                         } label: {
                             Image(systemName: "person.fill")
                                 .resizable()
@@ -79,10 +45,10 @@ struct MainView: View {
                                 }
                         }
                         .padding([.bottom, .trailing], 50)
-                        .sheet(isPresented: self.$isShowMyPage) {
+                        .sheet(isPresented: self.$viewModel.isShowMyPage) {
                             self.goToMyMemojiView()
                         }
-                        .sheet(isPresented: $isShowGuide) {
+                        .sheet(isPresented: $viewModel.isShowGuide) {
                             GuideView()
                         }
 //                        .fullScreenCover(isPresented: $isShowGuide) {
@@ -90,21 +56,31 @@ struct MainView: View {
 //                                .ignoresSafeArea(.all, edges: .top)
 //                        }
                         .onAppear {
-                            if firstGuide {
-                                firstGuide = false
-                                isShowGuide.toggle()
+                            if viewModel.firstGuide {
+                                viewModel.isShowGuide.toggle()
                             }
-                            DispatchQueue.global().async {
-                                self.requestAppStoreVersion()
+                            if self.viewModel.requestAppStoreVersion() {
+                                self.viewModel.showUpdateAlert()
                             }
                         }
                     }
                 }
             }
+            .alert("업데이트", isPresented: self.$viewModel.isShowUpdate) {
+                Button("취소") {
+                    self.viewModel.setCancelUpdateDate()
+                }
+                
+                Button("확인") {
+                    self.viewModel.goToAppStore()
+                }
+            } message: {
+                Text("최신버전이 아닙니다.\n업데이트 하시겠습니까?\n확인을 누르면 앱스토어로 이동합니다.")
+            }
             .navigationBarItems(trailing:
                                     HStack {
                 Button {
-                    self.isShowGuide = true
+                    self.viewModel.isShowGuide = true
                 } label: {
                     Image(systemName: "questionmark.circle")
                 }
@@ -117,7 +93,7 @@ struct MainView: View {
             )
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
-            .searchable(text: self.$searchText, placement: .automatic)
+            .searchable(text: self.$viewModel.searchText, placement: .automatic)
         }
     }
 }

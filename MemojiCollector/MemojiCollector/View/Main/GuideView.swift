@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GuideView: View {
+    @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
+    
     let guideText = [
         "닉네임을 설정하고, 나의 미모지를 확인하세요!",
         "비어있는 카드를 선택하여 나의 미모지를 만들어보세요!",
@@ -62,6 +64,9 @@ struct GuideView: View {
                 }
                 .padding(.horizontal)
             }
+        }
+        .onDisappear {
+            firstGuide = false
         }
         .tabViewStyle(PageTabViewStyle())
     }
