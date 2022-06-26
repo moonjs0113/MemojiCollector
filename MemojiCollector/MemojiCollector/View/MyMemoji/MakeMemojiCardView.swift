@@ -46,7 +46,7 @@ struct MakeMemojiCardView: View {
                         .focused(self.$focusedField)
                         .padding(.horizontal, 50)
                 }
-                
+                .padding(.top, 50)
                 
                 VStack {
                     VStack(spacing: 8) {
