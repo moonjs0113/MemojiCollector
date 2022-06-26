@@ -34,10 +34,7 @@ struct ChangeNameView: View {
     }
     
     var body: some View {
-        VStack(spacing: 40) {
-            Text("닉네임 변경 시, 나의 미모지 카드와 공유한 미모지 카드 모두 삭제됩니다.")
-                .padding(.top, 25)
-            
+        VStack(spacing: 10) {
             VStack(spacing: 8) {
                 HStack(spacing: 5) {
                     Text("새 닉네임    ")
@@ -50,6 +47,11 @@ struct ChangeNameView: View {
                 .padding(.leading, 15)
                 Divider()
             }
+            .padding(.top, 25)
+            
+            Text("\(Image(systemName: "exclamationmark.circle")) 닉네임 변경 시, 나의 미모지 카드와 공유한 미모지 카드 모두 삭제됩니다.")
+                .font(.caption)
+                .foregroundColor(.red)
             
             Spacer()
             

@@ -20,9 +20,11 @@ struct QRCodeView: View {
     func generateQRCode() -> UIImage {
         let urlString = self.memojiModel.urlString + "&timeStamp=\(Date.now)"
         let data = Data(urlString.utf8)
-        self.filter.setValue(data, forKey: "inputMessage")
-        
-        guard let qrCodeImage = self.filter.outputImage else {
+        self.filter.message = data
+        self.filter.correctionLevel = "L"
+        let transform = CGAffineTransform(scaleX: 3, y: 3)
+            
+        guard let qrCodeImage = self.filter.outputImage?.transformed(by: transform) else {
             return UIImage()
         }
         
@@ -34,23 +36,29 @@ struct QRCodeView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
+            Text("QR Code로 공유")
+                .padding(.vertical, 25)
+            
             Text("생성된 QR Code는 1분 동안 사용할 수 있습니다.")
-            Text(self.time == 60 ? "1:00": "0:\(self.time)")
+            Text(self.time == 60 ? "1:00": "0:\(String(format: "%02d", self.time))")
                 .onReceive(self.timer) { _ in
-                    if self.time == 0 {
+                    if self.time == 1 {
                         self.qrImage = self.generateQRCode()
                     }
-                    self.time = (self.time > 0) ? (self.time - 1) : 60
+                    self.time = (self.time > 1) ? (self.time - 1) : 60
                 }
             Image(uiImage: self.qrImage)
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
-                .padding()
+                .padding(.horizontal, 60)
                 .onAppear {
                     self.qrImage = self.generateQRCode()
                 }
+            
+            Spacer()
         }
+        .padding()
         
     }
 }

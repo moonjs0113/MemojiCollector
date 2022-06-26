@@ -21,7 +21,12 @@ struct RegisterUserView: View {
     var body: some View {
         VStack {
             VStack(spacing:40) {
-                Text("기본 정보 등록")
+                VStack(spacing: 20) {
+                    Text("기본 정보 등록")
+                    Text("\(Image(systemName: "exclamationmark.circle")) 닉네임은 이후 변경이 가능하지만, 변경 시 공유한 미모지 카드 포함하여 나의 미모지 카드가 모두 삭제됩니다.")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
 
                 VStack(spacing: 8) {
                     HStack(spacing: 5) {
@@ -35,10 +40,10 @@ struct RegisterUserView: View {
                     .padding(.leading, 15)
                     Divider()
                 }
-                Text("닉네임은 이후 변경이 가능하지만, 변경 시 나의 미모지 카드가 모두 삭제됩니다.\n(내가 공유한 미모지 카드 포함)")
-                    .font(.caption)
             }
+            .padding(.horizontal, 5)
             .padding(.top, 25)
+
 
             Spacer()
             Button {

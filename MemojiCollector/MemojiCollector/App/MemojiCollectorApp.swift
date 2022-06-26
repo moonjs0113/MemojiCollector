@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import MemojiCollectorStaticLibrary
-public typealias AppStorageKey = MemojiCollectorStaticLibrary.AppStorageKey
+//import MemojiCollectorStaticLibrary
+//public typealias AppStorageKey = MemojiCollectorStaticLibrary.AppStorageKey
 
 @main
 struct MemojiCollectorApp: App {

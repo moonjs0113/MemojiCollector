@@ -37,7 +37,11 @@ struct GridCardView: View {
             LazyVGrid(columns: self.gridItems) {
                 let memojiList = self.filterList()
                 if memojiList.isEmpty {
-                    TempMemojiCardView()
+                    Button {
+                        
+                    } label: {
+                        TempMemojiCardView()
+                    }
                 } else {
                     ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
                         MemojiCardView(memojiCard: memoji, preImageData: memoji.imageData)

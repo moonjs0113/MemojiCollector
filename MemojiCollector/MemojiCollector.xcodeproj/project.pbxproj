@@ -32,7 +32,7 @@
 		C7A3D88E28659C60000F01C1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D88D28659C60000F01C1 /* FirebaseStorage */; };
 		C7A3D8902865AE67000F01C1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A3D88F2865AE67000F01C1 /* String+Extension.swift */; };
 		C7A3D8932865B372000F01C1 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D8922865B372000F01C1 /* FirebaseStorageCombine-Community */; };
-		C7A3D8952865B376000F01C1 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D8942865B376000F01C1 /* FirebaseStorageSwift-Beta */; };
+		C7A3D8952865B376000F01C1 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D8942865B376000F01C1 /* FirebaseStorageSwift-Beta */; settings = {ATTRIBUTES = (Required, ); }; };
 		C7A3D8972865B47C000F01C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7A3D8962865B47C000F01C1 /* GoogleService-Info.plist */; };
 		C7A816BF282AB8820075D136 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816BE282AB8820075D136 /* SettingView.swift */; };
 		C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816C1282AB99A0075D136 /* ChangeNameView.swift */; };
@@ -46,9 +46,7 @@
 		C7D0F5242867785B008F17F5 /* MemojiTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D0F5232867785B008F17F5 /* MemojiTextViewDelegate.swift */; };
 		C7D499B7281E47E700440C07 /* IntroView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* IntroView+Extension.swift */; };
 		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
-		C7D969B528683C9A000AB5E5 /* MemojiCollectorStaticLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D969B428683C9A000AB5E5 /* MemojiCollectorStaticLibrary.swift */; };
-		C7D969B628683CDD000AB5E5 /* AppStorageKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey_.swift */; };
-		C7D969BA28683D2E000AB5E5 /* libMemojiCollectorStaticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D969AC28683C7A000AB5E5 /* libMemojiCollectorStaticLibrary.a */; };
+		C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey_.swift */; };
 		C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */; };
 		C7E2223D283B8033002F0E21 /* PasswordViewModel_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */; };
 		C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223E283B8F38002F0E21 /* LockView_.swift */; };
@@ -59,16 +57,6 @@
 		C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0307C281D27B90072CC11 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		C7D969BB28683D2E000AB5E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C70198FE2818C5C400AAEF0A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C7D969AB28683C7A000AB5E5;
-			remoteInfo = MemojiCollectorStaticLibrary;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		C7D969872868375F000AB5E5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -78,15 +66,6 @@
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7D969AA28683C7A000AB5E5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -130,8 +109,6 @@
 		C7D0F5232867785B008F17F5 /* MemojiTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiTextViewDelegate.swift; sourceTree = "<group>"; };
 		C7D499B6281E47E700440C07 /* IntroView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntroView+Extension.swift"; sourceTree = "<group>"; };
 		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
-		C7D969AC28683C7A000AB5E5 /* libMemojiCollectorStaticLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMemojiCollectorStaticLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7D969B428683C9A000AB5E5 /* MemojiCollectorStaticLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemojiCollectorStaticLibrary.swift; sourceTree = "<group>"; };
 		C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordView_.swift; sourceTree = "<group>"; };
 		C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel_.swift; sourceTree = "<group>"; };
 		C7E2223E283B8F38002F0E21 /* LockView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView_.swift; sourceTree = "<group>"; };
@@ -149,17 +126,9 @@
 			files = (
 				C7A3D88C28659C60000F01C1 /* FirebaseMessaging in Frameworks */,
 				C7A3D88E28659C60000F01C1 /* FirebaseStorage in Frameworks */,
-				C7D969BA28683D2E000AB5E5 /* libMemojiCollectorStaticLibrary.a in Frameworks */,
 				C7A3D8932865B372000F01C1 /* FirebaseStorageCombine-Community in Frameworks */,
 				C7A3D88A28659C60000F01C1 /* FirebaseAuth in Frameworks */,
 				C7A3D8952865B376000F01C1 /* FirebaseStorageSwift-Beta in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7D969A928683C7A000AB5E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				C70199082818C5C400AAEF0A /* MemojiCollector */,
-				C7D969AD28683C7A000AB5E5 /* MemojiCollectorStaticLibrary */,
 				C70199072818C5C400AAEF0A /* Products */,
 				C7A3D88628659C60000F01C1 /* Frameworks */,
 			);
@@ -180,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				C70199062818C5C400AAEF0A /* MemojiCollector.app */,
-				C7D969AC28683C7A000AB5E5 /* libMemojiCollectorStaticLibrary.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,6 +242,7 @@
 				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
 				C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */,
 				C7F0307C281D27B90072CC11 /* AppDelegate.swift */,
+				C73C456F2819300D00E41406 /* AppStorageKey_.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -369,15 +337,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		C7D969AD28683C7A000AB5E5 /* MemojiCollectorStaticLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				C73C456F2819300D00E41406 /* AppStorageKey_.swift */,
-				C7D969B428683C9A000AB5E5 /* MemojiCollectorStaticLibrary.swift */,
-			);
-			path = MemojiCollectorStaticLibrary;
-			sourceTree = "<group>";
-		};
 		C7E22239283B7F98002F0E21 /* Password */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,7 +370,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C7D969BC28683D2E000AB5E5 /* PBXTargetDependency */,
 			);
 			name = MemojiCollector;
 			packageProductDependencies = (
@@ -425,23 +383,6 @@
 			productReference = C70199062818C5C400AAEF0A /* MemojiCollector.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C7D969AB28683C7A000AB5E5 /* MemojiCollectorStaticLibrary */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C7D969B028683C7A000AB5E5 /* Build configuration list for PBXNativeTarget "MemojiCollectorStaticLibrary" */;
-			buildPhases = (
-				C7D969A828683C7A000AB5E5 /* Sources */,
-				C7D969A928683C7A000AB5E5 /* Frameworks */,
-				C7D969AA28683C7A000AB5E5 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MemojiCollectorStaticLibrary;
-			productName = MemojiCollectorStaticLibrary;
-			productReference = C7D969AC28683C7A000AB5E5 /* libMemojiCollectorStaticLibrary.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -453,9 +394,6 @@
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					C70199052818C5C400AAEF0A = {
-						CreatedOnToolsVersion = 13.3;
-					};
-					C7D969AB28683C7A000AB5E5 = {
 						CreatedOnToolsVersion = 13.3;
 					};
 				};
@@ -477,7 +415,6 @@
 			projectRoot = "";
 			targets = (
 				C70199052818C5C400AAEF0A /* MemojiCollector */,
-				C7D969AB28683C7A000AB5E5 /* MemojiCollectorStaticLibrary */,
 			);
 		};
 /* End PBXProject section */
@@ -514,6 +451,7 @@
 				C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */,
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */,
+				C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */,
 				C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */,
 				C715D43F2859890C005A22A9 /* TempMemojiCardView.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
@@ -542,24 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7D969A828683C7A000AB5E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C7D969B528683C9A000AB5E5 /* MemojiCollectorStaticLibrary.swift in Sources */,
-				C7D969B628683CDD000AB5E5 /* AppStorageKey_.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C7D969BC28683D2E000AB5E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C7D969AB28683C7A000AB5E5 /* MemojiCollectorStaticLibrary */;
-			targetProxy = C7D969BB28683D2E000AB5E5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C70199122818C5C500AAEF0A /* Debug */ = {
@@ -703,6 +624,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moonjs.MemojiCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -739,40 +664,16 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moonjs.MemojiCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		C7D969B128683C7A000AB5E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z629PZ4XVL;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		C7D969B228683C7A000AB5E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z629PZ4XVL;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -793,15 +694,6 @@
 			buildConfigurations = (
 				C70199152818C5C500AAEF0A /* Debug */,
 				C70199162818C5C500AAEF0A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C7D969B028683C7A000AB5E5 /* Build configuration list for PBXNativeTarget "MemojiCollectorStaticLibrary" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C7D969B128683C7A000AB5E5 /* Debug */,
-				C7D969B228683C7A000AB5E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
