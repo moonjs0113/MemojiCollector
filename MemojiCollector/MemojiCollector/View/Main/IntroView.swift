@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-import MemojiCollectorStaticLibrary
-public typealias LockView = MemojiCollectorStaticLibrary.LockView
-
 
 struct IntroView: View {
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()

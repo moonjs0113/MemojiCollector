@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import MemojiCollectorStaticLibrary
-public typealias PasswordView = MemojiCollectorStaticLibrary.PasswordView
 
 struct SettingView: View {
     @StateObject private var viewModel: SettingViewModel = SettingViewModel()

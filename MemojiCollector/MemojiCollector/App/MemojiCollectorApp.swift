@@ -7,7 +7,12 @@
 
 import SwiftUI
 import MemojiCollectorStaticLibrary
+
 public typealias AppStorageKey = MemojiCollectorStaticLibrary.AppStorageKey
+
+//public typealias AppStorageKey = MemojiCollectorStaticLibrary.AppStorageKey
+//public typealias LockView = MemojiCollectorStaticLibrary.LockView
+//public typealias PasswordView = MemojiCollectorStaticLibrary.PasswordView
 
 @main
 struct MemojiCollectorApp: App {

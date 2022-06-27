@@ -10,7 +10,7 @@ import FirebaseStorage
 
 class MakeMemojiViewModel: ObservableObject {
     // MARK: - AppStorage
-    @AppStorage(AppStorageKey.userName.string) var userName = ""
+    @AppStorage(AppStorageKey.userName.string) var userName: String = ""
     @AppStorage(AppStorageKey.saveCount.string) var saveCount: Int = 0
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.token.string) var token: String = ""
