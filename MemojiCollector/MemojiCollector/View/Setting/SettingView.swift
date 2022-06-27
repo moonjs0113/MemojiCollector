@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import MemojiCollectorStaticLibrary
+public typealias PasswordView = MemojiCollectorStaticLibrary.PasswordView
 
 struct SettingView: View {
     @StateObject private var viewModel: SettingViewModel = SettingViewModel()
@@ -25,7 +27,7 @@ struct SettingView: View {
                         NavigationLink("비밀번호 설정", isActive: self.$viewModel.goToPasswordView) { PasswordView() }
                             .foregroundColor(.black)
                     }
-                    .sheet(isPresented: self.$viewModel.showUnlockView) { LockView(isLock: self.$viewModel.goToPasswordView, sha256: self.viewModel.userPW) }
+                    .sheet(isPresented: self.$viewModel.showUnlockView) { LockView(isLock: self.$viewModel.goToPasswordView) }
                 }
                 if !self.viewModel.isUserNameRegister {
                     NavigationLink("닉네임 변경", destination: ChangeNameView())

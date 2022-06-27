@@ -26,6 +26,10 @@
 		C771269D286530C900E5954B /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C771269C286530C900E5954B /* QRCodeView.swift */; };
 		C77440BD28352F3100EEB6DE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */; };
 		C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77FF5AB281B020200518079 /* ActivityViewController.swift */; };
+		C79C13D72869AE8F00F840E8 /* libMemojiCollectorStaticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C13D12869AE8F00F840E8 /* libMemojiCollectorStaticLibrary.a */; };
+		C79C13D82869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftmodule in Resources */ = {isa = PBXBuildFile; fileRef = C79C13D32869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftmodule */; };
+		C79C13D92869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftsourceinfo in Resources */ = {isa = PBXBuildFile; fileRef = C79C13D52869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftsourceinfo */; };
+		C79C13DA2869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftdoc in Resources */ = {isa = PBXBuildFile; fileRef = C79C13D62869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftdoc */; };
 		C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79F852E281A1175001D013F /* MemojiCardModel.swift */; };
 		C7A3D88A28659C60000F01C1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D88928659C60000F01C1 /* FirebaseAuth */; };
 		C7A3D88C28659C60000F01C1 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C7A3D88B28659C60000F01C1 /* FirebaseMessaging */; };
@@ -46,11 +50,6 @@
 		C7D0F5242867785B008F17F5 /* MemojiTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D0F5232867785B008F17F5 /* MemojiTextViewDelegate.swift */; };
 		C7D499B7281E47E700440C07 /* IntroView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* IntroView+Extension.swift */; };
 		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
-		C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey_.swift */; };
-		C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */; };
-		C7E2223D283B8033002F0E21 /* PasswordViewModel_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */; };
-		C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223E283B8F38002F0E21 /* LockView_.swift */; };
-		C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22240283B94F1002F0E21 /* PasswordView_.swift */; };
 		C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22248283B9E09002F0E21 /* SettingViewModel.swift */; };
 		C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */; };
 		C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */; };
@@ -87,12 +86,15 @@
 		C73C45692819245D00E41406 /* MakeMemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiCardView.swift; sourceTree = "<group>"; };
 		C73C456B281924A400E41406 /* MemojiDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiDetailView.swift; sourceTree = "<group>"; };
 		C73C456D28192EA100E41406 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
-		C73C456F2819300D00E41406 /* AppStorageKey_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey_.swift; sourceTree = "<group>"; };
 		C74EA4D728214FA1001CDE03 /* GridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCardView.swift; sourceTree = "<group>"; };
 		C771269828647B5300E5954B /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		C771269C286530C900E5954B /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C77FF5AB281B020200518079 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		C79C13D12869AE8F00F840E8 /* libMemojiCollectorStaticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMemojiCollectorStaticLibrary.a; sourceTree = "<group>"; };
+		C79C13D32869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftmodule */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-ios-simulator.swiftmodule"; sourceTree = "<group>"; };
+		C79C13D52869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftsourceinfo */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-ios-simulator.swiftsourceinfo"; sourceTree = "<group>"; };
+		C79C13D62869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftdoc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "arm64-apple-ios-simulator.swiftdoc"; sourceTree = "<group>"; };
 		C79F852E281A1175001D013F /* MemojiCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardModel.swift; sourceTree = "<group>"; };
 		C7A3D88F2865AE67000F01C1 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		C7A3D8912865B019000F01C1 /* MemojiCollector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemojiCollector.entitlements; sourceTree = "<group>"; };
@@ -109,10 +111,6 @@
 		C7D0F5232867785B008F17F5 /* MemojiTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiTextViewDelegate.swift; sourceTree = "<group>"; };
 		C7D499B6281E47E700440C07 /* IntroView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntroView+Extension.swift"; sourceTree = "<group>"; };
 		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
-		C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordView_.swift; sourceTree = "<group>"; };
-		C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel_.swift; sourceTree = "<group>"; };
-		C7E2223E283B8F38002F0E21 /* LockView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView_.swift; sourceTree = "<group>"; };
-		C7E22240283B94F1002F0E21 /* PasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView_.swift; sourceTree = "<group>"; };
 		C7E22248283B9E09002F0E21 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Extension.swift"; sourceTree = "<group>"; };
@@ -126,6 +124,7 @@
 			files = (
 				C7A3D88C28659C60000F01C1 /* FirebaseMessaging in Frameworks */,
 				C7A3D88E28659C60000F01C1 /* FirebaseStorage in Frameworks */,
+				C79C13D72869AE8F00F840E8 /* libMemojiCollectorStaticLibrary.a in Frameworks */,
 				C7A3D8932865B372000F01C1 /* FirebaseStorageCombine-Community in Frameworks */,
 				C7A3D88A28659C60000F01C1 /* FirebaseAuth in Frameworks */,
 				C7A3D8952865B376000F01C1 /* FirebaseStorageSwift-Beta in Frameworks */,
@@ -138,6 +137,7 @@
 		C70198FD2818C5C400AAEF0A = {
 			isa = PBXGroup;
 			children = (
+				C79C13922869AA5200F840E8 /* staticLib */,
 				C70199082818C5C400AAEF0A /* MemojiCollector */,
 				C70199072818C5C400AAEF0A /* Products */,
 				C7A3D88628659C60000F01C1 /* Frameworks */,
@@ -187,7 +187,6 @@
 				C730A5502822622A00526965 /* MemojiCardViewModel.swift */,
 				C7CA62582832758300E0514B /* MyMemojiViewModel */,
 				C7CA6259283275D000E0514B /* CardDetailViewModel */,
-				C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */,
 				C7E22245283B9DFA002F0E21 /* SettingViewModel */,
 			);
 			path = ViewModel;
@@ -242,9 +241,35 @@
 				C70199092818C5C400AAEF0A /* MemojiCollectorApp.swift */,
 				C77440BC28352F3100EEB6DE /* Launch Screen.storyboard */,
 				C7F0307C281D27B90072CC11 /* AppDelegate.swift */,
-				C73C456F2819300D00E41406 /* AppStorageKey_.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		C79C13922869AA5200F840E8 /* staticLib */ = {
+			isa = PBXGroup;
+			children = (
+				C79C13D12869AE8F00F840E8 /* libMemojiCollectorStaticLibrary.a */,
+				C79C13D22869AE8F00F840E8 /* MemojiCollectorStaticLibrary.swiftmodule */,
+			);
+			path = staticLib;
+			sourceTree = "<group>";
+		};
+		C79C13D22869AE8F00F840E8 /* MemojiCollectorStaticLibrary.swiftmodule */ = {
+			isa = PBXGroup;
+			children = (
+				C79C13D32869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftmodule */,
+				C79C13D42869AE8F00F840E8 /* Project */,
+				C79C13D62869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftdoc */,
+			);
+			path = MemojiCollectorStaticLibrary.swiftmodule;
+			sourceTree = "<group>";
+		};
+		C79C13D42869AE8F00F840E8 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				C79C13D52869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftsourceinfo */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 		C7A3D88628659C60000F01C1 /* Frameworks */ = {
@@ -258,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				C7A816BE282AB8820075D136 /* SettingView.swift */,
-				C7E22239283B7F98002F0E21 /* Password */,
 				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
 				C7A816C3282ABE860075D136 /* ResetView.swift */,
 			);
@@ -335,16 +359,6 @@
 				C7D499BA281E48BB00440C07 /* JsonManager.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		C7E22239283B7F98002F0E21 /* Password */ = {
-			isa = PBXGroup;
-			children = (
-				C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */,
-				C7E2223E283B8F38002F0E21 /* LockView_.swift */,
-				C7E22240283B94F1002F0E21 /* PasswordView_.swift */,
-			);
-			path = Password;
 			sourceTree = "<group>";
 		};
 		C7E22245283B9DFA002F0E21 /* SettingViewModel */ = {
@@ -425,9 +439,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */,
+				C79C13D92869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftsourceinfo in Resources */,
 				C7A3D8972865B47C000F01C1 /* GoogleService-Info.plist in Resources */,
 				C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */,
 				C77440BD28352F3100EEB6DE /* Launch Screen.storyboard in Resources */,
+				C79C13D82869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftmodule in Resources */,
+				C79C13DA2869AE8F00F840E8 /* arm64-apple-ios-simulator.swiftdoc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,13 +462,10 @@
 				C730A554282294C000526965 /* MemojiDetaillViewModel.swift in Sources */,
 				C73C456E28192EA100E41406 /* RegisterUserView.swift in Sources */,
 				C701990C2818C5C400AAEF0A /* MainView.swift in Sources */,
-				C7E2223D283B8033002F0E21 /* PasswordViewModel_.swift in Sources */,
 				C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */,
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
-				C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */,
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */,
-				C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */,
 				C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */,
 				C715D43F2859890C005A22A9 /* TempMemojiCardView.swift in Sources */,
 				C701990A2818C5C400AAEF0A /* MemojiCollectorApp.swift in Sources */,
@@ -459,7 +473,6 @@
 				C771269D286530C900E5954B /* QRCodeView.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
 				C7D0F51E2867039A008F17F5 /* MainViewModel.swift in Sources */,
-				C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */,
 				C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */,
 				C7C5025628594EEC00B9C5BD /* GuideView.swift in Sources */,
 				C771269928647B5300E5954B /* IntroView.swift in Sources */,
@@ -473,7 +486,6 @@
 				C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
-				C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */,
 				C7D499B7281E47E700440C07 /* IntroView+Extension.swift in Sources */,
 				C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */,
 				C7A816BF282AB8820075D136 /* SettingView.swift in Sources */,
@@ -627,11 +639,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/staticLib",
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moonjs.MemojiCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/staticLib";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -667,11 +681,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/staticLib",
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.moonjs.MemojiCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/staticLib";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
