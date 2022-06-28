@@ -17,7 +17,7 @@ struct MemojiTextView: UIViewRepresentable {
         textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
-        textView.text = "\n\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드의 가장 왼쪽에 있습니다."
+        textView.text = "\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드의 가장 왼쪽에 있습니다.\n미모지 스티커가 보이지 않는다면, 활성화 버튼을 누르세요!"
         textView.delegate = context.coordinator
         textView.centerVerticalText()
         return textView
@@ -45,10 +45,12 @@ class TextViewCoordinator: NSObject, UITextViewDelegate {
         let heightRatio = targetSize.height / size.height
         
         var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: size.width * heightRatio,
+                             height: size.height * heightRatio)
         } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+            newSize = CGSize(width: size.width * widthRatio,
+                             height: size.height * widthRatio)
         }
         
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)

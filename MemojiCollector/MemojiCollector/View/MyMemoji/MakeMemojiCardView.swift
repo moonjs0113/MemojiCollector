@@ -33,7 +33,8 @@ struct MakeMemojiCardView: View {
                 VStack {
                     Text("1개의 미모지 스티커만 입력가능합니다.")
                         .font(.caption)
-                    MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji, isSelecteImage: self.$viewModel.isSelecteImage)
+                    MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji,
+                                   isSelecteImage: self.$viewModel.isSelecteImage)
                         .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
                         .aspectRatio(1, contentMode: .fit)
                         .cornerRadius(20)
@@ -45,6 +46,14 @@ struct MakeMemojiCardView: View {
                         }
                         .focused(self.$focusedField)
                         .padding(.horizontal, 50)
+                    Button {
+                        if let url = URL(string: "App-prefs:General&path=Keyboard") {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        }
+                    } label: {
+                        Text("미모지콘 스티커 활성화하기")
+                            .font(.subheadline)
+                    }
                 }
                 .padding(.top, 50)
                 

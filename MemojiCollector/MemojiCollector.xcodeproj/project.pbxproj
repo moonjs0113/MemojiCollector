@@ -12,6 +12,9 @@
 		C701990E2818C5C500AAEF0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C701990D2818C5C500AAEF0A /* Assets.xcassets */; };
 		C70199112818C5C500AAEF0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70199102818C5C500AAEF0A /* Preview Assets.xcassets */; };
 		C715D43F2859890C005A22A9 /* TempMemojiCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715D43E2859890C005A22A9 /* TempMemojiCardView.swift */; };
+		C719A803286A08D500DF011F /* PasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719A800286A08D500DF011F /* PasswordView_.swift */; };
+		C719A804286A08D500DF011F /* LockView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719A801286A08D500DF011F /* LockView_.swift */; };
+		C719A805286A08D500DF011F /* SetPasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719A802286A08D500DF011F /* SetPasswordView_.swift */; };
 		C730A54C2822594A00526965 /* MyMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54B2822594A00526965 /* MyMemojiViewModel.swift */; };
 		C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */; };
 		C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C730A5502822622A00526965 /* MemojiCardViewModel.swift */; };
@@ -47,10 +50,7 @@
 		C7D499B7281E47E700440C07 /* IntroView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499B6281E47E700440C07 /* IntroView+Extension.swift */; };
 		C7D499BB281E48BB00440C07 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D499BA281E48BB00440C07 /* JsonManager.swift */; };
 		C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C456F2819300D00E41406 /* AppStorageKey_.swift */; };
-		C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */; };
 		C7E2223D283B8033002F0E21 /* PasswordViewModel_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */; };
-		C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2223E283B8F38002F0E21 /* LockView_.swift */; };
-		C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22240283B94F1002F0E21 /* PasswordView_.swift */; };
 		C7E22249283B9E09002F0E21 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E22248283B9E09002F0E21 /* SettingViewModel.swift */; };
 		C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */; };
 		C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */; };
@@ -78,6 +78,9 @@
 		C70199102818C5C500AAEF0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C709F46B2819948A00C3F74C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C715D43E2859890C005A22A9 /* TempMemojiCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMemojiCardView.swift; sourceTree = "<group>"; };
+		C719A800286A08D500DF011F /* PasswordView_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordView_.swift; sourceTree = "<group>"; };
+		C719A801286A08D500DF011F /* LockView_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockView_.swift; sourceTree = "<group>"; };
+		C719A802286A08D500DF011F /* SetPasswordView_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordView_.swift; sourceTree = "<group>"; };
 		C730A54B2822594A00526965 /* MyMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A54E28225B9E00526965 /* MakeMemojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeMemojiViewModel.swift; sourceTree = "<group>"; };
 		C730A5502822622A00526965 /* MemojiCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiCardViewModel.swift; sourceTree = "<group>"; };
@@ -109,10 +112,7 @@
 		C7D0F5232867785B008F17F5 /* MemojiTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemojiTextViewDelegate.swift; sourceTree = "<group>"; };
 		C7D499B6281E47E700440C07 /* IntroView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntroView+Extension.swift"; sourceTree = "<group>"; };
 		C7D499BA281E48BB00440C07 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
-		C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordView_.swift; sourceTree = "<group>"; };
 		C7E2223C283B8033002F0E21 /* PasswordViewModel_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel_.swift; sourceTree = "<group>"; };
-		C7E2223E283B8F38002F0E21 /* LockView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView_.swift; sourceTree = "<group>"; };
-		C7E22240283B94F1002F0E21 /* PasswordView_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView_.swift; sourceTree = "<group>"; };
 		C7E22248283B9E09002F0E21 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		C7E2224A283BAA4C002F0E21 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		C7E2224C283BAA95002F0E21 /* NSTextAttachment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAttachment+Extension.swift"; sourceTree = "<group>"; };
@@ -178,6 +178,16 @@
 				C70199102818C5C500AAEF0A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C719A7FF286A08D500DF011F /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				C719A800286A08D500DF011F /* PasswordView_.swift */,
+				C719A801286A08D500DF011F /* LockView_.swift */,
+				C719A802286A08D500DF011F /* SetPasswordView_.swift */,
+			);
+			path = Password;
 			sourceTree = "<group>";
 		};
 		C730A54A2822593800526965 /* ViewModel */ = {
@@ -258,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				C7A816BE282AB8820075D136 /* SettingView.swift */,
-				C7E22239283B7F98002F0E21 /* Password */,
+				C719A7FF286A08D500DF011F /* Password */,
 				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
 				C7A816C3282ABE860075D136 /* ResetView.swift */,
 			);
@@ -335,16 +345,6 @@
 				C7D499BA281E48BB00440C07 /* JsonManager.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		C7E22239283B7F98002F0E21 /* Password */ = {
-			isa = PBXGroup;
-			children = (
-				C7E2223A283B7FD7002F0E21 /* SetPasswordView_.swift */,
-				C7E2223E283B8F38002F0E21 /* LockView_.swift */,
-				C7E22240283B94F1002F0E21 /* PasswordView_.swift */,
-			);
-			path = Password;
 			sourceTree = "<group>";
 		};
 		C7E22245283B9DFA002F0E21 /* SettingViewModel */ = {
@@ -439,6 +439,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7A816C4282ABE860075D136 /* ResetView.swift in Sources */,
+				C719A804286A08D500DF011F /* LockView_.swift in Sources */,
+				C719A805286A08D500DF011F /* SetPasswordView_.swift in Sources */,
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
 				C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */,
@@ -448,7 +450,6 @@
 				C7E2223D283B8033002F0E21 /* PasswordViewModel_.swift in Sources */,
 				C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */,
 				C79F852F281A1175001D013F /* MemojiCardModel.swift in Sources */,
-				C7E2223B283B7FD7002F0E21 /* SetPasswordView_.swift in Sources */,
 				C730A5512822622A00526965 /* MemojiCardViewModel.swift in Sources */,
 				C7E2224D283BAA95002F0E21 /* NSTextAttachment+Extension.swift in Sources */,
 				C7D969BD28683F65000AB5E5 /* AppStorageKey_.swift in Sources */,
@@ -459,8 +460,8 @@
 				C771269D286530C900E5954B /* QRCodeView.swift in Sources */,
 				C73C45662819155600E41406 /* MemojiCardView.swift in Sources */,
 				C7D0F51E2867039A008F17F5 /* MainViewModel.swift in Sources */,
-				C7E22241283B94F1002F0E21 /* PasswordView_.swift in Sources */,
 				C730A54F28225B9E00526965 /* MakeMemojiViewModel.swift in Sources */,
+				C719A803286A08D500DF011F /* PasswordView_.swift in Sources */,
 				C7C5025628594EEC00B9C5BD /* GuideView.swift in Sources */,
 				C771269928647B5300E5954B /* IntroView.swift in Sources */,
 				C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */,
@@ -473,7 +474,6 @@
 				C7E2224B283BAA4C002F0E21 /* UITextView+Extension.swift in Sources */,
 				C74EA4D828214FA1001CDE03 /* GridCardView.swift in Sources */,
 				C73C456A2819245D00E41406 /* MakeMemojiCardView.swift in Sources */,
-				C7E2223F283B8F38002F0E21 /* LockView_.swift in Sources */,
 				C7D499B7281E47E700440C07 /* IntroView+Extension.swift in Sources */,
 				C77FF5AC281B020200518079 /* ActivityViewController.swift in Sources */,
 				C7A816BF282AB8820075D136 /* SettingView.swift in Sources */,
