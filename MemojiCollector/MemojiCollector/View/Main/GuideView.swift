@@ -29,7 +29,7 @@ struct GuideView: View {
     var body: some View {
         TabView {
             ForEach(0..<3, id: \.self) { index in
-                VStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .center, spacing: 15) {
                     Image("Onboarding\(index)")
                         .resizable()
                         .scaledToFit()
@@ -46,7 +46,7 @@ struct GuideView: View {
                     
                     Rectangle()
                         .fill(.clear)
-                        .frame(height: 30)
+                        .frame(height: 40)
                 }
                 .padding(.horizontal)
             }
