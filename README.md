@@ -28,6 +28,15 @@
 - iOS 15.0+
 - Xcode 13.0+
 
+# Tester Build
+Build Architecture에 따른 Static Library Binary File이 다르기 때문에 빌드 환경에 맞는 브랜치를 통해 테스트 빌드가 가능합니다.
+
+## Device Branch
+실제 기기에 빌드할 때  사용하는 브랜치입니다.
+
+## Simulator Branch
+시뮬레이터를 통해 빌드할 때  사용하는 브랜치입니다.
+
 # Dependency
 <table width=100%>
     <thead>
