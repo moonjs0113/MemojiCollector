@@ -2,8 +2,6 @@
     <img style="height:50px; vertical-align:middle; border-radius:10px;" src="readmeSource/AppIcon.png"/> Memoji Collector
 </h1>
 
-2022.05.06 ~ 2022.05.06
-
 [![Swift Version][swift-image]](https://swift.org/)
 [![Platform][Platform-image]](https://developer.apple.com/kr/ios/)
 ![Version][Version-image]
@@ -55,24 +53,62 @@ MemojiCollector
 ├── App
 │   ├── AppDelegate.swift
 │   ├── AppStorageKey.swift
+│   ├── Launch Screen.storyboard
 │   └── MemojiCollectorApp.swift
+├── Delegate
+│   └── MemojiTextViewDelegate.swift
 ├── Extension
-│   └── App+Extension.swift
+│   ├── IntroView+Extension.swift
+│   ├── NSTextAttachment+Extension.swift
+│   ├── String+Extension.swift
+│   └── UITextView+Extension.swift
 ├── Manager
 │   └── JsonManager.swift
 ├── Model
 │   └── MemojiCardModel.swift
 ├── View
+│   ├── CardDetail
+│   │   ├── MemojiDetailView.swift
+│   │   └── SelectGroupView.swift
 │   ├── CardView
-│   ├── ContentView.swift
-│   ├── GridCardView.swift
-│   ├── MemojiDetailView.swift
-│   └── MyMemoji
+│   │   ├── DeletedCardView.swift
+│   │   ├── EmptyCardView.swift
+│   │   ├── MakeCardView.swift
+│   │   ├── MemojiCardView.swift
+│   │   └── TempMemojiCardView.swift
+│   ├── Main
+│   │   ├── FilterGroupView.swift
+│   │   ├── GridCardView.swift
+│   │   ├── GuideView.swift
+│   │   ├── IntroView.swift
+│   │   └── MainView.swift
+│   ├── MyMemoji
+│   │   ├── ActivityViewController.swift
+│   │   ├── MakeMemojiCardView.swift
+│   │   ├── MyMemojiView.swift
+│   │   ├── QRCodeView.swift
+│   │   └── RegisterUserView.swift
+│   └── Setting
+│       ├── ChangeNameView.swift
+│       ├── GroupView.swift
+│       ├── Password
+│       │   ├── LockView.swift
+│       │   ├── PasswordView_.swift
+│       │   └── SetPasswordView.swift
+│       ├── ResetView.swift
+│       └── SettingView.swift
 └── ViewModel
-    ├── MakeMemojiViewModel.swift
+    ├── CardDetailViewModel
+    │   └── MemojiDetaillViewModel.swift
+    ├── MainViewModel.swift
     ├── MemojiCardViewModel.swift
-    ├── MemojiDetaillViewModel.swift
-    └── MyMemojiViewModel.swift
+    ├── MyMemojiViewModel
+    │   ├── MakeMemojiViewModel.swift
+    │   └── MyMemojiViewModel.swift
+    ├── PasswordViewModel.swift
+    └── SettingViewModel
+        ├── GroupViewModel.swift
+        └── SettingViewModel.swift
 ```
 
 # API
