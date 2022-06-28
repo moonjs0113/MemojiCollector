@@ -17,7 +17,7 @@ struct MemojiTextView: UIViewRepresentable {
         textView.textAlignment = .center
         textView.backgroundColor = .clear
         textView.returnKeyType = .done
-        textView.text = "\n이곳을 눌러 미모지 스티커를 입력하세요.\n미모지 스티커는 이모티콘 키보드의 가장 왼쪽에 있습니다.\n미모지 스티커가 보이지 않는다면, 활성화 버튼을 누르세요!"
+        textView.text = "\n이곳을 눌러 미모티콘 스티커를 입력하세요.\n스티커는 이모티콘 키보드의 가장 왼쪽에 있습니다."
         textView.delegate = context.coordinator
         textView.centerVerticalText()
         return textView

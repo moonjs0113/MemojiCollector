@@ -31,7 +31,7 @@ struct MakeMemojiCardView: View {
         ScrollView {
             VStack(spacing: 25) {
                 VStack {
-                    Text("1개의 미모지 스티커만 입력가능합니다.")
+                    Text("1개의 미모티콘 스티커만 입력가능합니다.")
                         .font(.caption)
                     MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji,
                                    isSelecteImage: self.$viewModel.isSelecteImage)
@@ -46,13 +46,18 @@ struct MakeMemojiCardView: View {
                         }
                         .focused(self.$focusedField)
                         .padding(.horizontal, 50)
-                    Button {
-                        if let url = URL(string: "App-prefs:General&path=Keyboard") {
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    
+                    VStack {
+                        Text("\(Image(systemName: "exclamationmark.circle")) 미모티콘 스티커가 보이지 않는다면?")
+                            .font(.caption2)
+                        Button {
+                            if let url = URL(string: "App-prefs:General&path=Keyboard") {
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                            }
+                        } label: {
+                            Text("설정에서 활성화하기")
+                                .font(.caption)
                         }
-                    } label: {
-                        Text("미모지콘 스티커 활성화하기")
-                            .font(.subheadline)
                     }
                 }
                 .padding(.top, 50)
