@@ -52,6 +52,7 @@ struct ChangeNameView: View {
             Text("\(Image(systemName: "exclamationmark.circle")) 닉네임 변경 시, 나의 미모지 카드와 공유한 미모지 카드 모두 삭제됩니다.")
                 .font(.caption)
                 .foregroundColor(.red)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
             

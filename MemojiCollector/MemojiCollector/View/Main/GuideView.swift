@@ -29,24 +29,28 @@ struct GuideView: View {
     var body: some View {
         TabView {
             ForEach(0..<3, id: \.self) { index in
-                VStack(alignment: .center, spacing: 15) {
-                    Image("Onboarding\(index)")
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.top, 30)
-                    
-                    Text(self.guideTitle[index])
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                    
-                    Text(self.guideContent[index])
-                        .multilineTextAlignment(.center)
-                    
+                VStack(spacing: 30) {
+                    VStack(alignment: .center, spacing: 50) {
+                        Image("Onboarding\(index)")
+                            .resizable()
+                            .scaledToFit()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.top, 30)
+                        
+                        VStack(spacing: 12) {
+                            Text(self.guideTitle[index])
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                            
+                            Text(self.guideContent[index])
+                                .font(.callout)
+                                .multilineTextAlignment(.center)
+                        }
+                    }
                     Rectangle()
                         .fill(.clear)
-                        .frame(height: 40)
+                        .frame(height: 30)
                 }
                 .padding(.horizontal)
             }
