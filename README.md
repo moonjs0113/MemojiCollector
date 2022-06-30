@@ -13,8 +13,8 @@
 
 <center>
 
-| <div style="height:500px"> ![AppStoreImage](readmeSource/AppImage_0.PNG)</div> | <div style="height:500px"> ![AppStoreImage](readmeSource/AppImage_1.PNG) </div> | 
-| - | - |   
+| <div style="height:500px"> ![AppStoreImage](readmeSource/AppImage_0.PNG)</div> | <div style="height:500px"> ![AppStoreImage](readmeSource/AppImage_1.PNG) </div> | <div style="height:500px"> ![AppStoreImage](readmeSource/AppImage_2.PNG) </div> |
+| - | - | - |
 
 </center>
 
