@@ -8,7 +8,7 @@
 
 [swift-image]:https://img.shields.io/badge/swift-5.6-orange.svg?style=flat
 [Platform-image]: https://img.shields.io/badge/Platform-ios-lightgray.svg?style=flat
-[Version-image]: https://img.shields.io/badge/Version-1.0-blue.svg?style=flat
+[Version-image]: https://img.shields.io/badge/Version-2.0-blue.svg?style=flat
 
 
 <center>
