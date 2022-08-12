@@ -1,0 +1,189 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target x86_64-apple-ios15.4-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MemojiCollectorStaticFramework
+import CryptoKit
+import Foundation
+@_exported import MemojiCollectorStaticFramework
+import Swift
+import SwiftUI
+import _Concurrency
+public struct PasswordView : SwiftUI.View {
+  @SwiftUI.AppStorage @_projectedValueProperty($password) public var password: Swift.String {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $password: SwiftUI.Binding<Swift.String> {
+    get
+  }
+  @SwiftUI.State @_projectedValueProperty($isLock) public var isLock: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $isLock: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  @SwiftUI.State @_projectedValueProperty($showSetPasswordView) public var showSetPasswordView: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $showSetPasswordView: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  public init()
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s30MemojiCollectorStaticFramework12PasswordViewV4bodyQrvp", 0) __
+}
+public struct LockView : SwiftUI.View {
+  @SwiftUI.Binding @_projectedValueProperty($isLock) public var isLock: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $isLock: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  @SwiftUI.State @_projectedValueProperty($passwordText) public var passwordText: Swift.String {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $passwordText: SwiftUI.Binding<Swift.String> {
+    get
+  }
+  @SwiftUI.State @_projectedValueProperty($showAlert) public var showAlert: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $showAlert: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  @SwiftUI.AppStorage @_projectedValueProperty($sha256) public var sha256: Swift.String {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $sha256: SwiftUI.Binding<Swift.String> {
+    get
+  }
+  @SwiftUI.Environment public var dismiss: SwiftUI.DismissAction {
+    get
+  }
+  public init(isLock: SwiftUI.Binding<Swift.Bool>)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s30MemojiCollectorStaticFramework8LockViewV4bodyQrvp", 0) __
+}
+open class PasswordViewModel : Foundation.ObservableObject {
+  @Combine.Published @_projectedValueProperty($passwordString) public var passwordString: Swift.String {
+    get
+    set
+    _modify
+  }
+  public var $passwordString: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($passwordCheckString) public var passwordCheckString: Swift.String {
+    get
+    set
+    _modify
+  }
+  public var $passwordCheckString: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($readNotice) public var readNotice: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  public var $readNotice: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($guideText) public var guideText: Swift.String {
+    get
+    set
+    _modify
+  }
+  public var $guideText: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isComplete) public var isComplete: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  public var $isComplete: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init()
+  public func checkComplete()
+  public func savePassword()
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@_Concurrency.MainActor(unsafe) public struct SetPasswordView : SwiftUI.View {
+  @SwiftUI.StateObject @_projectedValueProperty($viewModel) @_Concurrency.MainActor(unsafe) public var viewModel: MemojiCollectorStaticFramework.PasswordViewModel {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var $viewModel: SwiftUI.ObservedObject<MemojiCollectorStaticFramework.PasswordViewModel>.Wrapper {
+    get
+  }
+  @SwiftUI.Binding @_projectedValueProperty($isLock) @_Concurrency.MainActor(unsafe) public var isLock: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  @_Concurrency.MainActor(unsafe) public var $isLock: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  @SwiftUI.State @_projectedValueProperty($showAlert) @_Concurrency.MainActor(unsafe) public var showAlert: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  @_Concurrency.MainActor(unsafe) public var $showAlert: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  @SwiftUI.Environment @_Concurrency.MainActor(unsafe) public var dismiss: SwiftUI.DismissAction {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public init(isLock: SwiftUI.Binding<Swift.Bool>)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s30MemojiCollectorStaticFramework15SetPasswordViewV4bodyQrvp", 0) __
+}
+public enum AppStorageKey : Swift.String {
+  case appleToken, token, saveCount, password
+  case isUserNameRegister, hideLoginGuide, firstGuide
+  case userName
+  case cardList
+  case updateAlert
+  public var string: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension MemojiCollectorStaticFramework.AppStorageKey : Swift.Equatable {}
+extension MemojiCollectorStaticFramework.AppStorageKey : Swift.Hashable {}
+extension MemojiCollectorStaticFramework.AppStorageKey : Swift.RawRepresentable {}

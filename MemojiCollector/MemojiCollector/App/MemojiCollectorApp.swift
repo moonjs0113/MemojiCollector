@@ -16,7 +16,7 @@ struct MemojiCollectorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            IntroView(isLock: (self.userPW != ""))
+            IntroView(isLock: (userPW != ""))
         }
     }
 }

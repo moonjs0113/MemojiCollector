@@ -1,0 +1,11 @@
+framework module MemojiCollectorStaticFramework {
+  umbrella header "MemojiCollectorStaticFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module MemojiCollectorStaticFramework.Swift {
+    header "MemojiCollectorStaticFramework-Swift.h"
+    requires objc
+}

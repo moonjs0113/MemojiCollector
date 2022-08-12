@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+//import MemojiCollectorStaticFramework
 
 struct IntroView: View {
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()

@@ -22,8 +22,6 @@ struct MemojiDetailView: View {
     @FocusState var isFocus: Bool
     @Environment(\.dismiss) var dismiss
     
-    
-    
     var cardView: some View {
         VStack{
             VStack(alignment: .leading) {

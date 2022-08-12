@@ -31,4 +31,5 @@ struct MemojiCard: Codable, Hashable {
     var urlScheme: URL? {
         return URL(string: self.urlString)
     }
+    
 }
