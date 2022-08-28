@@ -11,15 +11,6 @@ import SwiftUI
 struct MainView: View {
     @StateObject private var viewModel: MainViewModel = MainViewModel()
     
-    @ViewBuilder
-    func goToMyMemojiView() -> some View{
-        if self.viewModel.isUserNameRegister {
-            RegisterUserView(isShowMyPage: self.$viewModel.isShowMyPage)
-        } else {
-            MyMemojiView()
-        }
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -94,6 +85,17 @@ struct MainView: View {
             .navigationTitle("Memoji Collector")
             .navigationBarTitleDisplayMode(.large)
             .searchable(text: self.$viewModel.searchText, placement: .automatic)
+        }
+    }
+}
+
+extension MainView {
+    @ViewBuilder
+    func goToMyMemojiView() -> some View{
+        if let _ = UserDefaultManager.userID {
+            MyMemojiView()
+        } else {
+            RegisterUserView(isShowMyPage: self.$viewModel.isShowMyPage)
         }
     }
 }

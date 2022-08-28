@@ -14,15 +14,19 @@ class MakeMemojiViewModel: ObservableObject {
     @AppStorage(AppStorageKey.saveCount.string) var saveCount: Int = 0
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
     @AppStorage(AppStorageKey.token.string) var token: String = ""
+    @AppStorage("LEFT_CARD_ID") var leftCardID = ""
+    @AppStorage("RIGHT_CARD_ID") var rightCardID = ""
+    @AppStorage("USER_ID") private var userID: String = ""
     
     // MARK: - Published
     @Published var selectedMemoji: UIImage = UIImage()
     @Published var isSelecteImage: Bool = false
-    @Published var korean: String = "#"
-    @Published var english: String = "#"
+    @Published var firstString: String = "#"
+    @Published var secondString: String = "#"
     
     @Published var isComplete: Bool = false
     
+    /// true: 왼쪽, right: 오른쪽
     var isFirst: Bool = false
     
     func createMemojiModel() -> MemojiCard{
@@ -30,17 +34,17 @@ class MakeMemojiViewModel: ObservableObject {
                                     isFirst: self.isFirst,
                                     isMyCard: true,
                                     imageData: self.selectedMemoji.pngData() ?? Data(),
-                                    kor: self.korean.replacingOccurrences(of: " ", with: "_"),
-                                    eng: self.english.replacingOccurrences(of: " ", with: "_"),
+                                    kor: self.firstString.replacingOccurrences(of: " ", with: "_"),
+                                    eng: self.secondString.replacingOccurrences(of: " ", with: "_"),
                                     saveCount: self.saveCount,
                                     token: self.token)
         return memojiCard
     }
     
     func saveData(memojiCard: MemojiCard, completeHandler: @escaping () -> ()) {
-        var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
+        var memojiList = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         memojiList.append(memojiCard)
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
         self.saveImageToStorage(memojiModel: memojiCard) { snapshot in
             let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
             if percentComplete == 1.0 {
@@ -48,30 +52,95 @@ class MakeMemojiViewModel: ObservableObject {
                 completeHandler()
             }
         }
+        
+        
+        let requestDTO = RequestDTO(userName: userName, firstString: firstString, secondString: secondString, isRight: isFirst)
+        
+        NetworkService.requestCreateCard(requestDTO: requestDTO) { [weak self] result in
+            switch result {
+            case .success(let cardDTO):
+                if self?.isFirst ?? true {
+                    self?.leftCardID = cardDTO.id?.uuidString ?? ""
+                } else {
+                    self?.rightCardID = cardDTO.id?.uuidString ?? ""
+                }
+            case .failure(let error):
+                debugPrint(error)
+            }
+            completeHandler()
+        }
+    }
+    
+    func registerCardID(completeHandler: @escaping (NetworkError?) -> ()) {
+        let requestDTO = RequestDTO(userID: UUID(uuidString: userID),
+                                    userName: userName,
+                                    firstString: firstString,
+                                    secondString: secondString,
+                                    isRight: isFirst)
+        
+        NetworkService.requestCreateCard(requestDTO: requestDTO) { [weak self] result in
+            switch result {
+            case .success(let cardDTO):
+                guard let cardID = cardDTO.id else {
+                    completeHandler(.nilResponse)
+                    return
+                }
+                self?.uploadCardImage(cardID: cardID) { snapshot in
+                    let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                    if percentComplete == 1.0 {
+                        self?.fetchCardID(cardID: cardID)
+                        completeHandler(nil)
+                    }
+                }
+                return
+            case .failure(let error):
+                debugPrint(error)
+            }
+            completeHandler(.nilResponse)
+        }
+    }
+    
+    func fetchCardID(cardID: UUID) {
+        if isFirst {
+            leftCardID = cardID.uuidString
+        } else {
+            rightCardID = cardID.uuidString
+        }
+    }
+    
+    func uploadCardImage(cardID: UUID, progressHandler: @escaping (StorageTaskSnapshot) -> Void) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child(cardID.uuidString)
+        let metaDataDictionary: [String : Any] = [ "contentType" : "image/png" ]
+        
+        let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
+//        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
+        let uploadTask = storageRef.putData(selectedMemoji.pngData() ?? Data(), metadata: storageMetadata)
+        uploadTask.observe(.progress, handler: progressHandler)
     }
     
     func isEnableRegister() -> Bool {
-        return (self.korean.count > 1 && self.english.count > 1 && self.isSelecteImage)
+        return (self.firstString.count > 1 && self.secondString.count > 1 && self.isSelecteImage)
     }
     
     func firstTextCheck(newValue: String) {
         if newValue.count == 0 {
-            self.korean = "#"
+            self.firstString = "#"
         } else if newValue.count > 21 {
-            self.korean = String(Array(newValue)[0..<21])
+            self.firstString = String(Array(newValue)[0..<21])
         }
     }
     
     func secondTextCheck(newValue: String) {
         if newValue.count == 0 {
-            self.english = "#"
+            self.secondString = "#"
         } else if newValue.count > 21 {
-            self.english = String(Array(newValue)[0..<21])
+            self.secondString = String(Array(newValue)[0..<21])
         }
     }
     
     func isEmptySomeData() -> Bool{
-        return self.english.count < 2 || self.korean.count < 2 || !self.isSelecteImage
+        return self.secondString.count < 2 || self.firstString.count < 2 || !self.isSelecteImage
     }
     
     func saveImageToStorage(memojiModel: MemojiCard, progressHandler: @escaping (StorageTaskSnapshot) -> Void) {

@@ -51,12 +51,12 @@ extension IntroView {
     }
     
     func saveData(receiveMemojiCard: MemojiCard) {
-        var memojiList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
+        var memojiList = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         let memojiCard = receiveMemojiCard
         if memojiList.filter({ $0.urlString == memojiCard.urlString }).isEmpty {
             memojiList.append(memojiCard)
         }
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
     }
     
 }

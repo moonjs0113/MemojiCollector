@@ -27,7 +27,7 @@ struct SettingView: View {
                     }
                     .sheet(isPresented: self.$viewModel.showUnlockView) { LockView(isLock: self.$viewModel.goToPasswordView) }
                 }
-                if !self.viewModel.isUserNameRegister {
+                if let _ = UserDefaultManager.userName {
                     NavigationLink("닉네임 변경", destination: ChangeNameView())
                 }
             }
@@ -42,8 +42,20 @@ struct SettingView: View {
                             isPresented: self.$viewModel.showResetConfirmationDialog,
                             titleVisibility: .visible) {
             Button("초기화", role: .destructive) {
-                self.viewModel.removeMyMemojiCard()
-                self.dismiss()
+                guard let userID = UserDefaultManager.userID else {
+                    return
+                }
+                NetworkService.requestDeleteUser(userID: userID) { response in
+                    DispatchQueue.main.async {
+                        switch response {
+                        case .success(_):
+                            self.viewModel.initMemojiCollecter()
+                        case .failure(let error):
+                            print(error)
+                        }
+                        self.dismiss()
+                    }
+                }
             }
             Button("취소", role: .cancel) {
                 

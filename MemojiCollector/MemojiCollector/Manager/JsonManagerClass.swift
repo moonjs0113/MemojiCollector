@@ -7,8 +7,8 @@
 
 import Foundation
 
-class JsonManager {
-    public static var shared: JsonManager = JsonManager()
+class JsonManagerClass {
+    public static var shared: JsonManagerClass = JsonManagerClass()
     
     func jsonDecoder(decodingData: Data) -> [MemojiCard] {
         let decoder = JSONDecoder()
@@ -62,5 +62,25 @@ class JsonManager {
         } else {
             return Data()
         }
+    }
+}
+
+enum JsonManager {
+    static func jsonDecoder<D: Decodable>(decodingData: Data) throws -> D? {
+        let decoder = JSONDecoder()
+        guard let decodeObject = try? decoder.decode(D.self, from: decodingData) else {
+//            throw NetworkError.errorDecodingJson
+            return nil
+        }
+        return decodeObject
+    }
+    
+    static func jsonEncoder<D: Encodable>(ecodingData: D) throws -> Data? {
+        let encoder = JSONEncoder()
+        guard let encodeData = try? encoder.encode(ecodingData) else {
+//            throw NetworkError.errorEncodingJson
+            return nil
+        }
+        return encodeData
     }
 }

@@ -16,11 +16,11 @@ class MemojiDetaillViewModel: ObservableObject {
     var memojiCard: MemojiCard = MemojiCard(token: "")
 
     func deleteMemojiCard( completeHandler: @escaping () -> ()) {
-        var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
+        var memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         memojiList.removeAll{
             $0.urlString == self.memojiCard.urlString
         }
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
         
         if self.memojiCard.isMyCard {
             self.removeImageToStorage(memojiModel: self.memojiCard)
@@ -36,16 +36,16 @@ class MemojiDetaillViewModel: ObservableObject {
     }
     
     func editMemojiDescription() {
-        var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
+        var memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         if let index = memojiList.map({ $0.urlString }).firstIndex(of: self.memojiCard.urlString) {
             print("Change Memoji Card")
             memojiList[index] = self.memojiCard
         }
-        self.cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
     }
     
     func loadMemojiCard(memojiCard: MemojiCard) {
-        let memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList)
+        let memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         memojiList.forEach {
             if $0.urlString == memojiCard.urlString {
                 self.memojiCard = $0

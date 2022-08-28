@@ -2,36 +2,42 @@
 //  MemojiCardView.swift
 //  MemojiCollector
 //
-//  Created by Moon Jongseek on 2022/08/13.
+//  Created by Moon Jongseek on 2022/04/27.
 //
 
 import SwiftUI
+import Firebase
 
-struct MemojiCardView: View {
+struct MemojiCardViewLocalData: View {
+    @StateObject var viewModel: MemojiCardViewLocalDataModel = MemojiCardViewLocalDataModel()
     
-    let cardID: String
-    @State private var isCompleteLoad: Bool = false
-    @StateObject var viewModel: MemojiCardViewModel = MemojiCardViewModel()
+    let textColor = Color.black
     
-    init(cardID: String) {
-        self.cardID = cardID
+    var memojiCard: MemojiCard
+    var preImageData: Data = Data()
+    
+    init(memojiCard: MemojiCard, preImageData: Data = Data()) {
+        self.memojiCard = memojiCard
+        self.preImageData = preImageData
     }
     
     var body: some View {
         VStack {
-            if isCompleteLoad {
-                NavigationLink(destination: MemojiDetailView(memojiCard: viewModel.memojiCard)) {
+            if self.viewModel.isEmptyImage {
+                DeletedCardView(memojiCard: self.viewModel.memojiCard)
+            } else {
+                NavigationLink(destination: MemojiDetailView(memojiCard: self.viewModel.memojiCard ?? MemojiCard(token: ""))) {
                     VStack(alignment: .leading) {
-                        Text("\(viewModel.memojiCard.kor)\n\(viewModel.memojiCard.eng)")
+                        Text("\(self.viewModel.memojiCard?.kor ?? "")\n\(self.viewModel.memojiCard?.eng ?? "")")
                             .lineLimit(2)
                             .font(.system(.caption, design: .rounded))
                             .minimumScaleFactor(0.01)
                             .multilineTextAlignment(.leading)
                             .frame(alignment: .leading)
-                            .foregroundColor(.black)
+                            .foregroundColor(self.textColor)
                             .padding(.horizontal, 10)
                         Spacer()
-
+                        
                         VStack(alignment: .center) {
                             if self.viewModel.imageData.count == 0  {
                                 ProgressView(.init())
@@ -46,15 +52,15 @@ struct MemojiCardView: View {
                                     .clipped()
                                     .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
                             }
-
-                            Text(viewModel.memojiCard.name)
+                            
+                            Text(self.viewModel.memojiCard?.name ?? "")
                                 .font(.system(.title, design: .rounded))
                                 .fontWeight(.bold)
                                 .lineLimit(1)
-                                .foregroundColor(.black)
-                            if !(viewModel.memojiCard.isMyCard) {
+                                .foregroundColor(self.textColor)
+                            if !(self.viewModel.memojiCard?.isMyCard ?? false) {
                                 VStack(alignment: .center) {
-                                    Text(viewModel.memojiCard.subTitle)
+                                    Text(self.viewModel.memojiCard?.subTitle ?? "")
                                         .frame(alignment: .center)
                                         .font(.system(.caption2, design: .rounded))
                                         .lineLimit(1)
@@ -66,11 +72,7 @@ struct MemojiCardView: View {
                     .padding()
                     .padding(.top, 10)
                 }
-                .disabled(viewModel.imageData.count == 0)
-
-            } else {
-                ProgressView()
-                    .progressViewStyle(.circular)
+                .disabled(self.viewModel.imageData.count == 0)
             }
         }
         .frame(minWidth: 10, maxWidth: .infinity, minHeight: 10, maxHeight: .infinity)
@@ -81,15 +83,15 @@ struct MemojiCardView: View {
                 .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 1)
         }
         .onAppear{
-            viewModel.loadData(cardID: cardID) {
-                isCompleteLoad = true
-            }
+            self.viewModel.memojiCard = self.memojiCard
+            self.viewModel.imageData = self.preImageData
+            self.viewModel.syncImageData()
         }
     }
 }
 
-struct MemojiCardView_Previews: PreviewProvider {
+struct MemojiCardViewLocalData_Previews: PreviewProvider {
     static var previews: some View {
-        MemojiCardView(cardID: "")
+        MemojiCardViewLocalData(memojiCard: MemojiCard(token: ""))
     }
 }

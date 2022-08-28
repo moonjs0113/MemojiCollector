@@ -8,7 +8,6 @@
 import SwiftUI
 
 class MainViewModel: ObservableObject {
-    @AppStorage(AppStorageKey.isUserNameRegister.string) var isUserNameRegister: Bool = true
     @AppStorage(AppStorageKey.firstGuide.string) var firstGuide: Bool = true
     
     @Published var searchText = ""

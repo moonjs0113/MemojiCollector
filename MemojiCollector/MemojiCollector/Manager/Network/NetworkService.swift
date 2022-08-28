@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 typealias NetworkClosure = (Result<Data, NetworkError>) -> Void
+typealias GenericClosure<D: Codable> = (Result<D, NetworkError>) -> Void
 
 enum NetworkService {
     static let baseURL = "http://ec2-107-21-154-253.compute-1.amazonaws.com/"
-    static let manager = NetworkManager(baseURL: baseURL)
+    static private let manager = NetworkManager(baseURL: baseURL)
 }
 
 /*
@@ -62,18 +64,28 @@ extension NetworkService {
         }
     }
     
-    static func requestCreateCard(requestDTO: RequestDTO, completeHandler: @escaping NetworkClosure) {
+    static func requestCreateCard(requestDTO: RequestDTO, completeHandler: @escaping GenericClosure<CardDTO>) {
         
         guard let bodyData = try? JSONEncoder().encode(requestDTO) else {
             completeHandler(.failure(.errorEncodingJson))
             return
         }
         
-        manager.requestPOST(route: Card.base.route, bodyData: bodyData, completeHandler: completeHandler)
+        manager.requestPOST(route: Card.base.route, bodyData: bodyData) { result in
+            switch result {
+            case .success(let data):
+                guard let cardDTO: CardDTO = try? JsonManager.jsonDecoder(decodingData: data) else {
+                    completeHandler(.failure(.errorDecodingJson))
+                    return
+                }
+                completeHandler(.success(cardDTO))
+            case .failure(let error):
+                completeHandler(.failure(error))
+            }
+        }
     }
     
     static func requestDeleteCard(requestDTO: RequestDTO, completeHandler: @escaping NetworkClosure) {
-        
         guard let bodyData = try? JSONEncoder().encode(requestDTO) else {
             completeHandler(.failure(.errorEncodingJson))
             return
@@ -82,11 +94,59 @@ extension NetworkService {
         manager.requestDELETE(route: Card.base.route, bodyData: bodyData, completeHandler: completeHandler)
     }
     
-    static func requestCardData(cardID: String, completeHandler: @escaping NetworkClosure) {
-        manager.requestGET(route: Card.parameter(cardID).route, completeHandler: completeHandler)
+    static func requestCardData(cardID: String, completeHandler: @escaping GenericClosure<CardDTO>) {
+        manager.requestGET(route: Card.parameter(cardID).route) { result in
+            switch result {
+            case .success(let data):
+                guard let cardDTO: CardDTO = try? JsonManager.jsonDecoder(decodingData: data) else {
+                    completeHandler(.failure(.errorDecodingJson))
+                    return
+                }
+                completeHandler(.success(cardDTO))
+            case .failure(let error):
+                completeHandler(.failure(error))
+            }
+        }
     }
 
-//    enum ModelRoute: String, RouteProtocol {
+    
+    // TODO: - 닉네임 저장 로직
+    static func requestCreateUserID(userName: String, completeHandler: @escaping GenericClosure<UserDTO>) {
+        guard let routeString = User.create(userName).route.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            completeHandler(.failure(.invalidURL))
+            return
+        }
+        
+        manager.requestGET(route: routeString) { result in
+            switch result {
+            case .success(let data):
+                guard let userDTO: UserDTO = try? JsonManager.jsonDecoder(decodingData: data) else {
+                    completeHandler(.failure(.errorDecodingJson))
+                    return
+                }
+                completeHandler(.success(userDTO))
+            case .failure(let error):
+                completeHandler(.failure(error))
+            }
+        }
+    }
+    
+    static func requestDeleteUser(userID: String, completeHandler: @escaping NetworkClosure) {
+        let routeString = User.parameter(userID).route
+        manager.requestDELETE(route: routeString, completeHandler: completeHandler)
+    }
+    
+    static func requestUpdateUserName(userName: String, completeHandler: @escaping  NetworkClosure) {
+        @AppStorage("USER_ID") var userID = ""
+        let userDTO = UserDTO.init(id: UUID(uuidString: userID) ?? UUID(), userName: userName, sharedCardIDs: [])
+        guard let bodyData = try? JSONEncoder().encode(userDTO) else {
+            completeHandler(.failure(.errorEncodingJson))
+            return
+        }
+        
+        manager.requestPATCH(route: User.base.route, bodyData: bodyData, completeHandler: completeHandler)
+    }
+    //    enum ModelRoute: String, RouteProtocol {
 //        var stringValue: String {
 //            self.rawValue
 //        }

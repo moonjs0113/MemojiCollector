@@ -14,22 +14,35 @@ struct ChangeNameView: View {
     @State private var showAlert = false
     @Environment(\.dismiss) var dismiss
     
-    func removeMyMemojiCard() {
-        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-        let memojiCardList = JsonManager.shared.jsonDecoder(decodingData: cardInfoList).filter {
-            if $0.isMyCard {
-                self.removeImageToStorage(memojiModel: $0)
-                return false
-            } else {
-                return true
-            }
+    //    func removeMyMemojiCard() {
+    //        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
+    //        let memojiCardList = JsonManagerClass.shared.jsonDecoder(decodingData: cardInfoList).filter {
+    //            if $0.isMyCard {
+    //                self.removeImageToStorage(memojiModel: $0)
+    //                return false
+    //            } else {
+    //                return true
+    //            }
+    //        }
+    //        cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiCardList)
+    //    }
+    
+    func removeCardData() {
+        UserDefaultManager.userName = newUserName
+        if let rightCardID = UserDefaultManager.rightCardID {
+            removeImageFromStorage(imageName: rightCardID)
+            UserDefaultManager.rightCardID = nil
         }
-        cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiCardList)
+        if let leftCardID = UserDefaultManager.leftCardID {
+            removeImageFromStorage(imageName: leftCardID)
+            UserDefaultManager.leftCardID = nil
+        }
+        
     }
     
-    func removeImageToStorage(memojiModel: MemojiCard) {
+    func removeImageFromStorage(imageName: String) {
         let storage = Storage.storage()
-        let storageRef = storage.reference().child(memojiModel.imageName)
+        let storageRef = storage.reference().child(imageName)
         storageRef.delete()
     }
     
@@ -74,9 +87,18 @@ struct ChangeNameView: View {
                     self.dismiss()
                 }
                 Button("Yes", role: .none){
-                    self.removeMyMemojiCard()
-                    self.userName = self.newUserName
-                    self.dismiss()
+                    //                    self.removeMyMemojiCard()
+                    NetworkService.requestUpdateUserName(userName: newUserName) { response in
+                        DispatchQueue.main.async {
+                            switch response {
+                            case .success(_):
+                                self.removeCardData()
+                            case .failure(let error):
+                                print(error)
+                            }
+                            self.dismiss()
+                        }
+                    }
                 }
             }
             .disabled(self.newUserName == "")

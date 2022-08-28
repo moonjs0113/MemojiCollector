@@ -13,11 +13,11 @@ struct DeletedCardView: View {
     
     func deleteMemojiCard() {
         @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-        var memojiList: [MemojiCard] = JsonManager.shared.jsonDecoder(decodingData: cardInfoList)
+        var memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: cardInfoList)
         memojiList.removeAll{
             $0.urlString == (self.memojiCard?.urlString ?? "")
         }
-        cardInfoList = JsonManager.shared.jsonEncoder(ecodingData: memojiList)
+        cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
     }
     
     var body: some View {

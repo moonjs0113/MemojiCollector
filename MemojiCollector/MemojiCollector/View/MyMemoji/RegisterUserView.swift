@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RegisterUserView: View {
-    @AppStorage(AppStorageKey.userName.string) private var userName = ""
-    @AppStorage(AppStorageKey.isUserNameRegister.string) private var isUserNameRegister: Bool = true
+//    @AppStorage(AppStorageKey.userName.string) private var userName = ""
     @State private var newUserName = ""
     
     @Environment(\.dismiss) var dismiss
@@ -63,9 +62,18 @@ struct RegisterUserView: View {
             .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
-                    self.userName = self.newUserName
-                    self.isUserNameRegister = false
-                    self.dismiss()
+//                    self.userName = self.newUserName
+//                    self.isUserNameRegister = false
+                    NetworkService.requestCreateUserID(userName: newUserName) { result in
+                        switch result {
+                        case .success(let userDTO):
+                            UserDefaultManager.userID = userDTO.id?.uuidString
+                            UserDefaultManager.userName = userDTO.userName
+                        case .failure(let error):
+                            debugPrint(error)
+                        }
+                        self.dismiss()
+                    }
                 }
             } message: {
                 Text("닉네임: \(self.newUserName)")
@@ -73,7 +81,7 @@ struct RegisterUserView: View {
         }
         .padding()
         .onDisappear {
-            if self.isUserNameRegister == false {
+            if let _ = UserDefaultManager.userID {
                 self.isShowMyPage = true
             }
         }

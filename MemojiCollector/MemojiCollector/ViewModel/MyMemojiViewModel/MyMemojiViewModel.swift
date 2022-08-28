@@ -9,40 +9,23 @@ import SwiftUI
 
 class MyMemojiViewModel: ObservableObject {
     @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
+    @AppStorage("LEFT_CARD_ID") var leftCardID = ""
+    @AppStorage("RIGHT_CARD_ID") var rightCardID = ""
     
-    @Published private var firstMemojiCard: MemojiCard?
-    @Published private var SecondMemojiCard: MemojiCard?
-    
-    @ViewBuilder
-    func goToMemojiView(memojiCard: MemojiCard?, isFirst: Bool) -> some View {
-        if let memojiCard = memojiCard {
-            MemojiCardView(memojiCard: memojiCard, preImageData: memojiCard.imageData)
-        } else {
-            NavigationLink(destination: MakeMemojiCardView(isFirst: isFirst)) {
-                MakeCardView()
-            }
-        }
-    }
-    
-    @ViewBuilder
-    func setMyMemojiCard() -> some View {
-        HStack {
-            self.goToMemojiView(memojiCard: self.firstMemojiCard, isFirst: true)
-            self.goToMemojiView(memojiCard: self.SecondMemojiCard, isFirst: false)
-        }
-    }
+    @Published var firstMemojiCard: MemojiCard?
+    @Published var secondMemojiCard: MemojiCard?
     
     func findMemojiCard() {
-        let memojiCardList = JsonManager.shared.jsonDecoder(decodingData: self.cardInfoList).filter {
+        let memojiCardList = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList).filter {
             $0.isMyCard
         }
         self.firstMemojiCard = nil
-        self.SecondMemojiCard = nil
+        self.secondMemojiCard = nil
         for memojiCard in memojiCardList{
             if memojiCard.isFirst {
                 self.firstMemojiCard = memojiCard
             } else {
-                self.SecondMemojiCard = memojiCard
+                self.secondMemojiCard = memojiCard
             }
         }
     }

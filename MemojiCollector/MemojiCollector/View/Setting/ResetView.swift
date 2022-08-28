@@ -13,27 +13,43 @@ struct ResetView: View {
     @State private var readNotice = false
     @Environment(\.dismiss) var dismiss
     
-    func removeMyMemojiCard() {
-        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-        @AppStorage(AppStorageKey.userName.string) var userName = ""
-        @AppStorage(AppStorageKey.isUserNameRegister.string) var isUserNameRegister: Bool = true
-        
-        let _ = JsonManager.shared.jsonDecoder(decodingData: cardInfoList).filter {
-            if $0.isMyCard {
-                self.removeImageToStorage(memojiModel: $0)
-                return false
-            } else {
-                return true
-            }
+//    func removeMyMemojiCard() {
+//        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
+//        @AppStorage(AppStorageKey.userName.string) var userName = ""
+//        @AppStorage(AppStorageKey.isUserNameRegister.string) var isUserNameRegister: Bool = true
+//        @AppStorage("USER_ID") var userID: String = ""
+//
+//        let _ = JsonManagerClass.shared.jsonDecoder(decodingData: cardInfoList).filter {
+//            if $0.isMyCard {
+//                self.removeImageToStorage(memojiModel: $0)
+//                return false
+//            } else {
+//                return true
+//            }
+//        }
+//        cardInfoList = Data()
+//        userName = ""
+//        isUserNameRegister = true
+//        userID = ""
+//    }
+    
+    func initMemojiCollecter() {
+        UserDefaultManager.userID = nil
+        UserDefaultManager.userName = nil
+        if let rightCardID = UserDefaultManager.rightCardID {
+            removeImageFromStorage(imageName: rightCardID)
+            UserDefaultManager.rightCardID = nil
         }
-        cardInfoList = Data()
-        userName = ""
-        isUserNameRegister = true
+        if let leftCardID = UserDefaultManager.leftCardID {
+            removeImageFromStorage(imageName: leftCardID)
+            UserDefaultManager.leftCardID = nil
+        }
+        self.dismiss()
     }
     
-    func removeImageToStorage(memojiModel: MemojiCard) {
+    func removeImageFromStorage(imageName: String) {
         let storage = Storage.storage()
-        let storageRef = storage.reference().child(memojiModel.imageName)
+        let storageRef = storage.reference().child(imageName)
         storageRef.delete()
     }
     
@@ -81,12 +97,19 @@ struct ResetView: View {
             .disabled(!self.readNotice)
             .frame(height: 60)
             .alert("정말 초기화 하시겠습니까?", isPresented: self.$showAlert) {
-                Button("No", role: .cancel) {
-                    self.dismiss()
-                }
-                Button("Yes", role: .destructive){
-                    self.removeMyMemojiCard()
-                    self.dismiss()
+                Button("No", role: .cancel) { }
+                Button("Yes", role: .destructive) {
+                    guard let userID = UserDefaultManager.userID else {
+                        return
+                    }
+                    NetworkService.requestDeleteUser(userID: userID) { response in
+                        switch response {
+                        case .success(_):
+                            self.initMemojiCollecter()
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
                 }
             }
         }

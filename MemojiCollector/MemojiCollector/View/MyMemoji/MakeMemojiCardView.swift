@@ -14,6 +14,7 @@ struct MakeMemojiCardView: View {
     
     @State private var isUploading: Bool = false
     @State private var showAlert = false
+    @State private var showErrorAlert = false
     @State private var progressValue = 0.0
     
     @FocusState private var focusedField: Bool
@@ -77,15 +78,15 @@ struct MakeMemojiCardView: View {
                         HStack(spacing: 5) {
                             Text("첫번째문구  ")
                             ZStack(alignment: .leading) {
-                                if self.viewModel.korean.count == 1 {
+                                if self.viewModel.firstString.count == 1 {
                                     Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
-                                TextField("#으로 시작해주세요", text: self.$viewModel.korean)
-                                    .onChange(of: self.viewModel.korean) { newValue in
+                                TextField("#으로 시작해주세요", text: self.$viewModel.firstString)
+                                    .onChange(of: self.viewModel.firstString) { newValue in
                                         self.viewModel.firstTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
@@ -100,15 +101,15 @@ struct MakeMemojiCardView: View {
                         HStack(spacing: 5) {
                             Text("두번째문구  ")
                             ZStack(alignment: .leading) {
-                                if self.viewModel.english.count == 1 {
+                                if self.viewModel.secondString.count == 1 {
                                     Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
-                                TextField("#으로 시작해주세요", text: self.$viewModel.english)
-                                    .onChange(of: self.viewModel.english) { newValue in
+                                TextField("#으로 시작해주세요", text: self.$viewModel.secondString)
+                                    .onChange(of: self.viewModel.secondString) { newValue in
                                         self.viewModel.secondTextCheck(newValue: newValue)
                                     }
                                     .focused(self.$focusedField)
@@ -146,8 +147,15 @@ struct MakeMemojiCardView: View {
                         Button("No", role: .cancel) { }
                         Button("Yes", role: .none){
                             self.isUploading = true
-                            let memojiModel = self.viewModel.createMemojiModel()
-                            self.viewModel.saveData(memojiCard: memojiModel) {
+//                            let memojiModel = self.viewModel.createMemojiModel()
+//                            self.viewModel.saveData(memojiCard: memojiModel) {
+//                                self.dismiss()
+//                            }
+                            viewModel.registerCardID { error in
+                                if let _ = error {
+                                    showErrorAlert.toggle()
+                                    return
+                                }
                                 self.dismiss()
                             }
                         }
@@ -159,6 +167,13 @@ struct MakeMemojiCardView: View {
             }
             .onAppear {
                 self.viewModel.isFirst = self.isFirst
+            }
+            .alert("저장 실패", isPresented: self.$showErrorAlert) {
+                Button("확인", role: .none) {
+                    
+                }
+            } message: {
+                Text("저장에 실패했습니다.\n 잠시 후 다시 시도해주세요.")
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(self.isUploading)

@@ -2,64 +2,32 @@
 //  MemojiCardViewModel.swift
 //  MemojiCollector
 //
-//  Created by Moon Jongseek on 2022/05/04.
+//  Created by Moon Jongseek on 2022/08/13.
 //
 
 import SwiftUI
-import FirebaseStorage
 
 class MemojiCardViewModel: ObservableObject {
-    @Published var imageData: Data = Data()
-    @Published var isEmptyImage: Bool = false
-    var preImageData: Data = Data()
-    var memojiCard: MemojiCard?
     
-    func addImageData() {
-        let storage = Storage.storage()
-        if let memojiCard = self.memojiCard {
-            let pathReference = storage.reference(withPath: "\(memojiCard.imageName)")
-            pathReference.getData(maxSize: 1 * 1024 * 1024) { optionalData, _ in
-                if let data = optionalData {
-                    self.imageData = data
-                    self.updateImageData(imageData: data)
+    var memojiCard: MemojiCard = .init(token: "")
+    var imageData: Data = Data()
+    
+    func loadData(cardID: String, completeHandler: @escaping () -> ()) {
+        NetworkService.requestCardData(cardID: cardID) { [weak self] result in
+            switch result {
+            case .success(let cardDTO):
+                self?.memojiCard = MemojiCard(name: cardDTO.userName ?? "",
+                                              isMyCard: true,
+                                              kor: cardDTO.firstString ?? "",
+                                              eng: cardDTO.secondString ?? "",
+                                              token: "")
+                StorageManager.getImageData(imageName: cardDTO.id?.uuidString ?? "") { [weak self] imageData in
+                    self?.imageData = imageData
+                    completeHandler()
                 }
-            }
-        }
-    }
-    
-    func updateImageData(imageData: Data) {
-        @AppStorage(AppStorageKey.cardList.string) var cardListData: Data = Data()
-        var cardList = JsonManager.shared.jsonDecoder(decodingData: cardListData)
-        if let memojiCard = self.memojiCard {
-            cardList.indices.filter{
-                cardList[$0].urlString == memojiCard.urlString
-            }.forEach { changeIndex in
-                cardList[changeIndex].imageData = imageData
-                cardListData = JsonManager.shared.jsonEncoder(ecodingData: cardList)
-            }
-        }
-    }
-    
-    func checkImageExist() {
-        let storage = Storage.storage()
-        if let memojiCard = self.memojiCard {
-            let pathReference = storage.reference(withPath: "\(memojiCard.imageName)")
-            pathReference.getMetadata { _, error in
-                if let error = error as? NSError {
-                    if let errorCode = error.userInfo["ResponseErrorCode"] as? Int, errorCode == 404 {
-                        self.isEmptyImage = true
-                    }
-                }
-            }
-        }
-    }
-    
-    func syncImageData() {
-        if self.imageData.count == 0 {
-            self.addImageData()
-        } else {
-            if !(self.memojiCard?.isMyCard ?? false) {
-                self.checkImageExist()
+            case .failure(let error):
+                debugPrint(error)
+                completeHandler()
             }
         }
     }
