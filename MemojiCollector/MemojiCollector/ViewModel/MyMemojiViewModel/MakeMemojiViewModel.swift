@@ -41,36 +41,6 @@ class MakeMemojiViewModel: ObservableObject {
         return memojiCard
     }
     
-    func saveData(memojiCard: MemojiCard, completeHandler: @escaping () -> ()) {
-        var memojiList = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.append(memojiCard)
-        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
-        self.saveImageToStorage(memojiModel: memojiCard) { snapshot in
-            let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            if percentComplete == 1.0 {
-                self.saveCount += 1
-                completeHandler()
-            }
-        }
-        
-        
-        let requestDTO = RequestDTO(userName: userName, firstString: firstString, secondString: secondString, isRight: isRight)
-        
-        NetworkService.requestCreateCard(requestDTO: requestDTO) { [weak self] result in
-            switch result {
-            case .success(let cardDTO):
-                if self?.isRight ?? true {
-                    self?.rightCardID = cardDTO.id?.uuidString ?? ""
-                } else {
-                    self?.leftCardID = cardDTO.id?.uuidString ?? ""
-                }
-            case .failure(let error):
-                debugPrint(error)
-            }
-            completeHandler()
-        }
-    }
-    
     func registerCardID(completeHandler: @escaping (NetworkError?) -> ()) {
         let requestDTO = RequestDTO(userID: UUID(uuidString: userID),
                                     userName: userName,
@@ -85,7 +55,8 @@ class MakeMemojiViewModel: ObservableObject {
                     completeHandler(.nilResponse)
                     return
                 }
-                self?.uploadCardImage(cardID: cardID) { snapshot in
+                let imageData = self?.selectedMemoji.pngData() ?? Data()
+                StorageManager.uploadCardImage(imageData: imageData, cardID: cardID) { snapshot in
                     let percentComplete = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
                     if percentComplete == 1.0 {
                         self?.fetchCardID(cardID: cardID)
@@ -106,17 +77,6 @@ class MakeMemojiViewModel: ObservableObject {
         } else {
             leftCardID = cardID.uuidString
         }
-    }
-    
-    func uploadCardImage(cardID: UUID, progressHandler: @escaping (StorageTaskSnapshot) -> Void) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference().child(cardID.uuidString)
-        let metaDataDictionary: [String : Any] = [ "contentType" : "image/png" ]
-        
-        let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
-//        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
-        let uploadTask = storageRef.putData(selectedMemoji.pngData() ?? Data(), metadata: storageMetadata)
-        uploadTask.observe(.success, handler: progressHandler)
     }
     
     func isEnableRegister() -> Bool {
@@ -141,17 +101,6 @@ class MakeMemojiViewModel: ObservableObject {
     
     func isEmptySomeData() -> Bool{
         return self.secondString.count < 2 || self.firstString.count < 2 || !self.isSelecteImage
-    }
-    
-    func saveImageToStorage(memojiModel: MemojiCard, progressHandler: @escaping (StorageTaskSnapshot) -> Void) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference().child(memojiModel.imageName)
-        let metaDataDictionary: [String : Any] = [ "contentType" : "image/png" ]
-        
-        let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
-//        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
-        let uploadTask = storageRef.putData(memojiModel.imageData, metadata: storageMetadata)
-        uploadTask.observe(.progress, handler: progressHandler)
     }
     
     func normalizationToData(imageData: Data) -> Data {

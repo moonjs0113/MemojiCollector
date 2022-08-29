@@ -14,22 +14,6 @@ class SettingViewModel: ObservableObject {
     @Published var showResetConfirmationDialog: Bool = false
     @Published var goToPasswordView: Bool = false
     
-//    func removeMyMemojiCard() {
-//        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-//        @AppStorage(AppStorageKey.userName.string) var userName = ""
-//
-//        let _ = JsonManagerClass.shared.jsonDecoder(decodingData: cardInfoList).filter {
-//            if $0.isMyCard {
-//                self.removeImageToStorage(memojiModel: $0)
-//            }
-//            return !$0.isMyCard
-//        }
-//        cardInfoList = Data()
-//        userName = ""
-//        userPW = ""
-//        isUserNameRegister = true
-//    }
-    
     func initMemojiCollecter() {
         UserDefaultManager.userID = nil
         UserDefaultManager.userName = nil

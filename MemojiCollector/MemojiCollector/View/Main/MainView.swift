@@ -52,13 +52,13 @@ struct MainView: View {
                     }
                 }
             }
-            .alert("업데이트", isPresented: self.$viewModel.isShowUpdateAlert) {
+            .alert("업데이트", isPresented: $viewModel.isShowUpdateAlert) {
                 Button("취소") {
-                    self.viewModel.setCancelUpdateDate()
+                    viewModel.setCancelUpdateDate()
                 }
                 
                 Button("확인") {
-                    self.viewModel.goToAppStore()
+                    viewModel.goToAppStore()
                 }
             } message: {
                 Text("최신버전이 아닙니다.\n업데이트 하시겠습니까?\n확인을 누르면 앱스토어로 이동합니다.")

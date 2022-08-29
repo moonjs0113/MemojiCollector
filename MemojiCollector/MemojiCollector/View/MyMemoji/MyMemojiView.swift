@@ -22,10 +22,6 @@ struct MyMemojiView: View {
                 .padding(.horizontal, 20)
                 Spacer()
             }
-            .onAppear {
-//                viewModel.findMemojiCard()
-//                viewModel.loadMemojiCard()
-            }
         }
     }
 }
@@ -36,7 +32,7 @@ extension MyMemojiView {
     @ViewBuilder
     func MemojiCard(memojiCardID: String, isRight: Bool) -> some View {
         if !memojiCardID.isEmpty {
-            MemojiCardView(cardID: memojiCardID)
+            MemojiCardView(cardID: memojiCardID, isRight: isRight)
         } else {
             NavigationLink(destination: MakeMemojiCardView(isRight: isRight)) {
                 MakeCardView()

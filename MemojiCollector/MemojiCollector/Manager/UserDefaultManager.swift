@@ -8,8 +8,6 @@
 import Foundation
 
 struct UserDefaultManager {
-//    static let shr: UserDefaultManager = UserDefaultManager()
-    
     static var userID: String? {
         get {
             guard let userID = UserDefaults.standard.string(forKey: "USER_ID") else {

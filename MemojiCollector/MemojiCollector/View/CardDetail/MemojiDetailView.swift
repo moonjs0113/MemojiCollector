@@ -124,12 +124,10 @@ struct MemojiDetailView: View {
                 }
             }
             .onAppear{
-                viewModel.loadImageData(cardID: memojiCard.cardID.uuidString) { imageData in
+                StorageManager.getCardImage(imageName: memojiCard.cardID.uuidString) { imageData in
                     self.memojiCard.imageData = imageData
                 }
                 viewModel.memojiCard = memojiCard
-//                self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
-//                self.memojiCard = self.viewModel.memojiCard
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -213,7 +211,9 @@ struct MemojiDetailView: View {
                         case .failure(let error):
                             debugPrint(error)
                         }
-                        self.dismiss()
+                        DispatchQueue.main.async {
+                            self.dismiss()
+                        }
                     }
                 }
             } message: {

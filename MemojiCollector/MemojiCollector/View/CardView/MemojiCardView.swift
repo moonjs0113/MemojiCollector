@@ -10,11 +10,13 @@ import SwiftUI
 struct MemojiCardView: View {
     
     let cardID: String
+    let isRight: Bool
     @State private var isCompleteLoad: Bool = false
     @StateObject var viewModel: MemojiCardViewModel = MemojiCardViewModel()
     
-    init(cardID: String) {
+    init(cardID: String, isRight: Bool) {
         self.cardID = cardID
+        self.isRight = isRight
     }
     
     var body: some View {
@@ -81,7 +83,7 @@ struct MemojiCardView: View {
                 .shadow(color: .gray.opacity(0.5), radius: 3, x: 0, y: 1)
         }
         .onAppear{
-            viewModel.loadData(cardID: cardID) {
+            viewModel.loadData(cardID: cardID, isRight: isRight) {
                 isCompleteLoad = true
             }
         }
@@ -90,6 +92,6 @@ struct MemojiCardView: View {
 
 struct MemojiCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MemojiCardView(cardID: "")
+        MemojiCardView(cardID: "", isRight: true)
     }
 }

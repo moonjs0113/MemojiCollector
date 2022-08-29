@@ -12,17 +12,18 @@ class MemojiCardViewModel: ObservableObject {
     var memojiCard: MemojiCard = .init(token: "")
     var imageData: Data = Data()
     
-    func loadData(cardID: String, completeHandler: @escaping () -> ()) {
+    func loadData(cardID: String, isRight: Bool, completeHandler: @escaping () -> ()) {
         NetworkService.requestCardData(cardID: cardID) { [weak self] result in
             switch result {
             case .success(let cardDTO):
                 self?.memojiCard = MemojiCard(cardID: cardDTO.id ?? UUID(),
                                               name: cardDTO.userName ?? "",
+                                              isRight: isRight,
                                               isMyCard: true,
                                               kor: cardDTO.firstString ?? "",
                                               eng: cardDTO.secondString ?? "",
                                               token: "")
-                StorageManager.getImageData(imageName: cardDTO.id?.uuidString ?? "") { [weak self] imageData in
+                StorageManager.getCardImage(imageName: cardDTO.id?.uuidString ?? "") { [weak self] imageData in
                     self?.imageData = imageData
                     completeHandler()
                 }

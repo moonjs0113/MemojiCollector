@@ -44,7 +44,7 @@ struct GridCardView: View {
                     }
                 } else {
                     ForEach(Array(memojiList.enumerated()), id: \.1.urlString) { index, memoji in
-                        MemojiCardViewLocalData(memojiCard: memoji, preImageData: memoji.imageData)
+//                        MemojiCardViewLocalData(memojiCard: memoji, preImageData: memoji.imageData)
                         if index == 0 {
                             if memojiList.count == 1 {
                                 EmptyCardView(memojiCard: memoji)

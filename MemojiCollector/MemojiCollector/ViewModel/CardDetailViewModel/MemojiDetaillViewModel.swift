@@ -27,41 +27,18 @@ class MemojiDetaillViewModel: ObservableObject {
             
             let requestDTO = RequestDTO(userID: UUID(uuidString: UserDefaultManager.userID ?? ""), cardID: memojiCard.cardID, isRight: memojiCard.isRight)
             NetworkService.requestDeleteCard(requestDTO: requestDTO) { result in
-                self.removeImageToStorage(cardID: self.memojiCard.cardID.uuidString)
+                StorageManager.removeCardImage(cardID: self.memojiCard.cardID.uuidString)
                 completeHandler(result)
             }
-        }
-    }
-    
-    func removeImageToStorage(cardID: String) {
-        let storage = Storage.storage()
-        let storageRef = storage.reference().child(cardID)
-        storageRef.delete()
-    }
-    
-    func loadImageData(cardID: String, completeHandler: @escaping (Data) -> ()) {
-        StorageManager.getImageData(imageName: cardID) { imageData in
-            completeHandler(imageData)
         }
     }
     
     func editMemojiDescription() {
         var memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
         if let index = memojiList.map({ $0.urlString }).firstIndex(of: self.memojiCard.urlString) {
-            print("Change Memoji Card")
             memojiList[index] = self.memojiCard
         }
         self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
-    }
-    
-    func loadMemojiCard(memojiCard: MemojiCard) {
-        let memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.forEach {
-            if $0.urlString == memojiCard.urlString {
-                self.memojiCard = $0
-            }
-        }
-        self.memojiMemo = self.memojiCard.description
     }
     
     func convertViewUIImage<V: View>(cardView: V) {
