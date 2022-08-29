@@ -34,13 +34,11 @@ struct MyMemojiView: View {
 // MARK: - ViewBuilder
 extension MyMemojiView {
     @ViewBuilder
-//    func MemojiCard(memojiCard: MemojiCard?, isFirst: Bool) -> some View {
-    func MemojiCard(memojiCardID: String, isFirst: Bool) -> some View {
+    func MemojiCard(memojiCardID: String, isRight: Bool) -> some View {
         if !memojiCardID.isEmpty {
-//            MemojiCardViewLocalData(memojiCard: memojiCard, preImageData: memojiCard.imageData)
             MemojiCardView(cardID: memojiCardID)
         } else {
-            NavigationLink(destination: MakeMemojiCardView(isFirst: isFirst)) {
+            NavigationLink(destination: MakeMemojiCardView(isRight: isRight)) {
                 MakeCardView()
             }
         }
@@ -49,8 +47,8 @@ extension MyMemojiView {
     @ViewBuilder
     func MemojiCardHStack() -> some View {
         HStack {
-            self.MemojiCard(memojiCardID: viewModel.leftCardID, isFirst: true)
-            self.MemojiCard(memojiCardID: viewModel.rightCardID, isFirst: false)
+            self.MemojiCard(memojiCardID: viewModel.leftCardID, isRight: false)
+            self.MemojiCard(memojiCardID: viewModel.rightCardID, isRight: true)
         }
     }
 }

@@ -36,13 +36,18 @@ struct MemojiDetailView: View {
                     .padding(.horizontal, 30)
                 
                 VStack {
-                    Image(uiImage: (UIImage(data: self.memojiCard.imageData) ?? UIImage()))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
-                        .cornerRadius(20)
-                        .clipped()
-                        .onAppear()
+                    if memojiCard.imageData.count == 0 {
+                        ProgressView(value: 0.0)
+                            .progressViewStyle(.circular)
+                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
+                    } else {
+                        Image(uiImage: (UIImage(data: self.memojiCard.imageData) ?? UIImage()))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minWidth: 50, maxWidth: .infinity, minHeight: 50, maxHeight: .infinity, alignment: .bottom)
+                            .cornerRadius(20)
+                            .clipped()
+                    }
                     Text(self.memojiCard.name)
                         .font(.system(.largeTitle, design: .rounded))
                         .fontWeight(.bold)
@@ -119,8 +124,12 @@ struct MemojiDetailView: View {
                 }
             }
             .onAppear{
-                self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
-                self.memojiCard = self.viewModel.memojiCard
+                viewModel.loadImageData(cardID: memojiCard.cardID.uuidString) { imageData in
+                    self.memojiCard.imageData = imageData
+                }
+                viewModel.memojiCard = memojiCard
+//                self.viewModel.loadMemojiCard(memojiCard: self.memojiCard)
+//                self.memojiCard = self.viewModel.memojiCard
             }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -197,7 +206,13 @@ struct MemojiDetailView: View {
             .alert("삭제하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
-                    self.viewModel.deleteMemojiCard() {
+                    viewModel.deleteMemojiCard() { result in
+                        switch result {
+                        case .success(_):
+                            break
+                        case .failure(let error):
+                            debugPrint(error)
+                        }
                         self.dismiss()
                     }
                 }

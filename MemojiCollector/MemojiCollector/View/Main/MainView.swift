@@ -15,7 +15,6 @@ struct MainView: View {
         NavigationView {
             ZStack {
                 GridCardView(searchText: self.$viewModel.searchText)
-                
                 VStack{
                     Spacer()
                     HStack {
@@ -37,27 +36,23 @@ struct MainView: View {
                         }
                         .padding([.bottom, .trailing], 50)
                         .sheet(isPresented: self.$viewModel.isShowMyPage) {
-                            self.goToMyMemojiView()
+                            MyPageButton()
                         }
-                        .sheet(isPresented: $viewModel.isShowGuide) {
+                        .sheet(isPresented: $viewModel.isShowGuideView) {
                             GuideView()
                         }
-//                        .fullScreenCover(isPresented: $isShowGuide) {
-//                            GuideView()
-//                                .ignoresSafeArea(.all, edges: .top)
-//                        }
                         .onAppear {
-                            if viewModel.firstGuide {
-                                viewModel.isShowGuide.toggle()
+                            if UserDefaultManager.isFirstUser {
+                                viewModel.isShowGuideView.toggle()
                             }
-                            if self.viewModel.requestAppStoreVersion() {
-                                self.viewModel.showUpdateAlert()
+                            if viewModel.requestAppStoreVersion() {
+                                viewModel.showUpdateAlert()
                             }
                         }
                     }
                 }
             }
-            .alert("업데이트", isPresented: self.$viewModel.isShowUpdate) {
+            .alert("업데이트", isPresented: self.$viewModel.isShowUpdateAlert) {
                 Button("취소") {
                     self.viewModel.setCancelUpdateDate()
                 }
@@ -71,7 +66,7 @@ struct MainView: View {
             .navigationBarItems(trailing:
                                     HStack {
                 Button {
-                    self.viewModel.isShowGuide = true
+                    self.viewModel.isShowGuideView = true
                 } label: {
                     Image(systemName: "questionmark.circle")
                 }
@@ -91,7 +86,7 @@ struct MainView: View {
 
 extension MainView {
     @ViewBuilder
-    func goToMyMemojiView() -> some View{
+    func MyPageButton() -> some View{
         if let _ = UserDefaultManager.userID {
             MyMemojiView()
         } else {

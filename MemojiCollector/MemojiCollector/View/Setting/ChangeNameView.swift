@@ -14,19 +14,6 @@ struct ChangeNameView: View {
     @State private var showAlert = false
     @Environment(\.dismiss) var dismiss
     
-    //    func removeMyMemojiCard() {
-    //        @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
-    //        let memojiCardList = JsonManagerClass.shared.jsonDecoder(decodingData: cardInfoList).filter {
-    //            if $0.isMyCard {
-    //                self.removeImageToStorage(memojiModel: $0)
-    //                return false
-    //            } else {
-    //                return true
-    //            }
-    //        }
-    //        cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiCardList)
-    //    }
-    
     func removeCardData() {
         UserDefaultManager.userName = newUserName
         if let rightCardID = UserDefaultManager.rightCardID {
@@ -37,7 +24,6 @@ struct ChangeNameView: View {
             removeImageFromStorage(imageName: leftCardID)
             UserDefaultManager.leftCardID = nil
         }
-        
     }
     
     func removeImageFromStorage(imageName: String) {
@@ -87,7 +73,6 @@ struct ChangeNameView: View {
                     self.dismiss()
                 }
                 Button("Yes", role: .none){
-                    //                    self.removeMyMemojiCard()
                     NetworkService.requestUpdateUserName(userName: newUserName) { response in
                         DispatchQueue.main.async {
                             switch response {

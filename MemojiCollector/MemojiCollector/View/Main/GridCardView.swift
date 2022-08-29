@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GridCardView: View {    
-    let gridItems: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()),]
+    let twoGridItems: [GridItem] = [GridItem(.flexible()), GridItem(.flexible())]
     @AppStorage(AppStorageKey.cardList.string) var cardInfoList: Data = Data()
     @Binding var searchText: String
     
@@ -34,7 +34,7 @@ struct GridCardView: View {
     var body: some View {
         ScrollView {
             Spacer()
-            LazyVGrid(columns: self.gridItems) {
+            LazyVGrid(columns: twoGridItems) {
                 let memojiList = self.filterList()
                 if memojiList.isEmpty {
                     Button {

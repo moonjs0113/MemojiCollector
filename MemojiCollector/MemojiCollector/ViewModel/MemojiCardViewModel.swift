@@ -16,7 +16,8 @@ class MemojiCardViewModel: ObservableObject {
         NetworkService.requestCardData(cardID: cardID) { [weak self] result in
             switch result {
             case .success(let cardDTO):
-                self?.memojiCard = MemojiCard(name: cardDTO.userName ?? "",
+                self?.memojiCard = MemojiCard(cardID: cardDTO.id ?? UUID(),
+                                              name: cardDTO.userName ?? "",
                                               isMyCard: true,
                                               kor: cardDTO.firstString ?? "",
                                               eng: cardDTO.secondString ?? "",

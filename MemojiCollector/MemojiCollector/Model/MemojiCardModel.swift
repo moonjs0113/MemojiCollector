@@ -8,9 +8,10 @@
 import Foundation
 
 struct MemojiCard: Codable, Hashable {
+    var cardID: UUID = UUID()
     var name: String = ""
     var subTitle: String = ""
-    var isFirst: Bool = true
+    var isRight: Bool = false
     var isMyCard: Bool = false
     var imageData: Data = Data()
     var kor: String = ""
@@ -22,6 +23,10 @@ struct MemojiCard: Codable, Hashable {
     
     var imageName: String {
         return "\(self.name)___\(self.saveCount)___\(self.token).png"
+    }
+    
+    var airDropURL: String {
+        return "MemojiCollector://?cardID=\(cardID.uuidString)"
     }
     
     var urlString: String {

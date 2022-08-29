@@ -61,9 +61,32 @@ struct UserDefaultManager {
             UserDefaults.standard.set(newValue, forKey: "RIGHT_CARD_ID")
         }
     }
-    
 
+    static var isFirstUser: Bool {
+        get {
+            guard let isFirstUser = UserDefaults.standard.value(forKey: "IS_FIRST_USER") as? Bool else {
+                UserDefaults.standard.set(true, forKey: "IS_FIRST_USER")
+                return true
+            }
+            return isFirstUser
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "IS_FIRST_USER")
+        }
+    }
     
-    
+    static var sharedCardIDList: [String] {
+        get {
+            guard let sharedCardIDList = UserDefaults.standard.value(forKey: "SHARED_CARD_ID_LIST") as? [String] else {
+                return []
+            }
+            return sharedCardIDList
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "SHARED_CARD_ID_LIST")
+        }
+    }
     
 }

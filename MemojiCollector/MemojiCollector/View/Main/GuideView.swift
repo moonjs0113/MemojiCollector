@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct GuideView: View {
-    @AppStorage(AppStorageKey.firstGuide.string) private var firstGuide: Bool = true
-    
     let guideTitle = [
         "나의 미모지 카드 만들기",
         "미모티콘 스티커와 문구 작성",
@@ -38,12 +36,12 @@ struct GuideView: View {
                             .padding(.top, 30)
                         
                         VStack(spacing: 12) {
-                            Text(self.guideTitle[index])
+                            Text(guideTitle[index])
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
                             
-                            Text(self.guideContent[index])
+                            Text(guideContent[index])
                                 .font(.callout)
                                 .multilineTextAlignment(.center)
                         }
@@ -56,7 +54,7 @@ struct GuideView: View {
             }
         }
         .onDisappear {
-            firstGuide = false
+            UserDefaultManager.isFirstUser = false
         }
         .tabViewStyle(PageTabViewStyle())
     }

@@ -27,11 +27,11 @@ class MakeMemojiViewModel: ObservableObject {
     @Published var isComplete: Bool = false
     
     /// true: 왼쪽, right: 오른쪽
-    var isFirst: Bool = false
+    var isRight: Bool = false
     
     func createMemojiModel() -> MemojiCard{
         let memojiCard = MemojiCard(name: self.userName,
-                                    isFirst: self.isFirst,
+                                    isRight: self.isRight,
                                     isMyCard: true,
                                     imageData: self.selectedMemoji.pngData() ?? Data(),
                                     kor: self.firstString.replacingOccurrences(of: " ", with: "_"),
@@ -54,15 +54,15 @@ class MakeMemojiViewModel: ObservableObject {
         }
         
         
-        let requestDTO = RequestDTO(userName: userName, firstString: firstString, secondString: secondString, isRight: isFirst)
+        let requestDTO = RequestDTO(userName: userName, firstString: firstString, secondString: secondString, isRight: isRight)
         
         NetworkService.requestCreateCard(requestDTO: requestDTO) { [weak self] result in
             switch result {
             case .success(let cardDTO):
-                if self?.isFirst ?? true {
-                    self?.leftCardID = cardDTO.id?.uuidString ?? ""
-                } else {
+                if self?.isRight ?? true {
                     self?.rightCardID = cardDTO.id?.uuidString ?? ""
+                } else {
+                    self?.leftCardID = cardDTO.id?.uuidString ?? ""
                 }
             case .failure(let error):
                 debugPrint(error)
@@ -76,7 +76,7 @@ class MakeMemojiViewModel: ObservableObject {
                                     userName: userName,
                                     firstString: firstString,
                                     secondString: secondString,
-                                    isRight: isFirst)
+                                    isRight: isRight)
         
         NetworkService.requestCreateCard(requestDTO: requestDTO) { [weak self] result in
             switch result {
@@ -101,10 +101,10 @@ class MakeMemojiViewModel: ObservableObject {
     }
     
     func fetchCardID(cardID: UUID) {
-        if isFirst {
-            leftCardID = cardID.uuidString
-        } else {
+        if isRight {
             rightCardID = cardID.uuidString
+        } else {
+            leftCardID = cardID.uuidString
         }
     }
     
@@ -116,7 +116,7 @@ class MakeMemojiViewModel: ObservableObject {
         let storageMetadata = StorageMetadata(dictionary: metaDataDictionary)
 //        let uploadImageData = self.normalizationToData(imageData: memojiModel.imageData)
         let uploadTask = storageRef.putData(selectedMemoji.pngData() ?? Data(), metadata: storageMetadata)
-        uploadTask.observe(.progress, handler: progressHandler)
+        uploadTask.observe(.success, handler: progressHandler)
     }
     
     func isEnableRegister() -> Bool {

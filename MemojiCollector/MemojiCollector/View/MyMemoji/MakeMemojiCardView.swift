@@ -10,7 +10,7 @@ import PhotosUI
 
 struct MakeMemojiCardView: View {
     @ObservedObject var viewModel: MakeMemojiViewModel = MakeMemojiViewModel()
-    var isFirst: Bool
+    var isRight: Bool
     
     @State private var isUploading: Bool = false
     @State private var showAlert = false
@@ -21,8 +21,8 @@ struct MakeMemojiCardView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    init(isFirst: Bool) {
-        self.isFirst = isFirst
+    init(isRight: Bool) {
+        self.isRight = isRight
         UITextField.appearance().allowsEditingTextAttributes = true
         UITextView.appearance().allowsEditingTextAttributes = true
     }
@@ -34,8 +34,8 @@ struct MakeMemojiCardView: View {
                 VStack {
                     Text("1개의 미모티콘 스티커만 입력가능합니다.")
                         .font(.caption)
-                    MemojiTextView(selectedMemoji: self.$viewModel.selectedMemoji,
-                                   isSelecteImage: self.$viewModel.isSelecteImage)
+                    MemojiTextView(selectedMemoji: $viewModel.selectedMemoji,
+                                   isSelecteImage: $viewModel.isSelecteImage)
                         .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
                         .aspectRatio(1, contentMode: .fit)
                         .cornerRadius(20)
@@ -67,7 +67,7 @@ struct MakeMemojiCardView: View {
                     VStack(spacing: 8) {
                         HStack(spacing: 5) {
                             Text("닉네임        ")
-                            TextField("NickName", text: self.$viewModel.userName)
+                            TextField("NickName", text: $viewModel.userName)
                                 .disabled(true)
                         }
                         .padding(.leading, 15)
@@ -78,18 +78,18 @@ struct MakeMemojiCardView: View {
                         HStack(spacing: 5) {
                             Text("첫번째문구  ")
                             ZStack(alignment: .leading) {
-                                if self.viewModel.firstString.count == 1 {
+                                if viewModel.firstString.count == 1 {
                                     Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
-                                TextField("#으로 시작해주세요", text: self.$viewModel.firstString)
-                                    .onChange(of: self.viewModel.firstString) { newValue in
-                                        self.viewModel.firstTextCheck(newValue: newValue)
+                                TextField("#으로 시작해주세요", text: $viewModel.firstString)
+                                    .onChange(of: viewModel.firstString) { newValue in
+                                        viewModel.firstTextCheck(newValue: newValue)
                                     }
-                                    .focused(self.$focusedField)
+                                    .focused($focusedField)
                             }
                             
                         }
@@ -101,18 +101,18 @@ struct MakeMemojiCardView: View {
                         HStack(spacing: 5) {
                             Text("두번째문구  ")
                             ZStack(alignment: .leading) {
-                                if self.viewModel.secondString.count == 1 {
+                                if viewModel.secondString.count == 1 {
                                     Text("#최대 20자까지 가능합니다.")
                                         .foregroundColor(.gray)
                                         .multilineTextAlignment(.leading)
                                         .frame(alignment: .leading)
                                         .minimumScaleFactor(0.1)
                                 }
-                                TextField("#으로 시작해주세요", text: self.$viewModel.secondString)
-                                    .onChange(of: self.viewModel.secondString) { newValue in
-                                        self.viewModel.secondTextCheck(newValue: newValue)
+                                TextField("#으로 시작해주세요", text: $viewModel.secondString)
+                                    .onChange(of: viewModel.secondString) { newValue in
+                                        viewModel.secondTextCheck(newValue: newValue)
                                     }
-                                    .focused(self.$focusedField)
+                                    .focused($focusedField)
                             }
                         }
                         .padding(.leading, 15)
@@ -123,16 +123,16 @@ struct MakeMemojiCardView: View {
                     
                     Spacer()
                     Button {
-                        if self.viewModel.isEnableRegister() {
-                            self.focusedField = false
-                            self.showAlert.toggle()
+                        if viewModel.isEnableRegister() {
+                            focusedField = false
+                            showAlert.toggle()
                         }
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5, style: .circular)
                                 .fill(.tint)
-                            if self.isUploading {
-                                ProgressView(value: self.progressValue)
+                            if isUploading {
+                                ProgressView(value: progressValue)
                                     .progressViewStyle(.circular)
                             } else {
                                 Text("등록하기")
@@ -141,16 +141,12 @@ struct MakeMemojiCardView: View {
                             }
                         }
                     }
-                    .disabled(self.isUploading || self.viewModel.isEmptySomeData())
+                    .disabled(isUploading || viewModel.isEmptySomeData())
                     .frame(height: 60)
-                    .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
+                    .alert("저장하시겠습니까?", isPresented: $showAlert) {
                         Button("No", role: .cancel) { }
                         Button("Yes", role: .none){
-                            self.isUploading = true
-//                            let memojiModel = self.viewModel.createMemojiModel()
-//                            self.viewModel.saveData(memojiCard: memojiModel) {
-//                                self.dismiss()
-//                            }
+                            isUploading = true
                             viewModel.registerCardID { error in
                                 if let _ = error {
                                     showErrorAlert.toggle()
@@ -166,9 +162,9 @@ struct MakeMemojiCardView: View {
                 .padding()
             }
             .onAppear {
-                self.viewModel.isFirst = self.isFirst
+                viewModel.isRight = self.isRight
             }
-            .alert("저장 실패", isPresented: self.$showErrorAlert) {
+            .alert("저장 실패", isPresented: $showErrorAlert) {
                 Button("확인", role: .none) {
                     
                 }
@@ -176,7 +172,7 @@ struct MakeMemojiCardView: View {
                 Text("저장에 실패했습니다.\n 잠시 후 다시 시도해주세요.")
             }
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(self.isUploading)
+            .navigationBarBackButtonHidden(isUploading)
         }
         
     }
@@ -184,6 +180,6 @@ struct MakeMemojiCardView: View {
 
 struct MakeMemojiCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MakeMemojiCardView(isFirst: true)
+        MakeMemojiCardView(isRight: true)
     }
 }

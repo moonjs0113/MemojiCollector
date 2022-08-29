@@ -18,11 +18,11 @@ struct QRCodeView: View {
     @State var qrImage = UIImage()
     
     func generateQRCode() -> UIImage {
-        let urlString = self.memojiModel.urlString + "&timeStamp=\(Date.now)"
+        let urlString = memojiModel.cardID.uuidString + "&timeStamp=\(Date.now)"
         let data = Data(urlString.utf8)
         self.filter.message = data
         self.filter.correctionLevel = "L"
-        let transform = CGAffineTransform(scaleX: 3, y: 3)
+        let transform = CGAffineTransform(scaleX: 5, y: 5)
             
         guard let qrCodeImage = self.filter.outputImage?.transformed(by: transform) else {
             return UIImage()

@@ -62,8 +62,6 @@ struct RegisterUserView: View {
             .alert("저장하시겠습니까?", isPresented: self.$showAlert) {
                 Button("No", role: .cancel) { }
                 Button("Yes", role: .none){
-//                    self.userName = self.newUserName
-//                    self.isUserNameRegister = false
                     NetworkService.requestCreateUserID(userName: newUserName) { result in
                         switch result {
                         case .success(let userDTO):

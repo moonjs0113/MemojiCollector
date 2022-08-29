@@ -53,7 +53,6 @@
 		C7A3D8972865B47C000F01C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7A3D8962865B47C000F01C1 /* GoogleService-Info.plist */; };
 		C7A816BF282AB8820075D136 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816BE282AB8820075D136 /* SettingView.swift */; };
 		C7A816C2282AB99A0075D136 /* ChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816C1282AB99A0075D136 /* ChangeNameView.swift */; };
-		C7A816C4282ABE860075D136 /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A816C3282ABE860075D136 /* ResetView.swift */; };
 		C7B369F72820347800B05DED /* DeletedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F62820347800B05DED /* DeletedCardView.swift */; };
 		C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369F8282034BC00B05DED /* EmptyCardView.swift */; };
 		C7B369FB2820350200B05DED /* MakeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B369FA2820350200B05DED /* MakeCardView.swift */; };
@@ -117,7 +116,6 @@
 		C7A3D8962865B47C000F01C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7A816BE282AB8820075D136 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		C7A816C1282AB99A0075D136 /* ChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNameView.swift; sourceTree = "<group>"; };
-		C7A816C3282ABE860075D136 /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		C7B369F62820347800B05DED /* DeletedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedCardView.swift; sourceTree = "<group>"; };
 		C7B369F8282034BC00B05DED /* EmptyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCardView.swift; sourceTree = "<group>"; };
 		C7B369FA2820350200B05DED /* MakeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCardView.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				C7D0F51D2867039A008F17F5 /* MainViewModel.swift */,
 				C730A5502822622A00526965 /* MemojiCardViewLocalDataModel.swift */,
 				C78CC5D828A6B7D200B3B243 /* MemojiCardViewModel.swift */,
-				C78CC5CB28A6415D00B3B243 /* PasswordViewModel_.swift */,
 				C7CA62582832758300E0514B /* MyMemojiViewModel */,
 				C7CA6259283275D000E0514B /* CardDetailViewModel */,
 				C7E22245283B9DFA002F0E21 /* SettingViewModel */,
@@ -308,7 +305,6 @@
 				C7A816BE282AB8820075D136 /* SettingView.swift */,
 				C78CC5C428A6415500B3B243 /* Password */,
 				C7A816C1282AB99A0075D136 /* ChangeNameView.swift */,
-				C7A816C3282ABE860075D136 /* ResetView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -395,6 +391,7 @@
 		C7E22245283B9DFA002F0E21 /* SettingViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C78CC5CB28A6415D00B3B243 /* PasswordViewModel_.swift */,
 				C7E22248283B9E09002F0E21 /* SettingViewModel.swift */,
 			);
 			path = SettingViewModel;
@@ -482,7 +479,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7A816C4282ABE860075D136 /* ResetView.swift in Sources */,
 				C7F0307D281D27B90072CC11 /* AppDelegate.swift in Sources */,
 				C73C456C281924A400E41406 /* MemojiDetailView.swift in Sources */,
 				C7B369F9282034BC00B05DED /* EmptyCardView.swift in Sources */,

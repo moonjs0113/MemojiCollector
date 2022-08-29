@@ -12,20 +12,20 @@ class MyMemojiViewModel: ObservableObject {
     @AppStorage("LEFT_CARD_ID") var leftCardID = ""
     @AppStorage("RIGHT_CARD_ID") var rightCardID = ""
     
-    @Published var firstMemojiCard: MemojiCard?
-    @Published var secondMemojiCard: MemojiCard?
+    @Published var leftMemojiCard: MemojiCard?
+    @Published var rightMemojiCard: MemojiCard?
     
     func findMemojiCard() {
         let memojiCardList = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList).filter {
             $0.isMyCard
         }
-        self.firstMemojiCard = nil
-        self.secondMemojiCard = nil
-        for memojiCard in memojiCardList{
-            if memojiCard.isFirst {
-                self.firstMemojiCard = memojiCard
+        self.leftMemojiCard = nil
+        self.rightMemojiCard = nil
+        for memojiCard in memojiCardList {
+            if memojiCard.isRight {
+                self.rightMemojiCard = memojiCard
             } else {
-                self.secondMemojiCard = memojiCard
+                self.leftMemojiCard = memojiCard
             }
         }
     }

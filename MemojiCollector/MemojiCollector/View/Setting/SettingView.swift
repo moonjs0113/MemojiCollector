@@ -43,8 +43,11 @@ struct SettingView: View {
                             titleVisibility: .visible) {
             Button("초기화", role: .destructive) {
                 guard let userID = UserDefaultManager.userID else {
+                    UserDefaultManager.isFirstUser = true
+                    self.dismiss()
                     return
                 }
+                
                 NetworkService.requestDeleteUser(userID: userID) { response in
                     DispatchQueue.main.async {
                         switch response {
@@ -53,9 +56,11 @@ struct SettingView: View {
                         case .failure(let error):
                             print(error)
                         }
+                        UserDefaultManager.isFirstUser = true
                         self.dismiss()
                     }
                 }
+                
             }
             Button("취소", role: .cancel) {
                 

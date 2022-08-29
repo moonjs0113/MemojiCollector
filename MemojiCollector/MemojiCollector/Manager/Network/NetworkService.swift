@@ -28,7 +28,6 @@ enum NetworkService {
  /user/card                 PATCH : 공유받은 카드 업데이트
  */
 
-
 extension NetworkService {
     enum Card: Route {
         case base
@@ -108,7 +107,6 @@ extension NetworkService {
             }
         }
     }
-
     
     // TODO: - 닉네임 저장 로직
     static func requestCreateUserID(userName: String, completeHandler: @escaping GenericClosure<UserDTO>) {
@@ -137,119 +135,13 @@ extension NetworkService {
     }
     
     static func requestUpdateUserName(userName: String, completeHandler: @escaping  NetworkClosure) {
-        @AppStorage("USER_ID") var userID = ""
-        let userDTO = UserDTO.init(id: UUID(uuidString: userID) ?? UUID(), userName: userName, sharedCardIDs: [])
+        let userID = UUID(uuidString: UserDefaultManager.userID ?? "") ?? UUID()
+        let userDTO = UserDTO.init(id: userID, userName: userName, sharedCardIDs: [])
         guard let bodyData = try? JSONEncoder().encode(userDTO) else {
             completeHandler(.failure(.errorEncodingJson))
             return
         }
         
-        manager.requestPATCH(route: User.base.route, bodyData: bodyData, completeHandler: completeHandler)
+        manager.requestPOST(route: User.base.route, bodyData: bodyData, completeHandler: completeHandler)
     }
-    //    enum ModelRoute: String, RouteProtocol {
-//        var stringValue: String {
-//            self.rawValue
-//        }
-//
-//        var method: HTTPMethod {
-//            return .GET
-//        }
-//
-//        case character
-//        case location
-//        case episode
-//
-//        static func convertToString<M: Codable>(to model: M.Type) -> ModelRoute? {
-//            switch model {
-//            case is Character.Type:
-//                return .character
-//            case is Location.Type:
-//                return .location
-//            case is Episode.Type:
-//                return .episode
-//            default:
-//                return nil
-//            }
-//        }
-//    }
-//
-//    static func requestTotalObject<M: Codable>(as model: M.Type, completeHandler: @escaping NetworkClosure<ModelList<M>>) {
-//        guard let route = ModelRoute.convertToString(to: model) else {
-//            completeHandler(nil, .invalidType)
-//            return
-//        }
-//
-//        manager.sendRequest(route: route, decodeTo: ModelList<M>.self) { info, error in
-//            completeHandler(info, error)
-//        }
-//    }
-//
-//    static func requestObject<M: Codable, F: FilterProtocol>(as model: M.Type, filterBy filter: [F] = [], completeHandler: @escaping NetworkClosure<ModelList<M>>) {
-//        guard let route = ModelRoute.convertToString(to: model) else {
-//            completeHandler(nil, .invalidType)
-//            return
-//        }
-//
-//        manager.sendRequest(route: route, filterBy: filter, decodeTo: ModelList<M>.self) { info, error in
-//            completeHandler(info, error)
-//        }
-//    }
-//
-//    // Single or Multile Object(s)
-//    static func requestSingleObject<M: Codable>(as model: M.Type, id: Int, completeHandler: @escaping NetworkClosure<M>) {
-//        guard let route = ModelRoute.convertToString(to: model) else {
-//            completeHandler(nil, .invalidType)
-//            return
-//        }
-//
-//        manager.sendRequest(route: route, ids: [id], decodeTo: model.self) { result, error in
-//            completeHandler(result, error)
-//        }
-//    }
-//
-//    static func requestSingleObjectToURL<M: Codable>(as model: M.Type, url: String?) async throws -> M {
-//        guard let url = URL(string: url ?? "") else {
-//            throw NetworkError.invalidURL
-//        }
-//
-//        let data = try await manager.sendRequest(url: url)
-//        return try manager.jsonDecode(data: data, decodeTo: model.self)
-//    }
-//
-//    static func requestMultipleObjects<M: Codable>(as model: M.Type, id: [Int], completeHandler: @escaping NetworkClosure<[M]>) {
-//        guard let route = ModelRoute.convertToString(to: model) else {
-//            completeHandler(nil, .invalidType)
-//            return
-//        }
-//
-//        manager.sendRequest(route: route, ids: id, decodeTo: [M].self) { result, error in
-//            completeHandler(result, error)
-//        }
-//    }
-//
-//    static func requestImageData(url: String) throws -> Data {
-//        guard let url = URL(string: url) else {
-//            throw NetworkError.invalidURL
-//        }
-//
-//        do {
-//            let imageData = try manager.sendRequestImageData(url: url)
-//            return imageData
-//        } catch (let e as NetworkError) {
-//            throw e
-//        }
-//    }
-//
-//    static func requestImageData(url: String) async throws -> Data {
-//        guard let url = URL(string: url) else {
-//            throw NetworkError.invalidURL
-//        }
-//
-//        do {
-//            let imageData = try await manager.sendRequestImageData(url: url)
-//            return imageData
-//        } catch (let e as NetworkError) {
-//            throw e
-//        }
-//    }
 }

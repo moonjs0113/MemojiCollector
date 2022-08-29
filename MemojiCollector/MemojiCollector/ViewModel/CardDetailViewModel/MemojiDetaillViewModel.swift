@@ -10,29 +10,39 @@ import FirebaseStorage
 
 class MemojiDetaillViewModel: ObservableObject {
     @AppStorage(AppStorageKey.cardList.string) private var cardInfoList: Data = Data()
+    @AppStorage("LEFT_CARD_ID") var leftCardID = ""
+    @AppStorage("RIGHT_CARD_ID") var rightCardID = ""
     @Published var isEditing: Bool = false
     @Published var memojiMemo: String = ""
     
     var memojiCard: MemojiCard = MemojiCard(token: "")
 
-    func deleteMemojiCard( completeHandler: @escaping () -> ()) {
-        var memojiList: [MemojiCard] = JsonManagerClass.shared.jsonDecoder(decodingData: self.cardInfoList)
-        memojiList.removeAll{
-            $0.urlString == self.memojiCard.urlString
+    func deleteMemojiCard( completeHandler: @escaping NetworkClosure) {
+        if memojiCard.isMyCard {
+            if memojiCard.isRight {
+                rightCardID = ""
+            } else {
+                leftCardID = ""
+            }
+            
+            let requestDTO = RequestDTO(userID: UUID(uuidString: UserDefaultManager.userID ?? ""), cardID: memojiCard.cardID, isRight: memojiCard.isRight)
+            NetworkService.requestDeleteCard(requestDTO: requestDTO) { result in
+                self.removeImageToStorage(cardID: self.memojiCard.cardID.uuidString)
+                completeHandler(result)
+            }
         }
-        self.cardInfoList = JsonManagerClass.shared.jsonEncoder(ecodingData: memojiList)
-        
-        if self.memojiCard.isMyCard {
-            self.removeImageToStorage(memojiModel: self.memojiCard)
-        }
-        
-        completeHandler()
     }
     
-    func removeImageToStorage(memojiModel: MemojiCard) {
+    func removeImageToStorage(cardID: String) {
         let storage = Storage.storage()
-        let storageRef = storage.reference().child(memojiModel.imageName)
+        let storageRef = storage.reference().child(cardID)
         storageRef.delete()
+    }
+    
+    func loadImageData(cardID: String, completeHandler: @escaping (Data) -> ()) {
+        StorageManager.getImageData(imageName: cardID) { imageData in
+            completeHandler(imageData)
+        }
     }
     
     func editMemojiDescription() {

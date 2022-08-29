@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-class MainViewModel: ObservableObject {
-    @AppStorage(AppStorageKey.firstGuide.string) var firstGuide: Bool = true
-    
+class MainViewModel: ObservableObject {    
     @Published var searchText = ""
     @Published var isShowMyPage = false
-    @Published var isShowGuide = false
-    @Published var isShowUpdate = false
+    @Published var isShowGuideView = false
+    @Published var isShowUpdateAlert = false
     
     var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
@@ -34,12 +32,12 @@ class MainViewModel: ObservableObject {
     func showUpdateAlert() {
         let cancelDate = UserDefaults.standard.integer(forKey: AppStorageKey.updateAlert.string)
         if cancelDate == 0 {
-            self.isShowUpdate = true
+            self.isShowUpdateAlert = true
             return
         }
         
         if let nowDateInt = Int(self.dateFormatter.string(from: Date.now)) {
-            self.isShowUpdate = cancelDate < nowDateInt
+            self.isShowUpdateAlert = cancelDate < nowDateInt
         }
     }
     
